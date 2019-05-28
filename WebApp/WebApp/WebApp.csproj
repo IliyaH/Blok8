@@ -263,6 +263,42 @@
     <Compile Include="Migrations\201905280912269_KartaMigration.Designer.cs">
       <DependentUpon>201905280912269_KartaMigration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201905281747344_AdministratorMigration.cs" />
+    <Compile Include="Migrations\201905281747344_AdministratorMigration.Designer.cs">
+      <DependentUpon>201905281747344_AdministratorMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201905281757551_KontrolorMigration.cs" />
+    <Compile Include="Migrations\201905281757551_KontrolorMigration.Designer.cs">
+      <DependentUpon>201905281757551_KontrolorMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201905281800203_KorisnikMigration.cs" />
+    <Compile Include="Migrations\201905281800203_KorisnikMigration.Designer.cs">
+      <DependentUpon>201905281800203_KorisnikMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201905281802374_CenovnikMigration.cs" />
+    <Compile Include="Migrations\201905281802374_CenovnikMigration.Designer.cs">
+      <DependentUpon>201905281802374_CenovnikMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201905281803555_StavkaMigration.cs" />
+    <Compile Include="Migrations\201905281803555_StavkaMigration.Designer.cs">
+      <DependentUpon>201905281803555_StavkaMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201905281810493_CenovnikStavkaMigration.cs" />
+    <Compile Include="Migrations\201905281810493_CenovnikStavkaMigration.Designer.cs">
+      <DependentUpon>201905281810493_CenovnikStavkaMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201905281818211_LinijaMigration.cs" />
+    <Compile Include="Migrations\201905281818211_LinijaMigration.Designer.cs">
+      <DependentUpon>201905281818211_LinijaMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201905281822066_StanicaMigration.cs" />
+    <Compile Include="Migrations\201905281822066_StanicaMigration.Designer.cs">
+      <DependentUpon>201905281822066_StanicaMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201905281824519_StanicaLinijaMigration.cs" />
+    <Compile Include="Migrations\201905281824519_StanicaLinijaMigration.Designer.cs">
+      <DependentUpon>201905281824519_StanicaLinijaMigration.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -276,6 +312,7 @@
     <Compile Include="Models\Korisnik.cs" />
     <Compile Include="Models\Linija.cs" />
     <Compile Include="Models\Stanica.cs" />
+    <Compile Include="Models\StanicaLinija.cs" />
     <Compile Include="Models\Stavka.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Persistence\ApplicationDbContext.cs" />
@@ -388,6 +425,33 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201905280912269_KartaMigration.resx">
       <DependentUpon>201905280912269_KartaMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905281747344_AdministratorMigration.resx">
+      <DependentUpon>201905281747344_AdministratorMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905281757551_KontrolorMigration.resx">
+      <DependentUpon>201905281757551_KontrolorMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905281800203_KorisnikMigration.resx">
+      <DependentUpon>201905281800203_KorisnikMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905281802374_CenovnikMigration.resx">
+      <DependentUpon>201905281802374_CenovnikMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905281803555_StavkaMigration.resx">
+      <DependentUpon>201905281803555_StavkaMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905281810493_CenovnikStavkaMigration.resx">
+      <DependentUpon>201905281810493_CenovnikStavkaMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905281818211_LinijaMigration.resx">
+      <DependentUpon>201905281818211_LinijaMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905281822066_StanicaMigration.resx">
+      <DependentUpon>201905281822066_StanicaMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905281824519_StanicaLinijaMigration.resx">
+      <DependentUpon>201905281824519_StanicaLinijaMigration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

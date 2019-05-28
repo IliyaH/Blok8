@@ -12,6 +12,5 @@ namespace WebApp.Models
         public string Adresa { get; set; }
         public double XKoordinata { get; set; }
         public double YKoordinata { get; set; }
-        public List<Linija> Linije { get; set; }
     }
 }
