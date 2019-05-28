@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Web;
 using Unity;
 using WebApp.Persistence.Repository;
@@ -16,6 +17,10 @@ namespace WebApp.Persistence.UnitOfWork
         {
             _context = context;
         }
+
+        //Staviti ovde repozitorijume za sve modele
+        [Unity.Dependency]
+        public IKartaRepository Model {get;set;}
 
         public int Complete()
         {
