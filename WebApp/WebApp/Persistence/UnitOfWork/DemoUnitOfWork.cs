@@ -20,7 +20,7 @@ namespace WebApp.Persistence.UnitOfWork
 
         //Staviti ovde repozitorijume za sve modele
         [Unity.Dependency]
-        public IKartaRepository Model {get;set;}
+        public IKartaRepository KartaRepository {get;set;}
 
         public int Complete()
         {

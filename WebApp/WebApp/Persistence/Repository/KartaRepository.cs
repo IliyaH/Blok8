@@ -12,5 +12,6 @@ namespace WebApp.Persistence.Repository
         public KartaRepository(DbContext context) : base(context)
         {
         }
+
     }
 }
