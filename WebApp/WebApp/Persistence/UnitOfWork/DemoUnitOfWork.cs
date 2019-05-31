@@ -21,6 +21,8 @@ namespace WebApp.Persistence.UnitOfWork
         //Staviti ovde repozitorijume za sve modele
         [Unity.Dependency]
         public IKartaRepository KartaRepository {get;set;}
+        [Unity.Dependency]
+        public IKorisnikRepository KorisnikRepository { get; set; }
 
         public int Complete()
         {

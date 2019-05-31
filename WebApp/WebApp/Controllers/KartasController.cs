@@ -16,7 +16,7 @@ namespace WebApp.Controllers
 {
     public class KartasController : ApiController
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        //private ApplicationDbContext db = new ApplicationDbContext();
         public IUnitOfWork UnitOfWork { get; set; }
 
         public KartasController(IUnitOfWork unitOfWork)
