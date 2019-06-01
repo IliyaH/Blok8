@@ -1,5 +1,5 @@
 <form class="form">
-  <form>
+  
     <input name="Ime" type="text" placeholder="Ime"/>
     <input name="Prezime" type="text" placeholder="Prezime"/>
     <input name="Lozinka" type="password" placeholder="Lozinka"/>
@@ -8,15 +8,25 @@
     <input name="DatumRodjenja" type="date" placeholder="Datum Rodjenja"/>
     <input name="Adresa" type="text" placeholder="Adresa"/>
     
-      <select name="TipKorisnika" class="selectClass">
-        <option value="Regularan">Regularan</option>
-        <option value="Djak" selected>Djak</option>
-        <option value="Penzioner">Penzioner</option>
+      <select name="TipKorisnika"  (change)="onSelect($event)" class="selectClass"> 
+        <option  value="0"  selected >Regularan</option>
+        <option  value="1" >Djak</option>
+        <option  value="2" >Penzioner</option>
       </select>
 
-      <input type="file" name="Dokument" accept="document/*">
+    
+      <div *ngIf="vrednost == '1'">
+          <input type="file" name="Image" accept="image/*">
+      </div>       
+      <div *ngIf="vrednost == '2'">
+        <input type="file" name="Dokument" accept="document/*">
+      </div>
+
     <button>Register</button>
     <p class="message">Already registered? <a href="#">Sign In</a></p>
-  </form>
+
 </form>
 
+<div *ngIf="vrednost == '1'">
+  {{vrednost}}
+</div>

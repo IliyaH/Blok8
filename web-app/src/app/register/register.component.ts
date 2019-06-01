@@ -8,9 +8,17 @@ import {FormBuilder} from '@angular/forms';
 })
 export class RegisterComponent implements OnInit {
 
+  vrednost: any = "Pocetak";
+  brojac = 0;
   constructor() { }
 
   ngOnInit() {
+    
+  }
+
+  onSelect(event : any)
+  {
+    this.vrednost = event.target.value;
   }
 
 }
