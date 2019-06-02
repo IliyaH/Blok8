@@ -1,19 +1,19 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder} from '@angular/forms';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['../app.component.css']
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent {
+
+  putnik = ['Regularan', 'Djak' , 'Penzioner'];
 
   vrednost: any = "Pocetak";
   brojac = 0;
-  constructor() { }
 
-  ngOnInit() {
-    
+  constructor() 
+  {    
   }
 
   onSelect(event : any)
