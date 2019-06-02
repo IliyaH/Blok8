@@ -21,5 +21,11 @@ export class RegisterComponent {
     this.vrednost = event.target.value;
   }
 
+  onSubmit(value)
+  {
+    this.brojac
+    console.log(value) ;
+  }
+
 }
 

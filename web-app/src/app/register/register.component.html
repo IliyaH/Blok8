@@ -1,21 +1,20 @@
-<form class="form" >
-    <input name="Ime" type="text" placeholder="Ime"/>
-    <input name="Prezime" type="text" placeholder="Prezime" />
-    <input name="Lozinka" type="password" placeholder="Lozinka" />
-    <input name="PonovljenaLozinka" type="password" placeholder="Ponovljena Lozinka" />
-    <input name="Email" type="email" placeholder="Email" />
-    <input name="DatumRodjenja" type="date" placeholder="Datum Rodjenja" />
+<form class="form" (ngSubmit)="onSubmit(RegisterForm.value)" #RegisterForm="ngForm" >
+    <input name="Ime" type="text" placeholder="Ime" ngModel />
+    <input name="Prezime" type="text" placeholder="Prezime" ngModel/>
+    <input name="Lozinka" type="password" placeholder="Lozinka" ngModel/>
+    <input name="PonovljenaLozinka" type="password" placeholder="Ponovljena Lozinka" ngModel/>
+    <input name="Email" type="email" placeholder="Email" ngModel/>
+    <input name="DatumRodjenja" type="date" placeholder="Datum Rodjenja" ngModel/>
     <input name="Adresa" type="text" placeholder="Adresa" />
   
-    <select name="TipKorisnika1" id="TipKorisnika" class="form-control" (change)="onSelect($event)" class="selectClass" required>
-      <option *ngFor="let p of putnik" [value]="p">{{p}}</option>
+    <select name="TipKorisnika1" id="TipKorisnika" class="form-control" (change)="onSelect($event)" class="selectClass"  ngModel required>
+      <option selected *ngFor="let p of putnik" [value]="p">{{p}}</option>
     </select> 
-    
     <div *ngIf="vrednost == 'Djak'">
-        <input type="file" name="Slika" accept="image/*" >
+        <input type="file" name="Slika" accept="image/*" ngModel>
     </div>       
     <div *ngIf="vrednost == 'Penzioner'">
-      <input type="file" name="Dokument" accept="document/*" >
+      <input type="file" name="Dokument" accept="document/*" ngModel>
     </div>
 
     <button>Register</button>
