@@ -1,23 +1,22 @@
-<form class="form" (ngSubmit)="onSubmit(RegisterForm.value)" #RegisterForm="ngForm" >
-    <input name="Ime" type="text" placeholder="Ime" ngModel />
-    <input name="Prezime" type="text" placeholder="Prezime" ngModel/>
-    <input name="Lozinka" type="password" placeholder="Lozinka" ngModel/>
-    <input name="PonovljenaLozinka" type="password" placeholder="Ponovljena Lozinka" ngModel/>
-    <input name="Email" type="email" placeholder="Email" ngModel/>
-    <input name="DatumRodjenja" type="date" placeholder="Datum Rodjenja" ngModel/>
-    <input name="Adresa" type="text" placeholder="Adresa" />
+<br><br>
+<form class="form" [formGroup]="registerForm" (ngSubmit)="register()">
+    <input name="ime" type="text" placeholder="Ime" formControlName="ime" />
+    <input name="prezime" type="text" placeholder="Prezime" formControlName="prezime"/>
+    <input name="lozinka" type="password" placeholder="Lozinka" formControlName="lozinka"/>
+    <input name="ponovljenaLozinka" type="password" placeholder="Ponovljena Lozinka" formControlName="ponovljenaLozinka"/>
+    <input name="email" type="email" placeholder="Email" formControlName="email"/>
+    <input name="datumRodjenja" type="date" placeholder="Datum Rodjenja" formControlName="datumRodjenja"/>
+    <input name="adresa" type="text" placeholder="Adresa" formControlName="adresa"/>
   
-    <select name="TipKorisnika1" id="TipKorisnika" class="form-control" (change)="onSelect($event)" class="selectClass"  ngModel required>
-      <option selected *ngFor="let p of putnik" [value]="p">{{p}}</option>
+    <select name="tipKorisnika" id="tipKorisnika" class="form-control" (change)="onSelect($event)" class="selectClass"  formControlName="tipKorisnika">
+      <option *ngFor="let p of putnik" [value]="p">{{p}}</option>
     </select> 
     <div *ngIf="vrednost == 'Djak'">
-        <input type="file" name="Slika" accept="image/*" ngModel>
+        <input type="file" name="slika" accept="image/*" formControlName="slika">
     </div>       
     <div *ngIf="vrednost == 'Penzioner'">
-      <input type="file" name="Dokument" accept="document/*" ngModel>
+      <input type="file" name="dokument" accept="document/*" formControlName="dokument">
     </div>
 
-    <button>Register</button>
-    <p class="message">Already registered? <a href="#">Sign In</a></p>
+    <button type="submit" [disabled]="!registerForm.valid">Register</button>
 </form>
-{{vrednost}}

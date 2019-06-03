@@ -1,14 +1,18 @@
 <div class="login-page">
   <div class="form">
-    <form class="login-form" (ngSubmit)="onSubmit(LoginForm.value)" #LoginForm="ngForm" >
+    <form class="login-form" [formGroup]="loginForm" (ngSubmit)="login()" >
 
-      <input type="text" placeholder="Email" id="Email" name="email" ngModel/>
+      <div *ngIf="f.email.errors" class="invalid-feedback">
+        <div *ngIf="f.email.errors.required && (f.email.dirty || f.email.touched)">Email je obavezan</div>
+      </div>
+      <input formControlName="email" type="email" placeholder="Email" id="email" name="email" [ngClass]="{'is-invalid': submitted && f.email.errors}"/>
+      <div *ngIf="f.lozinka.errors" class="invalid-feedback">
+          <div *ngIf="f.lozinka.errors.required && (f.lozinka.dirty || f.lozinka.touched)">Lozinka je obavezna</div>
+        </div>
+      <input formControlName="lozinka" type="password" placeholder="lozinka" id="lozinka" name="lozinka" [ngClass]="{'is-invalid': submitted && f.lozinka.errors}"/>
 
-      <input type="password" placeholder="Lozinka" id="Lozinka" name="lozinka" ngModel/>
+      <button type="submit" [disabled]="!loginForm.valid">login</button>
 
-      <button type="submit" >login</button>
-
-      <p class="message">Not registered? <a href="#">Create an account</a></p>
     </form>
   </div>
 </div>

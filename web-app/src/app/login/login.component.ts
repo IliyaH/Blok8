@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-
+import { FormBuilder } from '@angular/forms';
+import {Validators } from  '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -8,18 +10,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent {
 
-  constructor() 
-  { 
+  loginForm = this.fb.group({
+    email: ['', [Validators.required, Validators.email]],
+    lozinka: ['', Validators.required],
+  });
+
+  constructor(public router: Router, private fb: FormBuilder) {
+    
   }
- 
-  mojeIme : any;
-  mojaSifra : any;
 
+  get f() 
+  {
+    return this.loginForm.controls;
+  }
 
+  login()
+  {
+      console.log(this.loginForm.value);
+  }
   onSubmit(value)
   {
-    this.mojeIme = value.email
-    this.mojaSifra = value.lozinka;
-    console.log(this.mojaSifra + "----" + this.mojeIme) ;
+    
   }
 }
