@@ -24,12 +24,33 @@ export class PutnikService {
         );
     }
 
+    //TO DO: Pozovi funkcije i uradi DELETE PUTNIK
+    //GETS ALL PUTNIK WITH ID 
+    getPutnik(id: number): Observable<Putnik> {
+      const url = `${this.putniksUrl}/${id}`;
+      return this.http.get<Putnik>(url).pipe(
+        catchError(this.handleError<Putnik>(`getPutnik id=${id}`))
+      );
+    }
+
     //ADD NEW PUTNIK    
     public addPutnik(putnik: Putnik): Observable<Putnik>{
         return this.http.post<Putnik>(this.putniksUrl, putnik, httpOptions).pipe(
             catchError(this.handleError<Putnik>('addPutnik')));
     }
 
+    //DELETE PUTNIK
+    
+  
+    //EDIT PUTNIK
+    updatePutnik (putnik: Putnik): Observable<any> {
+      return this.http.put(this.putniksUrl, putnik, httpOptions).pipe(
+        catchError(this.handleError<any>('updatePutnik'))
+      );
+    }
+
+
+    //ERROR HENDLER
     private handleError<T> (operation = 'operation', result?: T) {
         return (error: any): Observable<T> => {
           return of(result as T);
