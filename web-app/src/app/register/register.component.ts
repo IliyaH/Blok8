@@ -2,15 +2,17 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import {Validators, FormGroup } from  '@angular/forms';
 import { Router } from '@angular/router';
+import {Putnik} from '../classes';
+import {PutnikService} from '../putnik.services';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['../app.component.css']
 })
-export class RegisterComponent {
+export class RegisterComponent implements OnInit {
 
-  putnik = ['Regularan', 'Djak' , 'Penzioner'];
+  putniks = ['Regularan', 'Djak' , 'Penzioner'];
 
   registerForm = this.fb.group({
     ime: ['', Validators.required],
@@ -22,12 +24,20 @@ export class RegisterComponent {
     adresa: ['', Validators.required],
     tipKorisnika: ['', Validators.required],
     slika: [''],
-    dokument: [''],
+    
   }, {validator: this.checkPassword});
 
   vrednost: any;
 
-  constructor(public router: Router, private fb: FormBuilder) {
+  tempPutniks: Putnik[] = [];
+
+  tempPutnik: Putnik = new Putnik();
+
+  constructor(public router: Router, private fb: FormBuilder, private putnikService: PutnikService) {
+    
+  }
+
+  ngOnInit(){
     
   }
 
@@ -49,15 +59,29 @@ export class RegisterComponent {
     this.vrednost = event.target.value;
   }
 
-  register()
-  {
-      console.log(this.registerForm.value);
+  register(): void
+  {  
+    console.log(this.registerForm.controls.adresa.value);
+     this.tempPutnik.Adresa = this.registerForm.controls.adresa.value;
+     this.tempPutnik.DatumRodjenja = this.registerForm.controls.datumRodjenja.value;
+     this.tempPutnik.Email = this.registerForm.controls.email.value;
+     this.tempPutnik.Ime = this.registerForm.controls.ime.value;
+     this.tempPutnik.Lozinka = this.registerForm.controls.lozinka.value;
+     this.tempPutnik.PonovljenaLozinka = this.registerForm.controls.ponovljenaLozinka.value;
+     this.tempPutnik.Prezime = this.registerForm.controls.prezime.value;
+     this.tempPutnik.Slika = this.registerForm.controls.slika.value;
+     this.tempPutnik.TipKorisnika = this.registerForm.controls.tipKorisnika.value;
+     
+     this.putnikService.addPutnik(this.tempPutnik)
+     .subscribe(putnik => {this.tempPutniks.push(putnik);
+    });
   }
 
-  onSubmit(value)
-  {
-    console.log(value) ;
+
+  getPutniks(): void{
+    this.putnikService.getPutniks().subscribe(putnik => this.tempPutniks = putnik)
   }
+
 
 }
 

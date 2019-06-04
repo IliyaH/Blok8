@@ -9,13 +9,13 @@
     <input name="adresa" type="text" placeholder="Adresa" formControlName="adresa"/>
   
     <select name="tipKorisnika" id="tipKorisnika" class="form-control" (change)="onSelect($event)" class="selectClass"  formControlName="tipKorisnika">
-      <option *ngFor="let p of putnik" [value]="p">{{p}}</option>
+      <option *ngFor="let p of putniks" [value]="p">{{p}}</option>
     </select> 
     <div *ngIf="vrednost == 'Djak'">
         <input type="file" name="slika" accept="image/*" formControlName="slika">
     </div>       
     <div *ngIf="vrednost == 'Penzioner'">
-      <input type="file" name="dokument" accept="document/*" formControlName="dokument">
+      <input type="file" name="slika" accept="document/*" formControlName="slika">
     </div>
 
     <button type="submit" [disabled]="!registerForm.valid">Register</button>

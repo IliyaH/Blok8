@@ -8,7 +8,7 @@ import { CenovnikComponent } from 'src/app/cenovnik/cenovnik.component';
 
 const routes: Routes = [{ 
   path: '', 
-  redirectTo: '/navbar', 
+  redirectTo: 'navbar', 
   pathMatch: 'full' 
 },
 { 

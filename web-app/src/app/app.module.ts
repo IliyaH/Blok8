@@ -10,6 +10,7 @@ import { RegisterComponent } from './register/register.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { CenovnikComponent } from './cenovnik/cenovnik.component';
 
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { CenovnikComponent } from './cenovnik/cenovnik.component';
     FormsModule,
     AppRoutingModule,
     ReactiveFormsModule,
+    HttpClientModule,
       
   ],
   providers: [],

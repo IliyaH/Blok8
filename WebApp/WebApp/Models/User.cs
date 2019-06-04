@@ -12,6 +12,7 @@ namespace WebApp.Models
         public string Prezime { get; set; }
         public string Email { get; set; }
         public string Lozinka { get; set; }
+        public string PonovljenaLozinka { get; set; }
         public DateTime DatumRodjenja { get; set; }
         public string Adresa { get; set; }
 
