@@ -265,6 +265,14 @@
     <Compile Include="Migrations\201906040937581_PonovljenaLozinka.Designer.cs">
       <DependentUpon>201906040937581_PonovljenaLozinka.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201906050944433_KartaIzmenaMigration.cs" />
+    <Compile Include="Migrations\201906050944433_KartaIzmenaMigration.Designer.cs">
+      <DependentUpon>201906050944433_KartaIzmenaMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906051030196_KorisnikKartaMigration.cs" />
+    <Compile Include="Migrations\201906051030196_KorisnikKartaMigration.Designer.cs">
+      <DependentUpon>201906051030196_KorisnikKartaMigration.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -274,8 +282,10 @@
     <Compile Include="Models\CenovnikStavka.cs" />
     <Compile Include="Models\Enums.cs" />
     <Compile Include="Models\Karta.cs" />
+    <Compile Include="Models\Koeficient.cs" />
     <Compile Include="Models\Kontrolor.cs" />
     <Compile Include="Models\Korisnik.cs" />
+    <Compile Include="Models\KorisnikKarta.cs" />
     <Compile Include="Models\Linija.cs" />
     <Compile Include="Models\Stanica.cs" />
     <Compile Include="Models\StanicaLinija.cs" />
@@ -393,6 +403,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201906040937581_PonovljenaLozinka.resx">
       <DependentUpon>201906040937581_PonovljenaLozinka.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906050944433_KartaIzmenaMigration.resx">
+      <DependentUpon>201906050944433_KartaIzmenaMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906051030196_KorisnikKartaMigration.resx">
+      <DependentUpon>201906051030196_KorisnikKartaMigration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

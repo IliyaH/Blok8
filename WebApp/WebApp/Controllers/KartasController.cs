@@ -16,22 +16,18 @@ namespace WebApp.Controllers
 {
     public class KartasController : ApiController
     {
-        //private ApplicationDbContext db = new ApplicationDbContext();
         public IUnitOfWork UnitOfWork { get; set; }
 
         public KartasController(IUnitOfWork unitOfWork)
         {
 
             UnitOfWork = unitOfWork;
-            //db.Karta.Add(new Karta());
-            //db.SaveChanges();
         }
 
         // GET: api/Kartas
         public IQueryable<Karta> GetKarta()
         {
             return UnitOfWork.KartaRepository.GetAll().AsQueryable();
-            //return db.Karta;
         }
 
         // GET: api/Kartas/5
@@ -62,12 +58,10 @@ namespace WebApp.Controllers
             }
 
             UnitOfWork.KartaRepository.Entry(karta, EntityState.Modified);
-            //db.Entry(karta).State = EntityState.Modified;
 
             try
             {
                 UnitOfWork.KartaRepository.SaveChanges();
-                //db.SaveChanges();
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -95,8 +89,6 @@ namespace WebApp.Controllers
 
             UnitOfWork.KartaRepository.Add(karta);
             UnitOfWork.KartaRepository.SaveChanges();
-            //db.Karta.Add(karta);
-            //db.SaveChanges();
 
             return CreatedAtRoute("DefaultApi", new { id = karta.Id }, karta);
         }
@@ -105,7 +97,7 @@ namespace WebApp.Controllers
         [ResponseType(typeof(Karta))]
         public IHttpActionResult DeleteKarta(int id)
         {
-            Karta karta = UnitOfWork.KartaRepository.Get(id);//db.Karta.Find(id);
+            Karta karta = UnitOfWork.KartaRepository.Get(id);
             if (karta == null)
             {
                 return NotFound();
@@ -113,9 +105,7 @@ namespace WebApp.Controllers
 
             UnitOfWork.KartaRepository.Remove(karta);
             UnitOfWork.KartaRepository.SaveChanges();
-            //db.Karta.Remove(karta);
-            //db.SaveChanges();
-
+            
             return Ok(karta);
         }
 
@@ -127,17 +117,11 @@ namespace WebApp.Controllers
             }
             base.Dispose(disposing);
 
-            //if (disposing)
-            //{
-            //    db.Dispose();
-            //}
-            //base.Dispose(disposing);
         }
 
         private bool KartaExists(int id)
         {
             return UnitOfWork.KartaRepository.GetAll().Count(e => e.Id == id) > 0;
-            //return db.Karta.Count(e => e.Id == id) > 0;
         }
     }
 }

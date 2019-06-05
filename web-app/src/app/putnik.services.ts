@@ -24,7 +24,6 @@ export class PutnikService {
         );
     }
 
-    //TO DO: Pozovi funkcije i uradi DELETE PUTNIK
     //GETS ALL PUTNIK WITH ID 
     getPutnik(id: number): Observable<Putnik> {
       const url = `${this.putniksUrl}/${id}`;
@@ -39,9 +38,6 @@ export class PutnikService {
             catchError(this.handleError<Putnik>('addPutnik')));
     }
 
-    //DELETE PUTNIK
-    
-  
     //EDIT PUTNIK
     updatePutnik (putnik: Putnik): Observable<any> {
       return this.http.put(this.putniksUrl, putnik, httpOptions).pipe(
