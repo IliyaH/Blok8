@@ -9,3 +9,9 @@ export class Putnik{
     TipKorisnika: string;
     Slika: string;
 }
+
+export class Koeficijent
+{
+    TipKorisnika : string;
+    Koef : number;
+}

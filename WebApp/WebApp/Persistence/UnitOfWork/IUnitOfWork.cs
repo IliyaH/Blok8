@@ -11,6 +11,8 @@ namespace WebApp.Persistence.UnitOfWork
     {
         IKartaRepository KartaRepository { get; }
         IKorisnikRepository KorisnikRepository { get; }
+
+        IKoeficijentRepository KoeficijentRepository { get; }
         int Complete();
     }
 }

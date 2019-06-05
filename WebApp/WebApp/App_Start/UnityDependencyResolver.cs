@@ -72,6 +72,7 @@ namespace WebApp.App_Start
             container.RegisterType<IUnitOfWork, DemoUnitOfWork>();
             container.RegisterType<IKartaRepository, KartaRepository>();
             container.RegisterType<IKorisnikRepository, KorisnikRepository>();
+            container.RegisterType<IKoeficijentRepository, KoeficijentRepository> ();
         }
 
         public void Dispose()

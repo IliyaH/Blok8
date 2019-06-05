@@ -23,6 +23,8 @@ namespace WebApp.Persistence.UnitOfWork
         public IKartaRepository KartaRepository {get;set;}
         [Unity.Dependency]
         public IKorisnikRepository KorisnikRepository { get; set; }
+        [Unity.Dependency]
+        public IKoeficijentRepository KoeficijentRepository { get; set; }
 
         public int Complete()
         {
