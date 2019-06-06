@@ -15,4 +15,7 @@ export class PutnikService {
     private putniksUrl = 'http://localhost:52295/api/Koeficients';  // URL to web api
     
     constructor(private http: HttpClient) { }
+
+    
 }
+

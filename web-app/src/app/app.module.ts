@@ -11,6 +11,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { CenovnikComponent } from './cenovnik/cenovnik.component';
 
 import {HttpClientModule} from '@angular/common/http';
+import { KupovinaKarteComponent } from './kupovina-karte/kupovina-karte.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import {HttpClientModule} from '@angular/common/http';
     LoginComponent,
     RegisterComponent,
     NavbarComponent,
-    CenovnikComponent
+    CenovnikComponent,
+    KupovinaKarteComponent
   ],
   imports: [
     BrowserModule,

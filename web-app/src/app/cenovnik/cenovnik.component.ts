@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { PutnikService } from 'src/app/putnik.services';
+import { Observable, of } from 'rxjs';
 
 @Component({
   selector: 'app-cenovnik',
@@ -7,26 +9,34 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CenovnikComponent implements OnInit {
 
-  kartas = ['Vremenska', 'Dnevna', 'Mesecna','Godisnja'];
+  kartas = ['VremenskaKarta', 'DnevnaKarta', 'MesecnaKarta','GodisnjaKarta'];
   korisniks = ['Regularan', 'Djak', 'Penzioner'];
   izabranaKarta: any;
   izabraniKorisnik: any;
 
-  constructor() { }
+  tempCena: number;
+  cena: number;
+
+  constructor(private service: PutnikService) { }
 
   ngOnInit() {
     this.izabranaKarta = this.kartas[0];
     this.izabraniKorisnik = this.korisniks[0];
+    this.tempCena = 65;
   }
 
   onSelectKarta(event : any)
   {
     this.izabranaKarta = event.target.value;
+    this.service.getCena(this.izabranaKarta, this.izabraniKorisnik).subscribe(cena => this.tempCena = cena);
+    
+
   }
 
   onSelectKorisnik(event : any)
   {
     this.izabraniKorisnik = event.target.value;
+    this.service.getCena(this.izabranaKarta, this.izabraniKorisnik).subscribe(cena => this.tempCena = cena);
   }
 
   

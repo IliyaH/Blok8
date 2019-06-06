@@ -24,6 +24,10 @@ export class PutnikService {
         );
     }
 
+    getCena(vrstaKarte: string, tipKoriniska: string): Observable<number>{
+      return this.http.get<number>(`http://localhost:52295/api/Koeficients?vrstaKarte=${vrstaKarte}&tipKorisnika=${tipKoriniska}`);
+  }
+
     //GETS ALL PUTNIK WITH ID 
     getPutnik(id: number): Observable<Putnik> {
       const url = `${this.putniksUrl}/${id}`;
