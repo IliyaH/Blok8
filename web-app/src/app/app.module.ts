@@ -12,6 +12,12 @@ import { CenovnikComponent } from './cenovnik/cenovnik.component';
 
 import {HttpClientModule} from '@angular/common/http';
 import { KupovinaKarteComponent } from './kupovina-karte/kupovina-karte.component';
+import { IzmenaProfilaComponent } from './izmena-profila/izmena-profila.component';
+import { TokenInterceptor } from 'src/app/token.interceptor';
+import { ValuesHttpService } from 'src/app/values-http.service';
+import { AuthHttpService } from 'src/app/auth-http.service';
+
+import {HTTP_INTERCEPTORS} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -20,7 +26,8 @@ import { KupovinaKarteComponent } from './kupovina-karte/kupovina-karte.componen
     RegisterComponent,
     NavbarComponent,
     CenovnikComponent,
-    KupovinaKarteComponent
+    KupovinaKarteComponent,
+    IzmenaProfilaComponent
   ],
   imports: [
     BrowserModule,
@@ -30,7 +37,9 @@ import { KupovinaKarteComponent } from './kupovina-karte/kupovina-karte.componen
     HttpClientModule,
       
   ],
-  providers: [],
+  providers: [{provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true},
+    ValuesHttpService, 
+    AuthHttpService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

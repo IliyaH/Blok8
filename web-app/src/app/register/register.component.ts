@@ -74,18 +74,20 @@ export class RegisterComponent implements OnInit {
     }
     if(this.registered == false)
     {
-      this.tempPutnik.Adresa = this.registerForm.controls.adresa.value;
-      this.tempPutnik.DatumRodjenja = this.registerForm.controls.datumRodjenja.value;
-      this.tempPutnik.Email = this.registerForm.controls.email.value;
-      this.tempPutnik.Ime = this.registerForm.controls.ime.value;
-      this.tempPutnik.Lozinka = this.registerForm.controls.lozinka.value;
-      this.tempPutnik.PonovljenaLozinka = this.registerForm.controls.ponovljenaLozinka.value;
-      this.tempPutnik.Prezime = this.registerForm.controls.prezime.value;
-      this.tempPutnik.Slika = this.registerForm.controls.slika.value;
-      this.tempPutnik.TipKorisnika = this.registerForm.controls.tipKorisnika.value;
-      
-      this.putnikService.addPutnik(this.tempPutnik)
-      .subscribe(putnik => {this.tempPutniks.push(putnik);
+        this.tempPutnik.Adresa = this.registerForm.controls.adresa.value;
+        this.tempPutnik.DatumRodjenja = this.registerForm.controls.datumRodjenja.value;
+        this.tempPutnik.Email = this.registerForm.controls.email.value;
+        this.tempPutnik.Ime = this.registerForm.controls.ime.value;
+        this.tempPutnik.Lozinka = this.registerForm.controls.lozinka.value;
+        this.tempPutnik.PonovljenaLozinka = this.registerForm.controls.ponovljenaLozinka.value;
+        this.tempPutnik.Prezime = this.registerForm.controls.prezime.value;
+        this.tempPutnik.Slika = this.registerForm.controls.slika.value;
+        this.tempPutnik.TipKorisnika = this.registerForm.controls.tipKorisnika.value;
+        
+        this.putnikService.addPutnik(this.tempPutnik)
+        .subscribe(putnik => {this.tempPutniks.push(putnik);
+
+        this.registerForm.reset();
      });
     }
   }

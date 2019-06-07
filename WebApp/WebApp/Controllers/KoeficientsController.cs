@@ -99,11 +99,7 @@ namespace WebApp.Controllers
         [ResponseType(typeof(double))]
         public IHttpActionResult GetCena(VrstaKarte vrstaKarte, TipKorisnika tipKorisnika)
         {
-            int cenovnikId = db.Cenovnik.Where(c => c.Aktivan == true).Select(c => c.Id).First();
-            int stavkaId = db.Stavka.Where(s => s.VrstaKarte == vrstaKarte).Select(s => s.Id).First();
-            double cena = db.CenovnikStavka.Where(c => c.IdCenovnik == cenovnikId && c.IdStavka == stavkaId).Select(c => c.Cena).First();
-            float koef = db.Koeficient.Where(k => k.TipKorisnika == tipKorisnika).Select(k => k.Koef).First();
-            return Ok(Math.Round(cena * koef, 2));
+            return Ok(UnitOfWork.KoeficijentRepository.TipKorisnikaKoef(tipKorisnika, vrstaKarte));
 
         }
 

@@ -15,3 +15,9 @@ export class Koeficijent
     TipKorisnika : string;
     Koef : number;
 }
+
+export class LoginClass
+{
+    email : string;
+    lozinka : number;
+}

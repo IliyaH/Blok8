@@ -6,6 +6,7 @@ import { RegisterComponent } from './register/register.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { CenovnikComponent } from 'src/app/cenovnik/cenovnik.component';
 import { KupovinaKarteComponent } from './kupovina-karte/kupovina-karte.component';
+import { IzmenaProfilaComponent } from './izmena-profila/izmena-profila.component';
 
 const routes: Routes = [{ 
   path: '', 
@@ -27,6 +28,10 @@ const routes: Routes = [{
 { 
   path: 'kupovinaKarte', 
   component: KupovinaKarteComponent 
+},
+{ 
+  path: 'izmenaProfila', 
+  component: IzmenaProfilaComponent 
 },
 ];
 @NgModule({

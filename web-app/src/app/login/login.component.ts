@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import {Validators } from  '@angular/forms';
 import { Router } from '@angular/router';
-import {Putnik} from '../classes';
+import {Putnik, LoginClass} from '../classes';
 import {PutnikService} from '../putnik.services';
+import { AuthHttpService } from 'src/app/auth-http.service';
 
 @Component({
   selector: 'app-login',
@@ -23,31 +24,38 @@ export class LoginComponent implements OnInit {
 
   loggedIn: boolean = false;
 
-  constructor(public router: Router, private fb: FormBuilder, private putnikService: PutnikService) {
+  loginClass: LoginClass = new LoginClass;
+
+  constructor(public router: Router, private fb: FormBuilder, private putnikService: PutnikService, private http: AuthHttpService) {
     
   }
 
   get f() 
   {
     return this.loginForm.controls;
+    
   }
 
   login()
   {
 
-    for (let i = 0; i < this.tempPutniks.length; i++) {
-      if(this.loginForm.controls.email.value == this.tempPutniks[i].Email && this.loginForm.controls.lozinka.value == this.tempPutniks[i].Lozinka)
-      {
-        this.loggedIn = true;
+    //for (let i = 0; i < this.tempPutniks.length; i++) {
+      //if(this.loginForm.controls.email.value == this.tempPutniks[i].Email && this.loginForm.controls.lozinka.value == this.tempPutniks[i].Lozinka)
+      //{
+        this.loginClass.email = this.loginForm.controls.email.value;
+        this.loginClass.lozinka = this.loginForm.controls.lozinka.value;
+        this.http.logIn(this.loginClass, () => this.router.navigate(['/izmenaProfila']));
+        /*this.loggedIn = true;
         this.tempPutnik = this.tempPutniks[i];
         console.log('Uspesno logovanje');
         console.log(this.tempPutnik);
-        break;
-      }
-    }
+        this.loginForm.reset();*/ 
+        //break;
+      //}
+    /*}
     if(!this.loggedIn){
       console.log('Neuspesno logovanje!');
-    }
+    }*/
   }
 
   ngOnInit(){

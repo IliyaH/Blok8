@@ -457,3 +457,4 @@ C:\Users\e391-2015\Desktop\Blok8\WebApp\WebApp\obj\Debug\WebApp.csproj.GenerateR
 C:\Users\e391-2015\Desktop\Blok8\WebApp\WebApp\obj\Debug\WebApp.Migrations.PonovljenaLozinka.resources
 C:\Users\e391-2015\Desktop\Blok8\WebApp\WebApp\obj\Debug\WebApp.Migrations.KartaIzmenaMigration.resources
 C:\Users\e391-2015\Desktop\Blok8\WebApp\WebApp\obj\Debug\WebApp.Migrations.KorisnikKartaMigration.resources
+C:\Users\e391-2015\Desktop\Blok8\WebApp\WebApp\obj\Debug\WebApp.Migrations.KorisniciKakoTrebaMigration.resources

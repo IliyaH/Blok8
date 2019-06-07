@@ -274,6 +274,10 @@
     <Compile Include="Migrations\201906051030196_KorisnikKartaMigration.Designer.cs">
       <DependentUpon>201906051030196_KorisnikKartaMigration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201906071027121_KorisniciKakoTrebaMigration.cs" />
+    <Compile Include="Migrations\201906071027121_KorisniciKakoTrebaMigration.Designer.cs">
+      <DependentUpon>201906071027121_KorisniciKakoTrebaMigration.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -412,6 +416,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201906051030196_KorisnikKartaMigration.resx">
       <DependentUpon>201906051030196_KorisnikKartaMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906071027121_KorisniciKakoTrebaMigration.resx">
+      <DependentUpon>201906071027121_KorisniciKakoTrebaMigration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
