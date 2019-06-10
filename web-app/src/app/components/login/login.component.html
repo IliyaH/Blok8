@@ -1,0 +1,27 @@
+<br><br><div class="container">
+    <div class="row">
+      <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+        <div class="shadow-lg">
+          <div class="card card-signin my-5">
+            <div class="card-body">
+              <form class="form-signin" [formGroup]="loginForm" (ngSubmit)="login()">
+                <div class="form-label-group">
+                  <input name="email" type="email" class="form-control" placeholder="Email" required autofocus formControlName="email">
+                </div>
+                  <br>
+                <div class="form-label-group">
+                  <input name="password" type="password" class="form-control" placeholder="Password" required formControlName="password">
+                </div><br><br>
+                <div *ngIf="loginForm.valid">
+                  <button class="btn btn-lg btn-primary btn-block text-uppercase active" type="submit">Login</button>
+                </div>
+                <div *ngIf="!loginForm.valid">
+                  <button class="btn btn-lg btn-primary btn-block text-uppercase disabled" [disabled]="!loginForm.valid" type="submit">Login</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

@@ -3,21 +3,27 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
 using System.Web;
+using static WebApp.Models.Enums;
 
 namespace WebApp.Models
 {
     // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit https://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
     public class ApplicationUser : IdentityUser
     {
-        [ForeignKey("Korisnik")]
-        public int? KorisnikId { get; set; }
-        public Korisnik Korisnik { get; set; }
+
+        public string Name { get; set; }
+        public string Surname { get; set; }
+        public string Address { get; set; }
+        public DateTime? Birthday { get; set; }
+        public string Image { get; set; }
+        public bool Activated { get; set; }
+        public UserType UserType { get; set; }
+
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager, string authenticationType)
         {

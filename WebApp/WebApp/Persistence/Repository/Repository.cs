@@ -9,7 +9,6 @@ namespace WebApp.Persistence.Repository
     public class Repository<TEntity, TPKey> : IRepository<TEntity, TPKey> where TEntity : class
     {
         protected readonly DbContext context;
-        
 
         public Repository(DbContext context)
         {
@@ -71,7 +70,5 @@ namespace WebApp.Persistence.Repository
         {
             context.Dispose();
         }
-
-        
     }
 }

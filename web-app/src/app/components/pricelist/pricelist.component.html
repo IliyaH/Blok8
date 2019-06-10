@@ -1,0 +1,26 @@
+  <br><br><div class="container">
+      <div class="row">
+        <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+          <div class="shadow-lg">
+            <div class="card card-signin my-5">
+              <div class="card-body">
+                    <div class="form-label-group">
+                    <select name="ticketType" class="form-control" (change)="onSelectTicketType($event)">
+                      <option>TimeTicket</option>
+                      <option>DayTicket</option>
+                      <option>MounthTicket</option>
+                      <option>YearTicket</option>
+                    </select><br>
+                    <select name="userType" class="form-control" (change)="onSelectUserType($event)">
+                      <option>RegularUser</option>
+                      <option>Student</option>
+                      <option>Pensioner</option>
+                    </select><br>
+                    <label class="form-control text-center">Price: {{selectedTicketType}} {{selectedUserType}} RSD</label>
+                  </div><br>      
+                </div>
+              </div> 
+            </div>
+          </div>
+        </div>
+      </div>  

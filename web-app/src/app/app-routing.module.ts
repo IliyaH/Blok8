@@ -1,16 +1,14 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
-import { NavbarComponent } from './navbar/navbar.component';
-import { CenovnikComponent } from 'src/app/cenovnik/cenovnik.component';
-import { KupovinaKarteComponent } from './kupovina-karte/kupovina-karte.component';
-import { IzmenaProfilaComponent } from './izmena-profila/izmena-profila.component';
+import { NavBarComponent } from './components/nav-bar/nav-bar.component';
+import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
+import { PricelistComponent } from './components/pricelist/pricelist.component';
 
-const routes: Routes = [{ 
+const routes: Routes = [{
   path: '', 
-  redirectTo: 'navbar', 
+  redirectTo: 'nav-bar', 
   pathMatch: 'full' 
 },
 { 
@@ -22,18 +20,10 @@ const routes: Routes = [{
   component: RegisterComponent 
 },
 { 
-  path: 'cenovnik', 
-  component: CenovnikComponent 
-},
-{ 
-  path: 'kupovinaKarte', 
-  component: KupovinaKarteComponent 
-},
-{ 
-  path: 'izmenaProfila', 
-  component: IzmenaProfilaComponent 
-},
-];
+  path: 'pricelist', 
+  component: PricelistComponent 
+},];
+
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]

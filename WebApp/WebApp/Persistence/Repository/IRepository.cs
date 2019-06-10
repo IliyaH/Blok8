@@ -27,7 +27,5 @@ namespace WebApp.Persistence.Repository
         void Entry(TEntity entity, EntityState state);
 
         void Dispose();
-
-       
     }
 }

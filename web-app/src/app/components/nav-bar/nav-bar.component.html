@@ -1,0 +1,39 @@
+<div class="rounded-lg">
+  <div class="border">
+    <nav class="navbar navbar-expand-lg navbar navbar-light" style="background-color: #e3ecf4;">
+      <div class="collapse navbar-collapse" id="navbarCollapse9">
+          <div class="navbar-nav">
+            <div *ngIf="router == '/schedule'; then thenBlock else elseBlock"></div>
+              <ng-template #thenBlock><a href="#" class="nav-item nav-link active">Schedule</a></ng-template>
+              <ng-template #elseBlock><a href="#" class="nav-item nav-link">Schedule</a></ng-template>
+            <div *ngIf="router == '/bus-lines'; then thenBlock1 else elseBlock1"></div>
+              <ng-template #thenBlock1><a href="#" class="nav-item nav-link active">Bus Lines</a></ng-template>
+              <ng-template #elseBlock1><a href="#" class="nav-item nav-link">Bus Lines</a></ng-template>
+            <div *ngIf="router == '/bus-location'; then thenBlock2 else elseBlock2"></div>
+              <ng-template #thenBlock2><a href="#" class="nav-item nav-link active">Bus Locations</a></ng-template>
+              <ng-template #elseBlock2><a href="#" class="nav-item nav-link">Bus Locations</a></ng-template>
+            <div *ngIf="router == '/pricelist'; then thenBlock3 else elseBlock3"></div>
+              <ng-template #thenBlock3><a routerLink="/pricelist" class="nav-item nav-link active">Pricelist</a></ng-template>
+              <ng-template #elseBlock3><a routerLink="/pricelist" class="nav-item nav-link">Pricelist</a></ng-template>
+            <div *ngIf="router == '/buy-tickets'; then thenBlock4 else elseBlock4"></div>
+              <ng-template #thenBlock4><a href="#" class="nav-item nav-link active">Buy Ticket</a></ng-template>
+              <ng-template #elseBlock4><a href="#" class="nav-item nav-link">Buy Ticket</a></ng-template>
+            <div *ngIf="router == '/Profile'; then thenBlock5 else elseBlock5"></div>
+              <ng-template #thenBlock5><a href="#" class="nav-item nav-link active">Profile</a></ng-template>
+              <ng-template #elseBlock5><a href="#" class="nav-item nav-link">Profile</a></ng-template>
+          </div>
+          <form *ngIf="!loggedIn" class="form-inline ml-auto">
+                <a routerLink="/login" class="form-control mr-sm-2">Login</a>
+                <a routerLink="/register" class="form-control mr-sm-2">Register</a>
+            </form>
+            <form *ngIf="loggedIn" class="form-inline ml-auto">
+                <a routerLink="/login" class="form-control mr-sm-2" (click)="logOut($event)" >Log Out</a>
+            </form>
+      </div>
+    </nav>
+  </div>
+</div>
+
+
+
+

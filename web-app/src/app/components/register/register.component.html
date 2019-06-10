@@ -1,0 +1,68 @@
+<form class="form-signin" [formGroup]="registerForm"><br><br>
+<div class="container">
+    <div class="row">
+      <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+        <div class="shadow-lg">
+          <div class="card card-signin my-5">
+            <div class="card-body">
+                <div class="form-label-group">
+                    <input name="name" type="text" class="form-control" placeholder="Name" required autofocus formControlName="name">
+                </div><br>
+                <div class="form-label-group">
+                  <input name="surname" type="text" class="form-control" placeholder="Surname" required formControlName="surname">
+                </div><br>
+                <div class="form-label-group">
+                    <input name="address" type="text" class="form-control" placeholder="Address" required formControlName="address">
+                  </div><br>
+                  <div class="form-label-group">
+                      <input name="birthday" type="date" class="form-control" placeholder="Birthday" required formControlName="birthday">
+                    </div><br>
+                    
+                <div class="form-label-group">
+                  <input name="email" type="email" class="form-control" placeholder="Email" required formControlName="email">
+                </div>
+                  <br>
+                <div class="form-label-group">
+                  <input name="password" type="password" class="form-control" placeholder="Password" required formControlName="password">
+                </div><br>
+                <div class="form-label-group">
+                    <input name="confirmPassword" type="password" class="form-control" placeholder="Confirm Password" required formControlName="confirmPassword">
+                  </div><br>
+                  <div class="form-label-group">
+                  <select name="userType" class="form-control" (change)="onSelect($event)" required formControlName="userType">
+                    <option>RegularUser</option>
+                    <option>Student</option>
+                    <option>Pensioner</option>
+                  </select>
+                </div><br>
+                <div *ngIf="selectValue == 'Student'" class="form-label-group">
+                    <div class="input-group">
+                        <div class="custom-file">
+                          <input name="image" type="file" accept="image/*" class="custom-file-input" formControlName="image">
+                          <label class="custom-file-label">Choose file</label>
+                        </div>
+                    </div>
+                </div>       
+                <div *ngIf="selectValue == 'Pensioner'" class="form-label-group">
+                    <div class="input-group">
+                        <div class="custom-file">
+                          <input name="image" type="file" accept="document/*" class="custom-file-input" formControlName="image">
+                          <label class="custom-file-label">Choose file</label>
+                        </div>
+                    </div>
+                </div>
+
+                <br>
+                <div *ngIf="registerForm.valid">
+                  <button class="btn btn-lg btn-primary btn-block text-uppercase active" type="submit">Register</button>
+                </div>
+                <div *ngIf="!registerForm.valid">
+                  <button class="btn btn-lg btn-primary btn-block text-uppercase disabled" [disabled]="!registerForm.valid" type="submit">Register</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>  
+  </form>
