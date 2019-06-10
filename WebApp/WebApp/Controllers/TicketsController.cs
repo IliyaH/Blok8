@@ -9,6 +9,7 @@ using System.Web.Http.Description;
 using WebApp.Models;
 using WebApp.Persistence;
 using WebApp.Persistence.UnitOfWork;
+using static WebApp.Models.Enums;
 
 namespace WebApp.Controllers
 {
@@ -17,12 +18,12 @@ namespace WebApp.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        private readonly IUnitOfWork unitOfWork;
+        private readonly IUnitOfWork UnitOfWork;
         private ApplicationUserManager _userManager;
         public TicketsController(ApplicationUserManager userManager, IUnitOfWork uw)
         {
             UserManager = userManager;
-            unitOfWork = uw;
+            UnitOfWork = uw;
         }
 
         public ApplicationUserManager UserManager
@@ -35,6 +36,15 @@ namespace WebApp.Controllers
             {
                 _userManager = value;
             }
+        }
+
+        // GET: api/Koeficients
+        [Route("CalculatePrice")]
+        [ResponseType(typeof(double))]
+        public IHttpActionResult GetCena(TicketType ticketType, UserType userType)
+        {
+            return Ok(UnitOfWork.TicketRepository.CalculatePrice(ticketType, userType));
+
         }
 
         /*[Route("GetTicketTypes")]
@@ -148,7 +158,7 @@ namespace WebApp.Controllers
         {
             if (disposing)
             {
-                unitOfWork.Dispose();
+                UnitOfWork.Dispose();
             }
             base.Dispose(disposing);
         }
