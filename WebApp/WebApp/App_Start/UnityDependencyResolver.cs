@@ -71,6 +71,7 @@ namespace WebApp.App_Start
             container.RegisterType<DbContext, ApplicationDbContext>(new PerResolveLifetimeManager());
             container.RegisterType<IUnitOfWork, DemoUnitOfWork>();
             container.RegisterType<ITicketRepository, TicketRepository>();
+            container.RegisterType<IPricelistRepository, PricelistRepository>();
 
             //svaki korisnik treba da ima svoj dbkontekst, po requestu
             container.RegisterType<IUnitOfWork, DemoUnitOfWork>();

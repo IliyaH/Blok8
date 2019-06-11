@@ -47,6 +47,58 @@ namespace WebApp.Controllers
 
         }
 
+        [Route("Add")]
+        [ResponseType(typeof(Ticket))]
+        public IHttpActionResult PostTicket(string[] p)
+        {
+            var temp = Enum.Parse(typeof(TicketType), p[1]);
+            int IdPricelistItem = UnitOfWork.PricelistRepository.getPricelistsItem((TicketType)temp);
+
+            Ticket ticket = new Ticket()
+            {
+                Valid = true,
+                IssueDate = DateTime.Now,
+                Price = double.Parse(p[0]),
+                IdPricelistItem = IdPricelistItem,
+                IdApplicationUser = null
+            };
+
+            if (p[2] != null)
+            {
+                ticket.IdApplicationUser =UnitOfWork.PricelistRepository.getIdByEmail(p[2]);
+            }
+
+            UnitOfWork.TicketRepository.Add(ticket);
+            UnitOfWork.Complete();
+            return Ok(ticket.Id);
+
+
+            /*if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            try
+            {
+                Ticket t = new Ticket();
+                t.PurchaseTime = ticket.PurchaseTime;
+                t.TicketPricesId = unitOfWork.TicketPrices.Get(ticket.TicketPricesId).Id;
+                t.TicketTypeId = unitOfWork.TicketTypes.Get((int)ticket.TicketTypeId).Id;
+                t.Name = "Karta";
+                t.ApplicationUserId = UserManager.FindById(ticket.ApplicationUserId).Id;
+
+                unitOfWork.Tickets.Add(ticket);
+                unitOfWork.Complete();
+                return Ok(t.Id);
+            }
+            catch (Exception ex)
+            {
+                return NotFound();
+            }*/
+
+        }
+
+
         /*[Route("GetTicketTypes")]
         //GET: api/Tickets
         public IEnumerable<TicketType> GetTicketTypes()

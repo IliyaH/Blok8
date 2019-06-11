@@ -66,7 +66,7 @@ namespace WebApp.Controllers
             };
         }
 
-        [Route("GetUser")]
+        [Route("GetUserData")]
         public ApplicationUser GetUser(string email)
         {
             ApplicationUser user = UserManager.FindByEmail(email);

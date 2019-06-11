@@ -13,6 +13,6 @@ export class UserService {
     return this.httpClient.get('http://localhost:52295/api/Account/UserInfo')
   }
   getUserData(email:string) {
-    return this.httpClient.get('http://localhost:52295/api/Account/GetUser?email='+email)
+    return this.httpClient.get('http://localhost:52295/api/Account/GetUserData?email='+email)
   }
 }

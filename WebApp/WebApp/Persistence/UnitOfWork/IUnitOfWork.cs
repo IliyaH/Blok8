@@ -10,6 +10,7 @@ namespace WebApp.Persistence.UnitOfWork
     public interface IUnitOfWork : IDisposable
     {
         ITicketRepository TicketRepository { get; }
+        IPricelistRepository PricelistRepository { get; }
 
         int Complete();
     }

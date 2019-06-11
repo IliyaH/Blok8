@@ -67,6 +67,25 @@ namespace WebApp.Migrations
                 userManager.AddToRole(user.Id, "AppUser");
             }
 
+            if (!context.Users.Any(u => u.UserName == "nikola.dragas9@gmail.com"))
+            {
+                var user = new ApplicationUser()
+                {
+                    UserName = "nikola.dragas9@gmail.com",
+                    Email = "nikola.dragas9@gmail.com",
+                    PasswordHash = ApplicationUser.HashPassword("Nidza1996"),
+                    Name = "Nikola",
+                    Surname = "Dragas",
+                    Birthday = new DateTime(1996, 8, 15),
+                    Image = "",
+                    UserType = UserType.Student,
+                    Address = "Sase Kovacevica 9",
+                    Activated = true
+                };
+                userManager.Create(user);
+                userManager.AddToRole(user.Id, "AppUser");
+            }
+
             if (!context.Items.Any(i => i.TicketType == TicketType.TimeTicket))
             {
                 var item = new Item()
@@ -151,34 +170,38 @@ namespace WebApp.Migrations
 
             foreach (var pricelist in context.Pricelists)
             {
-                foreach (var item in context.Items)
+                if(!context.PricelistItems.Any(p => p.IdPricelist == pricelist.Id))
                 {
-                    var pricelistItem = new PricelistItem()
+                    foreach (var item in context.Items)
                     {
-                        IdPricelist = pricelist.Id,
-                        IdItem = item.Id,
-                        Price = 0
-                    };
+                        var pricelistItem = new PricelistItem()
+                        {
+                            IdPricelist = pricelist.Id,
+                            IdItem = item.Id,
+                            Price = 0
+                        };
 
-                    if (item.TicketType == TicketType.TimeTicket)
-                    {
-                        pricelistItem.Price = priceOfTimeTicket;
-                    }
-                    else if (item.TicketType == TicketType.DayTicket)
-                    {
-                        pricelistItem.Price = priceOfDayTicket;
-                    }
-                    else if (item.TicketType == TicketType.MounthTicket)
-                    {
-                        pricelistItem.Price = priceOfMonthTicket;
-                    }
-                    else
-                    {
-                        pricelistItem.Price = priceOfYearTicket;
-                    }
+                        if (item.TicketType == TicketType.TimeTicket)
+                        {
+                            pricelistItem.Price = priceOfTimeTicket;
+                        }
+                        else if (item.TicketType == TicketType.DayTicket)
+                        {
+                            pricelistItem.Price = priceOfDayTicket;
+                        }
+                        else if (item.TicketType == TicketType.MounthTicket)
+                        {
+                            pricelistItem.Price = priceOfMonthTicket;
+                        }
+                        else
+                        {
+                            pricelistItem.Price = priceOfYearTicket;
+                        }
 
-                    context.PricelistItems.Add(pricelistItem);
+                        context.PricelistItems.Add(pricelistItem);
+                    }
                 }
+                
             }
         }
     }
