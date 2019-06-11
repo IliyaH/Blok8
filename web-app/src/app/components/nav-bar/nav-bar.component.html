@@ -16,8 +16,8 @@
               <ng-template #thenBlock3><a routerLink="/pricelist" class="nav-item nav-link active">Pricelist</a></ng-template>
               <ng-template #elseBlock3><a routerLink="/pricelist" class="nav-item nav-link">Pricelist</a></ng-template>
             <div *ngIf="router == '/buy-ticket'; then thenBlock4 else elseBlock4"></div>
-              <ng-template #thenBlock4><a href="#" class="nav-item nav-link active">Buy Ticket</a></ng-template>
-              <ng-template #elseBlock4><a href="#" class="nav-item nav-link">Buy Ticket</a></ng-template>
+              <ng-template #thenBlock4><a routerLink="/buy-ticket" class="nav-item nav-link active">Buy Ticket</a></ng-template>
+              <ng-template #elseBlock4><a routerLink="/buy-ticket" class="nav-item nav-link">Buy Ticket</a></ng-template>
             <div *ngIf="router == '/Profile'; then thenBlock5 else elseBlock5"></div>
               <ng-template #thenBlock5><a href="#" class="nav-item nav-link active">Profile</a></ng-template>
               <ng-template #elseBlock5><a href="#" class="nav-item nav-link">Profile</a></ng-template>

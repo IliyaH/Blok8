@@ -66,6 +66,13 @@ namespace WebApp.Controllers
             };
         }
 
+        [Route("GetUser")]
+        public ApplicationUser GetUser(string email)
+        {
+            ApplicationUser user = UserManager.FindByEmail(email);
+            return user;
+        }
+
         // POST api/Account/Logout
         [Route("Logout")]
         public IHttpActionResult Logout()

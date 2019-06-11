@@ -461,3 +461,4 @@ C:\Users\Korisnik\Desktop\Blok8\WebApp\WebApp\obj\Debug\WebApp.csproj.CopyComple
 C:\Users\Korisnik\Desktop\Blok8\WebApp\WebApp\obj\Debug\WebApp.dll
 C:\Users\Korisnik\Desktop\Blok8\WebApp\WebApp\obj\Debug\WebApp.pdb
 C:\Users\Korisnik\Desktop\Blok8\WebApp\WebApp\obj\Debug\WebApp.Migrations.TestMigration.resources
+C:\Users\zilic\Desktop\Blok8\WebApp\WebApp\obj\Debug\WebApp.Migrations.TestMigration.resources

@@ -33,15 +33,19 @@ export class LoginComponent implements OnInit {
         let decodetJwtData = JSON.parse(decodedJwtJasonData)
 
         let role = decodetJwtData.role
+        //let temp = decodetJwtData.email
         
         console.log('jwtData: ' + jwtData)
         console.log('decodedJwtJsonData: ' + decodedJwtJasonData)
         console.log(decodetJwtData)
         console.log('Role: ' + role)
+        //console.log('Password' + temp)
+
         let a = decodetJwtData.unique_name
         localStorage.setItem('jwt', jwt)
         localStorage.setItem('role', role)
         localStorage.setItem('name',a);
+        //localStorage.setItem('password', temp);
         window.location.href = "/pricelist"
       }
     );
