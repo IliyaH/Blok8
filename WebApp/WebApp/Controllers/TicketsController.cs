@@ -38,7 +38,7 @@ namespace WebApp.Controllers
             }
         }
 
-        // GET: api/Koeficients
+        // GET: api/Tikets/CalculatePrice
         [Route("CalculatePrice")]
         [ResponseType(typeof(double))]
         public IHttpActionResult GetCena(TicketType ticketType, UserType userType)

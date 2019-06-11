@@ -280,6 +280,10 @@
     <Compile Include="Migrations\201906101848116_FourthMigration.Designer.cs">
       <DependentUpon>201906101848116_FourthMigration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201906110929123_TestMigration.cs" />
+    <Compile Include="Migrations\201906110929123_TestMigration.Designer.cs">
+      <DependentUpon>201906110929123_TestMigration.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -412,6 +416,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201906101848116_FourthMigration.resx">
       <DependentUpon>201906101848116_FourthMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906110929123_TestMigration.resx">
+      <DependentUpon>201906110929123_TestMigration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

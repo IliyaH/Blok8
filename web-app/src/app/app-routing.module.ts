@@ -22,7 +22,8 @@ const routes: Routes = [{
 { 
   path: 'pricelist', 
   component: PricelistComponent 
-},];
+},
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

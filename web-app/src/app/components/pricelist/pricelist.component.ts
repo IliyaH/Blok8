@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {TicketService} from 'src/app/services/ticket/ticket.service'
 
 @Component({
   selector: 'app-pricelist',
@@ -7,22 +8,27 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PricelistComponent implements OnInit {
 
-  selectedTicketType: string = 'TimeTicket';
-  selectedUserType: string = 'RegularUser';
+  selectedTicketType: any = 'TimeTicket';
+  selectedUserType: any = 'RegularUser';
+  price : number;
 
-  constructor() { }
+  constructor( private ticketService : TicketService) { }
 
   ngOnInit() {
     let ilija = localStorage['role'];
     console.log(ilija);
+
+
   }
 
   onSelectTicketType(event : any){
     this.selectedTicketType = event.target.value;
+    this.ticketService.getCena(this.selectedTicketType, this.selectedUserType).subscribe(tempPrice => this.price = tempPrice);
   }
 
   onSelectUserType(event : any){
     this.selectedUserType = event.target.value;
+    this.ticketService.getCena(this.selectedTicketType, this.selectedUserType).subscribe(tempPrice => this.price = tempPrice);
   }
 
 }

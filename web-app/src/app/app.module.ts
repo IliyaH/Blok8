@@ -13,13 +13,15 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import { PricelistComponent } from './components/pricelist/pricelist.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
     NavBarComponent,
     LoginComponent,
     RegisterComponent,
-    PricelistComponent
+    PricelistComponent,
+    
   ],
   imports: [
     BrowserModule,
