@@ -18,9 +18,9 @@
             <div *ngIf="router == '/buy-ticket'; then thenBlock4 else elseBlock4"></div>
               <ng-template #thenBlock4><a routerLink="/buy-ticket" class="nav-item nav-link active">Buy Ticket</a></ng-template>
               <ng-template #elseBlock4><a routerLink="/buy-ticket" class="nav-item nav-link">Buy Ticket</a></ng-template>
-            <div *ngIf="router == '/Profile'; then thenBlock5 else elseBlock5"></div>
-              <ng-template #thenBlock5><a href="#" class="nav-item nav-link active">Profile</a></ng-template>
-              <ng-template #elseBlock5><a href="#" class="nav-item nav-link">Profile</a></ng-template>
+            <div *ngIf="router == '/profile'; then thenBlock5 else elseBlock5"></div>
+              <ng-template #thenBlock5><a routerLink="/profile" class="nav-item nav-link active">Profile</a></ng-template>
+              <ng-template #elseBlock5><a routerLink="/profile" class="nav-item nav-link">Profile</a></ng-template>
           </div>
           <form *ngIf="!loggedIn" class="form-inline ml-auto">
                 <a routerLink="/login" class="form-control mr-sm-2">Login</a>
