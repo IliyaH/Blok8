@@ -17,6 +17,20 @@ namespace WebApp.Persistence
         public DbSet<PricelistItem> PricelistItems { get; set; }
         public DbSet<Ticket> Tickets { get; set; }
 
+        public DbSet<Line> Lines { get; set; }
+
+        public DbSet<BusLineType> BusLineTypes { get; set; }
+
+        public DbSet<Day> Days { get; set; }
+
+        public DbSet<Station> Stations { get; set; }
+
+        public DbSet<TimetableActive> TimetableActives { get; set; }
+
+        public DbSet<StationLine> StationLines { get; set; }
+
+        public DbSet<Timetable> Timetables { get; set; }
+
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {

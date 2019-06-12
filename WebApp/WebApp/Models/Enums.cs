@@ -21,5 +21,18 @@ namespace WebApp.Models
             MounthTicket = 2,
             YearTicket = 3
         }
+
+        public enum DayType
+        {
+            Weekday = 0,
+            Weekend = 1,
+        }
+
+        public enum LineType
+        {
+            City = 0,
+            Suburban = 1,
+        }
+
     }
 }
