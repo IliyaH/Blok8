@@ -395,6 +395,32 @@ namespace WebApp.Controllers
             return Ok();
         }
 
+        [Route("Brisac")]
+        public async Task<IHttpActionResult> Brisac(EditBindingModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            ApplicationUser user = UserManager.FindByEmail(model.Email);
+
+            try
+            {
+                IdentityResult result = await UserManager.DeleteAsync(user);
+                if (!result.Succeeded)
+                {
+                    return GetErrorResult(result);
+                }
+            }
+            catch(Exception e)
+            {
+                
+            }
+
+            return Ok();
+        }
+
         // POST api/Account/RegisterExternal
         [OverrideAuthentication]
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]

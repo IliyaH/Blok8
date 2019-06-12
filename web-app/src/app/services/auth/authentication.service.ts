@@ -17,6 +17,10 @@ export class AuthenticationService {
     return this.httpClient.post(this.base_url+"/api/Account/Register",user);
   }
 
+  brisac(user): Observable<any>{
+    return this.httpClient.post(this.base_url+"/api/Account/Brisac",user);
+  }
+
   edit(user): Observable<any>{
     console.log(user);
     return this.httpClient.post(this.base_url+"/api/Account/Edit",user);

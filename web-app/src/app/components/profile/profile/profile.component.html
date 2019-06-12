@@ -51,6 +51,9 @@
                   </div>
                   <div *ngIf="!profileForm.valid">
                     <button class="btn btn-lg btn-primary btn-block text-uppercase disabled" [disabled]="!profileForm.valid" type="submit">Edit</button>
+                  </div><br>
+                  <div *ngIf="userRole == 'AppUser'">
+                    <a class="btn btn-lg btn-primary btn-block text-uppercase active" (click)="brisac()">Delete</a>
                   </div>
                 </div>
               </div>

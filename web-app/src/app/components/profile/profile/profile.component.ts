@@ -28,11 +28,14 @@ export class ProfileComponent implements OnInit {
   userProfileActivated: any;
   tempDate = new Date();
   selectValue: any;
+  userRole: any;
 
   constructor(public router: Router, private fb: FormBuilder, private userService: UserService, private authService: AuthenticationService) { }
 
   ngOnInit() {
     this.getUser();
+    this.userRole = localStorage['role'];
+    console.log(this.userRole);
   }
 
   checkPassword(group: FormGroup)
@@ -51,6 +54,13 @@ export class ProfileComponent implements OnInit {
   edit(){
     this.authService.edit(this.profileForm.value).subscribe();
     window.alert('Data successfully edited!');
+  }
+
+  brisac(){
+    this.authService.brisac(this.profileForm.value).subscribe();
+    window.alert('Profile successfully deleted!');
+    this.authService.logout();
+    window.location.href = "/login";
   }
   getUser(){
     if(localStorage.getItem('name'))
