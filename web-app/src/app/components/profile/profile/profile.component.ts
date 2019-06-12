@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { UserService } from 'src/app/services/user/user.service';
+import { AuthenticationService } from 'src/app/services/auth/authentication.service';
 
 @Component({
   selector: 'app-profile',
@@ -16,11 +17,11 @@ export class ProfileComponent implements OnInit {
     address: ['', Validators.required],
     birthday: ['', Validators.required],
     email: ['', [Validators.required, Validators.email]],
-    password: ['', [Validators.required, Validators.minLength(8)]],
-    confirmPassword: ['', [Validators.required, Validators.minLength(8)]],
-    userType: ['', Validators.required],
-    image: [''],
-  }, {validator: this.checkPassword});
+    //password: ['', [Validators.required, Validators.minLength(8)]],
+    //confirmPassword: ['', [Validators.required, Validators.minLength(8)]],
+    //userType: ['', Validators.required],
+    //image: [''],
+  }/*, {validator: this.checkPassword}*/);
 
   userData: any;
   userProfileType: any;
@@ -28,7 +29,7 @@ export class ProfileComponent implements OnInit {
   tempDate = new Date();
   selectValue: any;
 
-  constructor(public router: Router, private fb: FormBuilder, private userService: UserService) { }
+  constructor(public router: Router, private fb: FormBuilder, private userService: UserService, private authService: AuthenticationService) { }
 
   ngOnInit() {
     this.getUser();
@@ -47,6 +48,10 @@ export class ProfileComponent implements OnInit {
     this.selectValue = event.target.value;
   }
 
+  edit(){
+    this.authService.edit(this.profileForm.value).subscribe();
+    window.alert('Data successfully edited!');
+  }
   getUser(){
     if(localStorage.getItem('name'))
     {
@@ -77,12 +82,14 @@ export class ProfileComponent implements OnInit {
           let date = new Date();
           console.log();
           this.profileForm.controls.birthday.setValue(date);*/
+          let birthday =  this.userData.Birthday.split('T',2);
+          this.profileForm.controls.birthday.setValue(`${birthday[0]}`);
         }
         if(this.userData.Email)
         {
           this.profileForm.controls.email.setValue(this.userData.Email);
         }
-        if(this.userData.Password)
+        /*if(this.userData.Password)
         {  
           this.profileForm.controls.password.setValue(this.userData.Password);
         }
@@ -111,7 +118,7 @@ export class ProfileComponent implements OnInit {
         if(this.userData.Image)
         {
           this.profileForm.controls.image.setValue(this.userData.Image);
-        }
+        }*/
       
     });
     }

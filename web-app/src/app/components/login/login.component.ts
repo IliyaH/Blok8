@@ -46,7 +46,7 @@ export class LoginComponent implements OnInit {
         localStorage.setItem('role', role)
         localStorage.setItem('name',a);
         //localStorage.setItem('password', temp);
-        window.location.href = "/pricelist"
+        window.location.href = "/profile"
       }
     );
   }

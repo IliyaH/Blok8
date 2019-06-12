@@ -86,7 +86,7 @@ namespace WebApp.Controllers
         public async Task<ManageInfoViewModel> GetManageInfo(string returnUrl, bool generateState = false)
         {
             IdentityUser user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
-
+            
             if (user == null)
             {
                 return null;
@@ -335,10 +335,58 @@ namespace WebApp.Controllers
                 return BadRequest(ModelState);
             }
 
-            var user = new ApplicationUser() { UserName = model.Email, Email = model.Email };
+            var user = new ApplicationUser()
+            {
+                UserName = model.Email,
+                Email = model.Email,
+                Name = model.Name,
+                Surname = model.Surname,
+                Address = model.Address,
+                Birthday = model.Birthday,
+                UserType = model.UserType
+            };
+
+            if (user.UserType == Enums.UserType.RegularUser)
+                user.Activated = true;
+            else
+                user.Activated = false;
 
             IdentityResult result = await UserManager.CreateAsync(user, model.Password);
 
+            if (!result.Succeeded)
+            {
+                return GetErrorResult(result);
+            }
+
+            result = await UserManager.AddToRoleAsync(user.Id, "AppUser");
+
+            if (!result.Succeeded)
+            {
+                return GetErrorResult(result);
+            }
+
+            return Ok();
+        }
+
+        [Route("Edit")]
+        public async Task<IHttpActionResult> Edit(EditBindingModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            ApplicationUser user = UserManager.FindByEmail(model.Email);
+            user.UserName = model.Email;
+            user.Email = model.Email;
+            user.Birthday = DateTime.Parse(model.Birthday);
+            user.Address = model.Address;
+            user.Name = model.Name;
+            user.Surname = model.Surname;
+            //user.Image = path;
+            //path = "";
+
+            IdentityResult result = await UserManager.UpdateAsync(user);
             if (!result.Succeeded)
             {
                 return GetErrorResult(result);

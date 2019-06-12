@@ -15,10 +15,7 @@ export class PricelistComponent implements OnInit {
   constructor( private ticketService : TicketService) { }
 
   ngOnInit() {
-    let ilija = localStorage['role'];
-    console.log(ilija);
-
-
+    this.price = 65;
   }
 
   onSelectTicketType(event : any){

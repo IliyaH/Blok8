@@ -17,6 +17,11 @@ export class AuthenticationService {
     return this.httpClient.post(this.base_url+"/api/Account/Register",user);
   }
 
+  edit(user): Observable<any>{
+    console.log(user);
+    return this.httpClient.post(this.base_url+"/api/Account/Edit",user);
+  }
+
   login(email: any, password: any){
     let data = `username=${email}&password=${password}&grant_type=password`;
     let headers = new HttpHeaders();
