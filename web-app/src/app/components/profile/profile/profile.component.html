@@ -6,26 +6,43 @@
             <div class="card card-signin my-5">
               <div class="card-body">
                   <div class="form-label-group">
+                      <div *ngIf="profileForm.controls.email.errors" >
+                          <div *ngIf="profileForm.controls.email.errors.required && (profileForm.controls.email.dirty || profileForm.controls.email.touched)" class="badge badge-danger">Email is mandatory field</div>
+                        </div>
+                      
+                    <input type="hidden" name="email" class="form-control" placeholder="Email" required formControlName="email">
+                    <button type="button" class="form-control" disabled>{{profileForm.controls.email.value}}</button>
+                  </div><br>
+                  <div class="form-label-group">
+                      <div *ngIf="profileForm.controls.name.errors" >
+                          <div *ngIf="profileForm.controls.name.errors.required && (profileForm.controls.name.dirty || profileForm.controls.name.touched)" class="badge badge-danger">Name is mandatory field</div>
+                        </div>
                       <span class="badge badge-primary">Name: </span>
                       <input name="name" type="text" class="form-control" placeholder="Name" required formControlName="name">
                   </div><br>
                   <div class="form-label-group">
+                      <div *ngIf="profileForm.controls.surname.errors" >
+                          <div *ngIf="profileForm.controls.surname.errors.required && (profileForm.controls.surname.dirty || profileForm.controls.surname.touched)" class="badge badge-danger">Surname is mandatory field</div>
+                        </div>
                       <span class="badge badge-primary">Surname: </span>
                     <input name="surname" type="text" class="form-control" placeholder="Surname" required formControlName="surname">
                   </div><br>
                   <div class="form-label-group">
+                      <div *ngIf="profileForm.controls.address.errors" >
+                          <div *ngIf="profileForm.controls.address.errors.required && (profileForm.controls.address.dirty || profileForm.controls.address.touched)" class="badge badge-danger">Address is mandatory field</div>
+                        </div>
                       <span class="badge badge-primary">Address: </span>
                       <input name="address" type="text" class="form-control" placeholder="Address" required formControlName="address">
                     </div><br>
                     <div class="form-label-group">
+                        <div *ngIf="profileForm.controls.birthday.errors" >
+                            <div *ngIf="profileForm.controls.birthday.errors.required && (profileForm.controls.birthday.dirty || profileForm.controls.birthday.touched)" class="badge badge-danger">Birthday is mandatory field</div>
+                          </div>
                         <span class="badge badge-primary">Birthday: </span>
                         <input name="birthday" type="date" class="form-control" placeholder="Birthday" required formControlName="birthday">
                       </div><br>
                       
-                  <div class="form-label-group">
-                      <span class="badge badge-primary">Email: </span>
-                    <input name="email" disabled type="email" class="form-control" placeholder="Email" required formControlName="email">
-                  </div>
+                  
                    <br>
                   <div *ngIf="selectValue == 'Student' && userProfileActivated == 'false'" class="form-label-group">
                       <div class="input-group">

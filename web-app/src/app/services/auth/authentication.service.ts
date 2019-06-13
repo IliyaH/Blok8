@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { Http, Response } from '@angular/http';
+import { catchError} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -13,8 +14,9 @@ export class AuthenticationService {
   constructor(private http: Http, private httpClient:HttpClient) { }
 
   register(user): Observable<any>{
-    console.log(user);
-    return this.httpClient.post(this.base_url+"/api/Account/Register",user);
+    //console.log(user);
+    return this.httpClient.post<any>(this.base_url+"/api/Account/Register",user).pipe(
+      catchError(this.handleError<any>(`register`)));
   }
 
   brisac(user): Observable<any>{
@@ -34,7 +36,8 @@ export class AuthenticationService {
     if(!localStorage.jwt){
       this.isLoggedIn = true;
       console.log(this.isLoggedIn);
-      return this.httpClient.post(this.base_url+"/oauth/token",data,{"headers":headers}) as Observable<any>
+      return this.httpClient.post(this.base_url+"/oauth/token",data,{"headers":headers}).pipe(
+        catchError(this.handleError<any>(`login`))) as Observable<any>
     }
     else{
      // window.location.href = "/home";
@@ -63,5 +66,12 @@ export class AuthenticationService {
   // }
   getTypes() {
     return this.httpClient.get(this.base_url+"/api/Types/GetTypes");
+  }
+
+  //ERROR HENDLER
+  private handleError<T> (operation = 'operation', result?: T) {
+    return (error: any): Observable<T> => {
+      return of(result as T);
+    };
   }
 }

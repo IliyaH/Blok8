@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { AuthenticationService } from 'src/app/services/auth/authentication.service';
+import { error } from '@angular/compiler/src/util';
+import { ifError } from 'assert';
 
 @Component({
   selector: 'app-register',
@@ -11,6 +13,7 @@ import { AuthenticationService } from 'src/app/services/auth/authentication.serv
 export class RegisterComponent implements OnInit {
 
   selectValue: any;
+  emailInUse: boolean = false;
 
   registerForm = this.fb.group({
     name: ['', Validators.required],
@@ -29,11 +32,14 @@ export class RegisterComponent implements OnInit {
   constructor(public router: Router, private fb: FormBuilder, private authService: AuthenticationService) { }
 
   ngOnInit() {
+    
   }
 
   onSelect(event : any)
   {
     this.selectValue = event.target.value;
+    console.log(this.checkPassword(this.registerForm));
+    console.log(this.registerForm.valid);
   }
 
   checkPassword(group: FormGroup)
@@ -45,9 +51,21 @@ export class RegisterComponent implements OnInit {
   }
 
   register(){
-    this.authService.register(this.registerForm.value).subscribe();
-    window.alert('Successfully registered!');
-    window.location.href = "/login"
+    this.authService.register(this.registerForm.value).subscribe( data=>{
+      if(!data)
+      {
+        console.log('Data: ' + data)
+        window.alert('User with email: ' + this.registerForm.controls.email.value + ' already registered!')
+        this.emailInUse = true;
+      }
+      else if (data == 200) 
+      {
+        window.alert('Successfully registered!');
+        console.log('Zdravo!');
+        this.emailInUse = false;
+        this.login();
+      }
+    });
   }
   
   login(){

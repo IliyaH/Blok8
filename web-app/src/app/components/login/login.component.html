@@ -6,10 +6,19 @@
             <div class="card-body">
               <form class="form-signin" [formGroup]="loginForm" (ngSubmit)="login()">
                 <div class="form-label-group">
+                    <div *ngIf="loginForm.controls.email.errors" >
+                        <div *ngIf="loginForm.controls.email.errors.required && (loginForm.controls.email.dirty || loginForm.controls.email.touched)" class="badge badge-danger">Email is mandatory field</div>
+                    </div>
+                    <div *ngIf="emailOrPassError == true" >
+                      <div class="badge badge-danger">Wrong email or password</div>
+                  </div>
                   <input name="email" type="email" class="form-control" placeholder="Email" required autofocus formControlName="email">
                 </div>
                   <br>
                 <div class="form-label-group">
+                    <div *ngIf="loginForm.controls.password.errors" >
+                        <div *ngIf="loginForm.controls.password.errors.required && (loginForm.controls.password.dirty || loginForm.controls.password.touched)" class="badge badge-danger">Password is mandatory field</div>
+                    </div>
                   <input name="password" type="password" class="form-control" placeholder="Password" required formControlName="password">
                 </div><br><br>
                 <div *ngIf="loginForm.valid">

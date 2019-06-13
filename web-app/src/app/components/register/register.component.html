@@ -6,29 +6,65 @@
           <div class="card card-signin my-5">
             <div class="card-body">
                 <div class="form-label-group">
-                    <input name="name" type="text" class="form-control" placeholder="Name" required autofocus formControlName="name">
+                    <div *ngIf="registerForm.controls.name.errors" >
+                        <div *ngIf="registerForm.controls.name.errors.required && (registerForm.controls.name.dirty || registerForm.controls.name.touched)" class="badge badge-danger">Name is mandatory field</div>
+                      </div>
+                    <input name="name" type="text" class="form-control" placeholder="Name" required formControlName="name">
                 </div><br>
                 <div class="form-label-group">
+                    <div *ngIf="registerForm.controls.surname.errors" >
+                        <div *ngIf="registerForm.controls.surname.errors.required && (registerForm.controls.surname.dirty || registerForm.controls.surname.touched)" class="badge badge-danger">Surname is mandatory field</div>
+                      </div>
                   <input name="surname" type="text" class="form-control" placeholder="Surname" required formControlName="surname">
                 </div><br>
                 <div class="form-label-group">
+                    <div *ngIf="registerForm.controls.address.errors" >
+                        <div *ngIf="registerForm.controls.address.errors.required && (registerForm.controls.address.dirty || registerForm.controls.address.touched)" class="badge badge-danger">Address is mandatory field</div>
+                      </div>
                     <input name="address" type="text" class="form-control" placeholder="Address" required formControlName="address">
                   </div><br>
                   <div class="form-label-group">
+                      <div *ngIf="registerForm.controls.birthday.errors" >
+                          <div *ngIf="registerForm.controls.birthday.errors.required && (registerForm.controls.birthday.dirty || registerForm.controls.birthday.touched)" class="badge badge-danger">Birthday is mandatory field</div>
+                        </div>
                       <input name="birthday" type="date" class="form-control" placeholder="Birthday" required formControlName="birthday">
                     </div><br>
                     
                 <div class="form-label-group">
+                    <div *ngIf="registerForm.controls.email.errors" >
+                        <div *ngIf="registerForm.controls.email.errors.required && (registerForm.controls.email.dirty || registerForm.controls.email.touched)" class="badge badge-danger">Email is mandatory field</div>
+                    </div>
+                    <div *ngIf="emailInUse == true" >
+                        <div class="badge badge-danger">Email already in use</div>
+                    </div>
                   <input name="email" type="email" class="form-control" placeholder="Email" required formControlName="email">
                 </div>
                   <br>
                 <div class="form-label-group">
+                    <div *ngIf="registerForm.controls.password.errors" >
+                        <div *ngIf="registerForm.controls.password.errors.required && (registerForm.controls.password.dirty || registerForm.controls.password.touched)" class="badge badge-danger">Password is mandatory field</div>
+                    </div>
+                    <div *ngIf="registerForm.controls.password.status == 'INVALID' && registerForm.controls.password.errors" >
+                        <div *ngIf="(registerForm.controls.password.dirty || registerForm.controls.password.touched)" class="badge badge-danger">Password needs to be minimum 8 characters long</div>
+                    </div>
                   <input name="password" type="password" class="form-control" placeholder="Password" required formControlName="password">
                 </div><br>
                 <div class="form-label-group">
+                    <div *ngIf="registerForm.controls.confirmPassword.errors" >
+                        <div *ngIf="registerForm.controls.confirmPassword.errors.required && (registerForm.controls.confirmPassword.dirty || registerForm.controls.confirmPassword.touched)" class="badge badge-danger">Confirm password is mandatory field</div>
+                    </div>
+                    <div *ngIf="registerForm.controls.confirmPassword.status == 'INVALID' && registerForm.controls.confirmPassword.errors" >
+                        <div *ngIf="(registerForm.controls.confirmPassword.dirty || registerForm.controls.confirmPassword.touched)" class="badge badge-danger">Confirm password needs to be minimum 8 characters long</div>
+                    </div>
+                    <div *ngIf="checkPassword(registerForm) != null" >
+                        <div *ngIf="(registerForm.controls.confirmPassword.dirty || registerForm.controls.confirmPassword.touched)" class="badge badge-danger">Passwords need to match</div>
+                    </div>
                     <input name="confirmPassword" type="password" class="form-control" placeholder="Confirm Password" required formControlName="confirmPassword">
                   </div><br>
                   <div class="form-label-group">
+                      <div *ngIf="registerForm.controls.userType.errors" >
+                          <div *ngIf="registerForm.controls.userType.errors.required && (registerForm.controls.userType.dirty || registerForm.controls.userType.touched)" class="badge badge-danger">User type is mandatory field</div>
+                      </div>
                   <select name="userType" class="form-control" (change)="onSelect($event)" required formControlName="userType">
                     <option>RegularUser</option>
                     <option>Student</option>

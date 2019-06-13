@@ -11,7 +11,10 @@
                   <option *ngIf="loggedIn">MounthTicket</option>
                   <option *ngIf="loggedIn">YearTicket</option>
                 </select><br>
-                <label class="form-control text-center">Price: {{price}} RSD</label>
+                <label class="form-control text-center">Price: {{price}} RSD</label><br>
+                <div *ngIf="!loggedIn">
+                  <input name="email" type="email" class="form-control" placeholder="Email" required>
+                </div>
               </div><br>      
               <button class="btn btn-lg btn-primary btn-block text-uppercase active" (click)="buyTicket()">Buy</button>
             </div>

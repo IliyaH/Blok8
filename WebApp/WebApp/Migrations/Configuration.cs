@@ -73,7 +73,7 @@ namespace WebApp.Migrations
                 {
                     UserName = "nikola.dragas9@gmail.com",
                     Email = "nikola.dragas9@gmail.com",
-                    PasswordHash = ApplicationUser.HashPassword("Nidza1996"),
+                    PasswordHash = ApplicationUser.HashPassword("Nidza1996!"),
                     Name = "Nikola",
                     Surname = "Dragas",
                     Birthday = new DateTime(1996, 8, 15),

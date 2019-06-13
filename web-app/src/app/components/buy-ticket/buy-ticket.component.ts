@@ -23,6 +23,7 @@ export class BuyTicketComponent implements OnInit {
     this.loggedIn = localStorage['role'];
     this.selectedTicketType = "TimeTicket";
     this.getUser();
+    
   }
 
   onSelectTicketType(event : any){
@@ -37,6 +38,7 @@ export class BuyTicketComponent implements OnInit {
         this.userData = data;
         this.userProfileActivated = this.userData.Activated;
         this.userProfileType = this.userData.UserType;
+        
         if(!this.userProfileActivated)
         {
           this.userProfileType = 0;
