@@ -19,8 +19,6 @@ namespace WebApp.Persistence
 
         public DbSet<Line> Lines { get; set; }
 
-        public DbSet<BusLineType> BusLineTypes { get; set; }
-
         public DbSet<Day> Days { get; set; }
 
         public DbSet<Station> Stations { get; set; }

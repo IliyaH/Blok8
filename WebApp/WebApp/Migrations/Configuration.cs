@@ -203,6 +203,237 @@ namespace WebApp.Migrations
                 }
                 
             }
+
+            if (!context.Days.Any(i => i.dayType == DayType.Weekday))
+            {
+                var day = new Day()
+                {
+                    dayType = DayType.Weekday
+                };
+                context.Days.Add(day);
+            }
+
+            if (!context.Days.Any(i => i.dayType == DayType.Weekend))
+            {
+                var day = new Day()
+                {
+                    dayType = DayType.Weekend
+                };
+                context.Days.Add(day);
+            }
+
+
+            if (!context.TimetableActives.Any(p => p.Active == true))
+            {
+                var timetableActive = new TimetableActive()
+                {
+                    Start = new DateTime(2019, 1, 1),
+                    End = new DateTime(2019, 12, 31),
+                    Active = true
+                };
+                context.TimetableActives.Add(timetableActive);
+            }
+
+            if (!context.Lines.Any(i => i.LineName == "1"))
+            {
+                var line = new Line()
+                {
+                    LineName = "1",
+                    LineType = LineType.City
+                    
+                };
+                context.Lines.Add(line);
+            }
+
+            if (!context.Lines.Any(i => i.LineName == "4"))
+            {
+                var line = new Line()
+                {
+                    LineName = "4",
+                    LineType = LineType.City
+                };
+                context.Lines.Add(line);
+            }
+
+            if (!context.Lines.Any(i => i.LineName == "33"))
+            {
+                var line = new Line()
+                {
+                    LineName = "33",
+                    LineType = LineType.Suburban
+                };
+                context.Lines.Add(line);
+            }
+
+            if (!context.Lines.Any(i => i.LineName == "21"))
+            {
+                var line = new Line()
+                {
+                    LineName = "21",
+                    LineType = LineType.Suburban
+                };
+                context.Lines.Add(line);
+            }
+
+            #region Timetable data
+
+            string[] polasci1Radni = new string[] { "6:50", "7:50", "9:50", "11:50", "13:50", "14:50", "16:50" };
+            string[] polasci1Vikend = new string[] { "6:45", "7:45", "9:45", "11:45", "13:45", "14:45", "16:45" };
+            string[] polasci2Radni = new string[] { "6:30", "7:30", "9:30", "11:30", "13:30", "14:30", "16:30" };
+            string[] polasci2Vikend = new string[] { "6:25", "7:25", "9:25", "11:25", "13:25", "14:25", "16:25" };
+
+            foreach (var timetableActive in context.TimetableActives)
+            {
+                if (!context.Timetables.Any(p => p.IdTimetableActive == timetableActive.Id))
+                {
+                    foreach (var day in context.Days)
+                    {
+                        if (!context.Timetables.Any(p => p.IdDay == day.Id))
+                        {
+                            foreach (var line in context.Lines)
+                            {
+
+                                //polasci za prvu liniju - gradski
+                                if (line.LineName == "1" && day.dayType == DayType.Weekday)
+                                {
+                                    foreach (var polasci in polasci1Radni)
+                                    {
+                                        var timetable = new Timetable()
+                                        {
+                                            IdTimetableActive = timetableActive.Id,
+                                            IdDay = day.Id,
+                                            IdLine = line.Id,
+                                            Departures = polasci
+                                        };
+                                        context.Timetables.Add(timetable);
+                                    }
+
+                                }
+                                if (line.LineName == "1" && day.dayType == DayType.Weekend)
+                                {
+                                    foreach (var polasci in polasci1Vikend)
+                                    {
+                                        var timetable = new Timetable()
+                                        {
+                                            IdTimetableActive = timetableActive.Id,
+                                            IdDay = day.Id,
+                                            IdLine = line.Id,
+                                            Departures = polasci
+                                        };
+                                        context.Timetables.Add(timetable);
+                                    }
+
+                                }
+
+                                //polasci za drugu liniju - gradski
+                                if (line.LineName == "4" && day.dayType == DayType.Weekday)
+                                {
+                                    foreach (var polasci in polasci2Radni)
+                                    {
+                                        var timetable = new Timetable()
+                                        {
+                                            IdTimetableActive = timetableActive.Id,
+                                            IdDay = day.Id,
+                                            IdLine = line.Id,
+                                            Departures = polasci
+                                        };
+                                        context.Timetables.Add(timetable);
+                                    }
+
+                                }
+
+                                if (line.LineName == "4" && day.dayType == DayType.Weekend)
+                                {
+                                    foreach (var polasci in polasci2Vikend)
+                                    {
+                                        var timetable = new Timetable()
+                                        {
+                                            IdTimetableActive = timetableActive.Id,
+                                            IdDay = day.Id,
+                                            IdLine = line.Id,
+                                            Departures = polasci
+                                        };
+                                        context.Timetables.Add(timetable);
+                                    }
+
+                                }
+
+                                //Polasci za 3. liniju - prigradski
+                                if (line.LineName == "33" && day.dayType == DayType.Weekday)
+                                {
+                                    foreach (var polasci in polasci1Radni)
+                                    {
+                                        var timetable = new Timetable()
+                                        {
+                                            IdTimetableActive = timetableActive.Id,
+                                            IdDay = day.Id,
+                                            IdLine = line.Id,
+                                            Departures = polasci
+                                        };
+                                        context.Timetables.Add(timetable);
+                                    }
+
+                                }
+
+                                if (line.LineName == "33" && day.dayType == DayType.Weekend)
+                                {
+                                    foreach (var polasci in polasci1Vikend)
+                                    {
+                                        var timetable = new Timetable()
+                                        {
+                                            IdTimetableActive = timetableActive.Id,
+                                            IdDay = day.Id,
+                                            IdLine = line.Id,
+                                            Departures = polasci
+                                        };
+                                        context.Timetables.Add(timetable);
+                                    }
+
+                                }
+
+
+                                //Polasci za 4. liniju - prigradski
+                                if (line.LineName == "21" && day.dayType == DayType.Weekday)
+                                {
+                                    foreach (var polasci in polasci2Radni)
+                                    {
+                                        var timetable = new Timetable()
+                                        {
+                                            IdTimetableActive = timetableActive.Id,
+                                            IdDay = day.Id,
+                                            IdLine = line.Id,
+                                            Departures = polasci
+                                        };
+                                        context.Timetables.Add(timetable);
+                                    }
+
+                                }
+                                if (line.LineName == "21" && day.dayType == DayType.Weekend)
+                                {
+                                    foreach (var polasci in polasci2Vikend)
+                                    {
+                                        var timetable = new Timetable()
+                                        {
+                                            IdTimetableActive = timetableActive.Id,
+                                            IdDay = day.Id,
+                                            IdLine = line.Id,
+                                            Departures = polasci
+
+                                        };
+                                        context.Timetables.Add(timetable);
+                                    }
+
+                                }
+
+
+
+                            }
+                        }
+                    }
+                }
+            }
+
+            #endregion
         }
     }
 }

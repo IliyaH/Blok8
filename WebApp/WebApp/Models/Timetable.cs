@@ -20,10 +20,6 @@ namespace WebApp.Models
         public int IdDay { get; set; }
         public Day Day { get; set; }
 
-        [ForeignKey("BusLineType")]
-        public int IdBusLineType { get; set; }
-        public BusLineType BusLineType { get; set; }
-
         [ForeignKey("TimetableActive")]
         public int IdTimetableActive { get; set; }
         public TimetableActive TimetableActive { get; set; }

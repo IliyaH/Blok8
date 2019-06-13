@@ -11,10 +11,12 @@ export class NavBarComponent implements OnInit {
 
   loggedIn = undefined;
 
+
   constructor(public router: Router, private authService: AuthenticationService) { }
 
   ngOnInit() {
     this.loggedIn = localStorage['role'];
+    console.log(this.loggedIn);
   }
 
   logOut(){

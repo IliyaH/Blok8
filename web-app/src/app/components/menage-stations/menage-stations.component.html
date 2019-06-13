@@ -1,0 +1,79 @@
+<br><br><div class="container">
+    <div class="row">
+      <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+        <div class="shadow-lg">
+          <div class="card card-signin my-5">
+            <div class="card-body">
+              <form class="form-signin" [formGroup]="stationForm" (ngSubmit)="addStation()" >
+                <div class="form-label-group">
+                    <div *ngIf="stationForm.controls.name.errors" >
+                        <div *ngIf="stationForm.controls.name.errors.required && (stationForm.controls.name.dirty || stationForm.controls.name.touched)" class="badge badge-danger">Name is mandatory field</div>
+                    </div>
+                    <input name="name" type="text" class="form-control" placeholder="Name" formControlName="name">
+                </div>
+                <br>
+                <div class="form-label-group">
+                    <div *ngIf="stationForm.controls.address.errors" >
+                        <div *ngIf="stationForm.controls.address.errors.required && (stationForm.controls.address.dirty || stationForm.controls.address.touched)" class="badge badge-danger">Address is mandatory field</div>
+                    </div>
+                    <input name="address" type="text" class="form-control" placeholder="Address" formControlName="address">
+                </div>
+                <br>
+                <div class="form-label-group">
+                    <div *ngIf="stationForm.controls.xCoordinate.errors" >
+                        <div *ngIf="stationForm.controls.xCoordinate.errors.required && (stationForm.controls.xCoordinate.dirty || stationForm.controls.xCoordinate.touched)" class="badge badge-danger">xCoordinate is mandatory field</div>
+                    </div>
+                    <input name="xCoordinate" type="number" class="form-control" placeholder="xCoordinate" formControlName="xCoordinate">
+                </div>
+                <br>
+                <div class="form-label-group">
+                    <div *ngIf="stationForm.controls.yCoordinate.errors" >
+                        <div *ngIf="stationForm.controls.yCoordinate.errors.required && (stationForm.controls.yCoordinate.dirty || stationForm.controls.yCoordinate.touched)" class="badge badge-danger">yCoordinate is mandatory field</div>
+                    </div>
+                    <input name="yCoordinate" type="number" class="form-control" placeholder="yCoordinate" formControlName="yCoordinate">
+                </div>
+                  <br>
+
+                  <div *ngIf="stationForm.valid">
+                      <button class="btn btn-lg btn-primary btn-block text-uppercase active" type="submit">Add Station</button>
+                    </div>
+                    <div *ngIf="!stationForm.valid">
+                      <button class="btn btn-lg btn-primary btn-block text-uppercase disabled" [disabled]="!stationForm.valid" type="submit">Add Station</button>
+                    </div><br>
+                    <div *ngIf="visible">
+                        <a class="btn btn-lg btn-primary text-uppercase active">Edit</a><a class="btn btn-lg btn-primary text-uppercase active">Delete</a>
+                      </div>
+
+              </form>
+
+              
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+   <div class="container">
+      <div class="row">
+        <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+          <div class="shadow-lg">
+            <div class="card card-signin my-5">
+              <div class="card-body">
+
+                  <div class="form-label-group">
+                      <select name="selectedStation" class="form-control" (change)="onSelect($event)">
+                          <option  *ngFor="let s of stations" [value]="s.Id">{{s.Name}}</option>
+                      </select>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+  

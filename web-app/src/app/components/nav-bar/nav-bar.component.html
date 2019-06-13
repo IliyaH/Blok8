@@ -3,21 +3,49 @@
     <nav class="navbar navbar-expand-lg navbar navbar-light" style="background-color: #e3ecf4;">
       <div class="collapse navbar-collapse" id="navbarCollapse9">
           <div class="navbar-nav">
+              <div *ngIf="loggedIn != 'Admin'">
             <div *ngIf="router == '/schedule'; then thenBlock else elseBlock"></div>
               <ng-template #thenBlock><a href="#" class="nav-item nav-link active">Schedule</a></ng-template>
               <ng-template #elseBlock><a href="#" class="nav-item nav-link">Schedule</a></ng-template>
+              </div>
+              <div *ngIf="loggedIn != 'Admin'">
             <div *ngIf="router == '/bus-lines'; then thenBlock1 else elseBlock1"></div>
               <ng-template #thenBlock1><a href="#" class="nav-item nav-link active">Bus Lines</a></ng-template>
               <ng-template #elseBlock1><a href="#" class="nav-item nav-link">Bus Lines</a></ng-template>
+            </div>
+              <div *ngIf="loggedIn != 'Admin'">
             <div *ngIf="router == '/bus-location'; then thenBlock2 else elseBlock2"></div>
               <ng-template #thenBlock2><a href="#" class="nav-item nav-link active">Bus Locations</a></ng-template>
               <ng-template #elseBlock2><a href="#" class="nav-item nav-link">Bus Locations</a></ng-template>
+          </div>
+            <div *ngIf="loggedIn != 'Admin'">
             <div *ngIf="router == '/pricelist'; then thenBlock3 else elseBlock3"></div>
               <ng-template #thenBlock3><a routerLink="/pricelist" class="nav-item nav-link active">Pricelist</a></ng-template>
               <ng-template #elseBlock3><a routerLink="/pricelist" class="nav-item nav-link">Pricelist</a></ng-template>
-            <div *ngIf="router == '/buy-ticket'; then thenBlock4 else elseBlock4"></div>
-              <ng-template #thenBlock4><a routerLink="/buy-ticket" class="nav-item nav-link active">Buy Ticket</a></ng-template>
-              <ng-template #elseBlock4><a routerLink="/buy-ticket" class="nav-item nav-link">Buy Ticket</a></ng-template>
+            </div>
+            <div *ngIf="loggedIn != 'Admin'">
+              <div *ngIf="router == '/buy-ticket'; then thenBlock4 else elseBlock4"></div>
+                <ng-template #thenBlock4><a routerLink="/buy-ticket" class="nav-item nav-link active">Buy Ticket</a></ng-template>
+                <ng-template #elseBlock4><a routerLink="/buy-ticket" class="nav-item nav-link">Buy Ticket</a></ng-template>
+            </div>
+
+          <div *ngIf="loggedIn == 'Admin'">
+            <div *ngIf="router == '/menage-lines'; then thenBlock6 else elseBlock6"></div>
+                <ng-template #thenBlock6><a routerLink="/menage-lines" class="nav-item nav-link active">Menage Lines</a></ng-template>
+                <ng-template #elseBlock6><a routerLink="/menage-lines" class="nav-item nav-link">Menage Lines</a></ng-template>
+          </div>
+          <div *ngIf="loggedIn == 'Admin'">
+            <div *ngIf="router == '/menage-stations'; then thenBlock7 else elseBlock7"></div>
+                <ng-template #thenBlock7><a routerLink="/menage-stations" class="nav-item nav-link active">Menage Stations</a></ng-template>
+                <ng-template #elseBlock7><a routerLink="/menage-stations" class="nav-item nav-link">Menage Stations</a></ng-template>
+          </div>
+          <div *ngIf="loggedIn == 'Admin'">
+            <div *ngIf="router == '/menage-schedule'; then thenBlock8 else elseBlock8"></div>
+                <ng-template #thenBlock8><a routerLink="/menage-schedule" class="nav-item nav-link active">Menage Schedule</a></ng-template>
+                <ng-template #elseBlock8><a routerLink="/menage-schedule" class="nav-item nav-link">Menage Schedule</a></ng-template>
+
+          </div>
+            
             <div *ngIf="loggedIn">
               <div *ngIf="router == '/profile'; then thenBlock5 else elseBlock5"></div>
                 <ng-template #thenBlock5><a routerLink="/profile" class="nav-item nav-link active">Profile</a></ng-template>
