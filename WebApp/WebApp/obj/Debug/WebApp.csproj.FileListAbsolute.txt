@@ -317,3 +317,4 @@ C:\Users\zilic\Desktop\Blok8\WebApp\WebApp\obj\Debug\WebApp.csproj.CopyComplete
 C:\Users\zilic\Desktop\Blok8\WebApp\WebApp\obj\Debug\WebApp.dll
 C:\Users\zilic\Desktop\Blok8\WebApp\WebApp\obj\Debug\WebApp.pdb
 C:\Users\zilic\Desktop\Blok8\WebApp\WebApp\obj\Debug\WebApp.Migrations.LineUpdateMigration.resources
+C:\Users\Korisnik\Desktop\Blok8\WebApp\WebApp\obj\Debug\WebApp.Migrations.DataMigration.resources

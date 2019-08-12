@@ -302,9 +302,9 @@
     <Compile Include="Migrations\201906121139534_TimetableMigration1.Designer.cs">
       <DependentUpon>201906121139534_TimetableMigration1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201906131426071_LineUpdateMigration.cs" />
-    <Compile Include="Migrations\201906131426071_LineUpdateMigration.Designer.cs">
-      <DependentUpon>201906131426071_LineUpdateMigration.cs</DependentUpon>
+    <Compile Include="Migrations\201908051715047_DataMigration.cs" />
+    <Compile Include="Migrations\201908051715047_DataMigration.Designer.cs">
+      <DependentUpon>201908051715047_DataMigration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
@@ -464,8 +464,8 @@
     <EmbeddedResource Include="Migrations\201906121139534_TimetableMigration1.resx">
       <DependentUpon>201906121139534_TimetableMigration1.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201906131426071_LineUpdateMigration.resx">
-      <DependentUpon>201906131426071_LineUpdateMigration.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201908051715047_DataMigration.resx">
+      <DependentUpon>201908051715047_DataMigration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

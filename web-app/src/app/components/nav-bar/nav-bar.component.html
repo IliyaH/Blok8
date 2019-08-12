@@ -3,11 +3,11 @@
     <nav class="navbar navbar-expand-lg navbar navbar-light" style="background-color: #e3ecf4;">
       <div class="collapse navbar-collapse" id="navbarCollapse9">
           <div class="navbar-nav">
-              <div *ngIf="loggedIn != 'Admin'">
+            <div *ngIf="loggedIn != 'Admin'">
             <div *ngIf="router == '/schedule'; then thenBlock else elseBlock"></div>
-              <ng-template #thenBlock><a href="#" class="nav-item nav-link active">Schedule</a></ng-template>
-              <ng-template #elseBlock><a href="#" class="nav-item nav-link">Schedule</a></ng-template>
-              </div>
+              <ng-template #thenBlock><a routerLink='/schedule' class="nav-item nav-link active">Schedule</a></ng-template>
+              <ng-template #elseBlock><a routerLink='/schedule' class="nav-item nav-link">Schedule</a></ng-template>
+            </div>
               <div *ngIf="loggedIn != 'Admin'">
             <div *ngIf="router == '/bus-lines'; then thenBlock1 else elseBlock1"></div>
               <ng-template #thenBlock1><a href="#" class="nav-item nav-link active">Bus Lines</a></ng-template>

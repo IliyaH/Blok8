@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -10,6 +12,8 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using WebApp.Models;
 using WebApp.Persistence;
+using WebApp.Persistence.UnitOfWork;
+using static WebApp.Models.Enums;
 
 namespace WebApp.Controllers
 {
@@ -18,10 +22,39 @@ namespace WebApp.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: api/Timetables
-        public IQueryable<Timetable> GetTimetables()
+        private readonly IUnitOfWork UnitOfWork;
+        private ApplicationUserManager _userManager;
+
+        public TimetablesController(ApplicationUserManager userManager, IUnitOfWork uw)
         {
-            return db.Timetables;
+
+            UserManager = userManager;
+            UnitOfWork = uw;
+        }
+
+        public ApplicationUserManager UserManager
+        {
+            get
+            {
+                return _userManager ?? Request.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            }
+            private set
+            {
+                _userManager = value;
+            }
+        }
+
+        // GET: api/Timetables
+        public IQueryable<Timetable> GetTimetables(DayType dayType, LineType lineType, string lineName)
+        {
+            return UnitOfWork.TimetableRepository.getTimetableItem(dayType , lineType, lineName).AsQueryable();
+        }
+
+        // GET: api/Timetables/Lines
+        [Route("Lines")]
+        public IQueryable<Line>GetTimetableLineItems(LineType lineType)
+        {
+            return UnitOfWork.TimetableRepository.getTimetableLineItems(lineType).AsQueryable();
         }
 
         // GET: api/Timetables/5

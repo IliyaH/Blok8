@@ -15,6 +15,7 @@ import { PricelistComponent } from './components/pricelist/pricelist.component';
 import { BuyTicketComponent } from './components/buy-ticket/buy-ticket.component';
 import { ProfileComponent } from './components/profile/profile/profile.component';
 import { MenageStationsComponent } from './components/menage-stations/menage-stations.component';
+import { ScheduleComponent } from './components/schedule/schedule.component';
 
 
 @NgModule({
@@ -27,6 +28,7 @@ import { MenageStationsComponent } from './components/menage-stations/menage-sta
     BuyTicketComponent,
     ProfileComponent,
     MenageStationsComponent,
+    ScheduleComponent,
     
   ],
   imports: [

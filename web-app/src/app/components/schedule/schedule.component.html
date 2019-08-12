@@ -1,0 +1,38 @@
+<form class="form-signin" [formGroup]="timetableForm" (ngSubmit)="getTimetable()"><br><br>
+<br><br><div class="container">
+  <div class="row">
+    <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+      <div class="shadow-lg">
+        <div class="card card-signin my-5">
+          <div class="card-body">
+            <div class="form-label-group">
+
+              <select name="dayType" class="form-control"  formControlName="dayType" >
+                <option>Weekday</option>
+                <option>Weekend</option>
+              </select><br>
+              
+              <select name="lineType" class="form-control" (change)="getLines($event)"  formControlName="lineType">
+                <option>City</option>
+                <option>Suburban</option>
+              </select><br>
+                        
+              <select name="lineName" class="form-control" required formControlName="lineName">
+                <option *ngFor="let line of Lines"> {{line.LineName}}</option>
+              </select><br>
+              <button class="btn btn-lg btn-primary btn-block text-uppercase active" type="submit">Schedule</button>
+              <br>
+              
+              <li *ngFor="let item of Departures">
+                  {{item.Departures}}
+              </li>
+              
+
+            </div><br>      
+            </div>
+          </div> 
+        </div>
+      </div>
+    </div>
+  </div>  
+</form>
