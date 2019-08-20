@@ -18,9 +18,16 @@
               </select><br>
                         
               <select name="lineName" class="form-control" required formControlName="lineName">
+                  <option></option>
                 <option *ngFor="let line of Lines"> {{line.LineName}}</option>
               </select><br>
-              <button class="btn btn-lg btn-primary btn-block text-uppercase active" type="submit">Schedule</button>
+              <div *ngIf="timetableForm.controls.lineName.value">
+                  <button class="btn btn-lg btn-primary btn-block text-uppercase active" type="submit">Register</button>
+                </div>
+                <div *ngIf="!timetableForm.controls.lineName.value">
+                  <button class="btn btn-lg btn-primary btn-block text-uppercase disabled" disabled type="submit">Register</button>
+                </div>
+              <!--<button class="btn btn-lg btn-primary btn-block text-uppercase active" type="submit">Schedule</button>-->
               <br>
               
               <li *ngFor="let item of Departures">

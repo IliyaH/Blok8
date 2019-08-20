@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Line, Departure } from 'src/app/models/models';
 import { TimetableService } from 'src/app/services/timetable/timetable.service';
 import { Router } from '@angular/router';
-import { FormBuilder, FormControl } from '@angular/forms';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import { delay } from 'rxjs/operators';
 
 @Component({
   selector: 'app-schedule',
@@ -34,16 +35,25 @@ export class ScheduleComponent implements OnInit {
 
   getLines(event : any)
   {    
-    this.selectedLineType = event.target.value;
-    this.timetableService.getLines(this.selectedLineType).subscribe((c: Line[]) => this.Lines = c);
+    //console.log("Lines: " + this.Lines[0].LineName);
+    this.selectedDayType = this.timetableForm.controls.dayType.value;
+    this.selectedLineType = this.timetableForm.controls.lineType.value;
+    this.selectedLineName = this.timetableForm.controls.lineName.value;
+    this.timetableForm.controls.lineName.setValue('');
+    this.timetableService.getLines(this.selectedLineType).subscribe(c=>this.Lines = c);
+    //this.selectedLineName = this.Lines[0].LineName;
+    //console.log("Lines: " + this.Lines[0].LineName);
+    //console.log("LineName: " + this.selectedLineName);
+    console.log("DayType: " + this.selectedDayType + "\nLineType: " + this.selectedLineType + "\nLineName: " + this.selectedLineName + "\nLines: " + this.Lines.length);
   }
 
   getTimetable()
   {
+    console.log("DayType: " + this.selectedDayType + "\nLineType: " + this.selectedLineType + "\nLineName: " + this.timetableForm.controls.lineName.value + "\nLines: " + this.Lines.length);
     this.selectedDayType = this.timetableForm.controls.dayType.value;
     this.selectedLineType = this.timetableForm.controls.lineType.value;
     this.selectedLineName = this.timetableForm.controls.lineName.value;
-    this.timetableService.getSchedule(this.selectedDayType , this.selectedLineType , this.selectedLineName).subscribe((c: Departure[]) => this.Departures = c)
+    this.timetableService.getSchedule(this.selectedDayType , this.selectedLineType , this.timetableForm.controls.lineName.value).subscribe((c: Departure[]) => this.Departures = c)
   }
 
 }
