@@ -16,9 +16,9 @@ export class TicketService {
     return this.http.get<number>(`http://localhost:52295/api/Tickets/CalculatePrice?ticketType=${ticketType}&userType=${userType}`);
   }
 
-  addTicket(ticketPrice: any, selectedTicketType: any, userName: any): Observable<any>{
+  addTicket(ticketPrice: any, selectedTicketType: any, userName: any, email: any): Observable<any>{
     
-    return this.http.post("http://localhost:52295/api/Tickets/Add",[ticketPrice, selectedTicketType, userName]);
+    return this.http.post("http://localhost:52295/api/Tickets/Add",[ticketPrice, selectedTicketType, userName, email]);
   }
 
 

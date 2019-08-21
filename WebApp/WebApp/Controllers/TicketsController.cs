@@ -67,34 +67,15 @@ namespace WebApp.Controllers
             {
                 ticket.IdApplicationUser =UnitOfWork.PricelistRepository.getIdByEmail(p[2]);
             }
-
             UnitOfWork.TicketRepository.Add(ticket);
             UnitOfWork.Complete();
+            if(p[2] == null)
+            {
+                //Poslati jos i tip karte i cenu
+                EmailHelper.SendEmail(p[3], "Buying Ticket", "You have successfully bought a ticket with ID: " + ticket.Id);
+            }
+
             return Ok(ticket.Id);
-
-
-            /*if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            try
-            {
-                Ticket t = new Ticket();
-                t.PurchaseTime = ticket.PurchaseTime;
-                t.TicketPricesId = unitOfWork.TicketPrices.Get(ticket.TicketPricesId).Id;
-                t.TicketTypeId = unitOfWork.TicketTypes.Get((int)ticket.TicketTypeId).Id;
-                t.Name = "Karta";
-                t.ApplicationUserId = UserManager.FindById(ticket.ApplicationUserId).Id;
-
-                unitOfWork.Tickets.Add(ticket);
-                unitOfWork.Complete();
-                return Ok(t.Id);
-            }
-            catch (Exception ex)
-            {
-                return NotFound();
-            }*/
 
         }
 
