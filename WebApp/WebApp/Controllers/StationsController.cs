@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNet.Identity.Owin;
+﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -7,6 +8,7 @@ using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
 using WebApp.Models;
@@ -44,6 +46,13 @@ namespace WebApp.Controllers
         public IQueryable<Station> GetStations()
         {
             return UnitOfWork.StationRepository.GetAll().AsQueryable();
+        }
+
+        // GET: api/Stations
+        [Route("FindLine")]
+        public IQueryable<string> GetLines(int id)
+        {
+            return UnitOfWork.StationRepository.FindLines(id).AsQueryable();
         }
 
         // GET: api/Stations/5
@@ -124,6 +133,27 @@ namespace WebApp.Controllers
             UnitOfWork.StationRepository.SaveChanges();
 
             return Ok(station);
+        }
+
+        // DELETE: api/Stations/5
+        [Route("Edit")]
+        [ResponseType(typeof(Station))]
+        public IHttpActionResult EditStation(Station station, int id)
+        {
+            if (station == null)
+            {
+                return NotFound();
+            }
+            
+            /*Station stationTemp = UnitOfWork.StationRepository.Get(station.Id);
+            stationTemp.Name = station.Name;
+            stationTemp.Address = station.Address;
+            stationTemp.XCoordinate = station.XCoordinate;
+            stationTemp.YCoordinate = station.YCoordinate;*/
+            UnitOfWork.StationRepository.EditStation(station, id);
+            UnitOfWork.StationRepository.SaveChanges();
+            Station tempStation = UnitOfWork.StationRepository.Get(id);
+            return Ok(tempStation);
         }
 
         protected override void Dispose(bool disposing)

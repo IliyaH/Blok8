@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Validators, FormBuilder } from '@angular/forms';
 import { MenageService } from 'src/app/services/menage/menage.service';
-import { Station } from 'src/app/models/models';
+import { Station, Line } from 'src/app/models/models';
 
 @Component({
   selector: 'app-menage-stations',
@@ -19,6 +19,9 @@ export class MenageStationsComponent implements OnInit {
 
   stations : Station[] = [];
   selectedStationId: any = "";
+  station : Station;
+  lines : string[] = [];
+
 
   constructor(private fb: FormBuilder, private menageService: MenageService) { }
 
@@ -29,8 +32,9 @@ export class MenageStationsComponent implements OnInit {
   addStation(){
     this.menageService.addStation(this.stationForm.value).subscribe( data=>
       {
-        window.alert('Station with ID: ' + data + ' added!');
+        window.alert('Station with ID: ' + data.Id + ' added!');
         this.getStations();
+        this.stationForm.reset();
       });
   }
 
@@ -48,6 +52,16 @@ export class MenageStationsComponent implements OnInit {
       this.stationForm.controls.xCoordinate.setValue(data.XCoordinate);
       this.stationForm.controls.yCoordinate.setValue(data.YCoordinate);
     });
+    this.findLines();
+  }
+
+  findLines(){
+    this.menageService.findLines(this.selectedStationId).subscribe(
+      data=>{
+        this.lines = data;
+        console.log(this.lines);
+      }
+    );
   }
 
 
@@ -55,15 +69,22 @@ export class MenageStationsComponent implements OnInit {
     this.menageService.deleteStation(this.selectedStationId).subscribe(
       d=>{
         this.getStations();
+        window.alert("Successfully deleted station with ID: " + this.selectedStationId);
         this.selectedStationId = "";
         this.stationForm.reset();
-        
-        const index: number = this.stations.indexOf(d);
-          if (index !== -1) {
-          this.stations.splice(index, 1);
-          }  
       }
     );
+  }
+
+
+  onClickEdit(){
+        this.menageService.editStation(this.stationForm.value, this.selectedStationId).subscribe(
+          data=>{
+            this.getStations();
+            window.alert("Successfully edited station with ID: " + this.selectedStationId);
+            this.stationForm.reset();
+          }
+        );
   }
 
 

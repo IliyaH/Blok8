@@ -32,6 +32,16 @@ export class MenageService {
       catchError(this.handleError<any>(`deleteStation`)));
   }
 
+  editStation(station: any, id: any): Observable<any>{
+    return this.httpClient.post<any>(this.base_url+`/api/Stations/Edit?station=${station}&id=${id}`, station, id).pipe(
+      catchError(this.handleError<any>(`editStation`)));
+  }
+
+  findLines(id: any): Observable<any>{
+    return this.httpClient.get<any>(this.base_url+`/api/Stations/FindLine?id=${id}`, id).pipe(
+      catchError(this.handleError<any>(`findLine`)));
+  }
+
   private handleError<T> (operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       return of(result as T);
