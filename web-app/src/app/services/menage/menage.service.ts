@@ -13,7 +13,6 @@ export class MenageService {
   base_url = "http://localhost:52295"
 
   addStation(station: any): Observable<any>{
-    console.log(station);
     return this.httpClient.post<any>(this.base_url+"/api/Stations",station).pipe(
       catchError(this.handleError<any>(`addStation`)));
   }
@@ -26,6 +25,11 @@ export class MenageService {
   getStation(id: any): Observable<any>{
     return this.httpClient.get<any>(this.base_url+`/api/Stations/${id}`).pipe(
       catchError(this.handleError<any>(`getStation`)));
+  }
+
+  deleteStation(id: any): Observable<any>{
+    return this.httpClient.delete<any>(this.base_url+`/api/Stations/Delete?id=${id}`).pipe(
+      catchError(this.handleError<any>(`deleteStation`)));
   }
 
   private handleError<T> (operation = 'operation', result?: T) {

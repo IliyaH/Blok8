@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity.Owin;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -10,24 +11,46 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using WebApp.Models;
 using WebApp.Persistence;
+using WebApp.Persistence.UnitOfWork;
 
 namespace WebApp.Controllers
 {
+    [RoutePrefix("api/Stations")]
     public class StationsController : ApiController
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
+        private readonly IUnitOfWork UnitOfWork;
+        private ApplicationUserManager _userManager;
+        public StationsController(ApplicationUserManager userManager, IUnitOfWork uw)
+        {
+            UserManager = userManager;
+            UnitOfWork = uw;
+        }
+
+        public ApplicationUserManager UserManager
+        {
+            get
+            {
+                return _userManager ?? Request.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            }
+            private set
+            {
+                _userManager = value;
+            }
+        }
+
         // GET: api/Stations
         public IQueryable<Station> GetStations()
         {
-            return db.Stations;
+            return UnitOfWork.StationRepository.GetAll().AsQueryable();
         }
 
         // GET: api/Stations/5
         [ResponseType(typeof(Station))]
         public IHttpActionResult GetStation(int id)
         {
-            Station station = db.Stations.Find(id);
+            Station station = UnitOfWork.StationRepository.Get(id);
             if (station == null)
             {
                 return NotFound();
@@ -50,11 +73,11 @@ namespace WebApp.Controllers
                 return BadRequest();
             }
 
-            db.Entry(station).State = EntityState.Modified;
+            UnitOfWork.StationRepository.Entry(station, EntityState.Modified);
 
             try
             {
-                db.SaveChanges();
+                UnitOfWork.StationRepository.SaveChanges();
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -72,6 +95,7 @@ namespace WebApp.Controllers
         }
 
         // POST: api/Stations
+        //[Route("Add")]
         [ResponseType(typeof(Station))]
         public IHttpActionResult PostStation(Station station)
         {
@@ -79,25 +103,25 @@ namespace WebApp.Controllers
             {
                 return BadRequest(ModelState);
             }
-
-            db.Stations.Add(station);
-            db.SaveChanges();
+            UnitOfWork.StationRepository.Add(station);
+            UnitOfWork.StationRepository.SaveChanges();
 
             return CreatedAtRoute("DefaultApi", new { id = station.Id }, station);
         }
 
         // DELETE: api/Stations/5
+        [Route("Delete")]
         [ResponseType(typeof(Station))]
         public IHttpActionResult DeleteStation(int id)
         {
-            Station station = db.Stations.Find(id);
+            Station station = UnitOfWork.StationRepository.Get(id);
             if (station == null)
             {
                 return NotFound();
             }
 
-            db.Stations.Remove(station);
-            db.SaveChanges();
+            UnitOfWork.StationRepository.Remove(station);
+            UnitOfWork.StationRepository.SaveChanges();
 
             return Ok(station);
         }
@@ -106,7 +130,7 @@ namespace WebApp.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                UnitOfWork.StationRepository.Dispose();
             }
             base.Dispose(disposing);
         }

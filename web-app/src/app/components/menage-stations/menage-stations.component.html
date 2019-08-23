@@ -1,10 +1,34 @@
 <br><br><div class="container">
+
+    <div class="container">
+        <div class="row">
+          <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+            <div class="shadow-lg">
+              <div id="gape1" class="card card-signin my-5">
+                <div class="card-body">
+                    <div>
+                      <label>Station: </label>
+                    </div>
+                    <div class="form-label-group">
+                        <select name="selectedStation" class="form-control" (change)="onSelect($event)">
+                            <option></option>
+                            <option  *ngFor="let s of stations" [value]="s.Id">{{s.Name}}</option>
+                        </select>
+                    </div>
+  
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
     <div class="row">
       <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
         <div class="shadow-lg">
           <div class="card card-signin my-5">
             <div class="card-body">
-              <form class="form-signin" [formGroup]="stationForm" (ngSubmit)="addStation()" >
+              <form class="form-signin" [formGroup]="stationForm">
                 <div class="form-label-group">
                     <div *ngIf="stationForm.controls.name.errors" >
                         <div *ngIf="stationForm.controls.name.errors.required && (stationForm.controls.name.dirty || stationForm.controls.name.touched)" class="badge badge-danger">Name is mandatory field</div>
@@ -33,21 +57,31 @@
                     <input name="yCoordinate" type="number" class="form-control" placeholder="yCoordinate" formControlName="yCoordinate">
                 </div>
                   <br>
-
+                  <div *ngIf="selectedStationId==''">
                   <div *ngIf="stationForm.valid">
-                      <button class="btn btn-lg btn-primary btn-block text-uppercase active" type="submit">Add Station</button>
+                      <button class="btn btn-lg btn-primary btn-block text-uppercase active" (click)="addStation()">Add Station</button>
                     </div>
                     <div *ngIf="!stationForm.valid">
-                      <button class="btn btn-lg btn-primary btn-block text-uppercase disabled" [disabled]="!stationForm.valid" type="submit">Add Station</button>
+                      <button class="btn btn-lg btn-primary btn-block text-uppercase disabled" [disabled]="!stationForm.valid">Add Station</button>
                     </div><br>
-                    <div *ngIf="visible">
-                        <a class="btn btn-lg btn-primary text-uppercase active">Edit</a><a class="btn btn-lg btn-primary text-uppercase active">Delete</a>
-                      </div>
-
+                  </div>
+                    <div *ngIf="selectedStationId!=''">
+                        <div class="d-flex justify-content-between">
+                            <div *ngIf="stationForm.valid">
+                              <button class="btn btn-lg btn-primary text-uppercase active">Edit</button>
+                            </div>
+                            <div *ngIf="!stationForm.valid">
+                              <button class="btn btn-lg btn-primary text-uppercase disabled" [disabled]="!stationForm.valid">Edit</button>
+                            </div>
+                            <div *ngIf="stationForm.valid">
+                              <button class="btn btn-lg btn-primary text-uppercase active" (click)="onClickDelete()">Delete</button>
+                            </div>
+                            <div *ngIf="!stationForm.valid">
+                                <button class="btn btn-lg btn-primary text-uppercase disabled" [disabled]="!stationForm.valid">Delete</button>
+                            </div>
+                       </div>
+                    </div>
               </form>
-
-              
-
             </div>
           </div>
         </div>
@@ -56,24 +90,6 @@
   </div>
 
 
-   <div class="container">
-      <div class="row">
-        <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
-          <div class="shadow-lg">
-            <div class="card card-signin my-5">
-              <div class="card-body">
-
-                  <div class="form-label-group">
-                      <select name="selectedStation" class="form-control" (change)="onSelect($event)">
-                          <option  *ngFor="let s of stations" [value]="s.Id">{{s.Name}}</option>
-                      </select>
-                  </div>
-
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+   
   
   

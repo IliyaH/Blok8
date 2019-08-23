@@ -73,6 +73,7 @@ namespace WebApp.App_Start
             container.RegisterType<ITicketRepository, TicketRepository>();
             container.RegisterType<IPricelistRepository, PricelistRepository>();
             container.RegisterType<ITimetableRepository, TimetableRepository>();
+            container.RegisterType<IStationRepository, StationRepository>();
 
             //svaki korisnik treba da ima svoj dbkontekst, po requestu
             container.RegisterType<IUnitOfWork, DemoUnitOfWork>();

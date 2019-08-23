@@ -18,15 +18,12 @@ export class MenageStationsComponent implements OnInit {
   });
 
   stations : Station[] = [];
-  selectedStationId: any;
-  visible: boolean;
+  selectedStationId: any = "";
 
   constructor(private fb: FormBuilder, private menageService: MenageService) { }
 
   ngOnInit() {
-    console.log(this.stationForm.valid);
     this.getStations();
-    this.visible = false; 
   }
 
   addStation(){
@@ -40,24 +37,34 @@ export class MenageStationsComponent implements OnInit {
   getStations(){
     this.menageService.getStations().subscribe(data=>{
       this.stations = data;
-      console.log(this.stations);
-    
     });
   }
 
   onSelect(event : any){
     this.selectedStationId = event.target.value;
-    console.log(this.selectedStationId)
     this.menageService.getStation(this.selectedStationId).subscribe(data=>{
       this.stationForm.controls.name.setValue(data.Name);
       this.stationForm.controls.address.setValue(data.Address);
       this.stationForm.controls.xCoordinate.setValue(data.XCoordinate);
       this.stationForm.controls.yCoordinate.setValue(data.YCoordinate);
-      console.log(data.Name);
-      this.visible = true;
     });
   }
 
+
+  onClickDelete(){
+    this.menageService.deleteStation(this.selectedStationId).subscribe(
+      d=>{
+        this.getStations();
+        this.selectedStationId = "";
+        this.stationForm.reset();
+        
+        const index: number = this.stations.indexOf(d);
+          if (index !== -1) {
+          this.stations.splice(index, 1);
+          }  
+      }
+    );
+  }
 
 
 }
