@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { Http, Response } from '@angular/http';
 import { catchError} from 'rxjs/operators';
+import { Line } from 'src/app/models/models';
 
 @Injectable({
   providedIn: 'root'
@@ -40,6 +41,27 @@ export class MenageService {
   findLines(id: any): Observable<any>{
     return this.httpClient.get<any>(this.base_url+`/api/Stations/FindLine?id=${id}`, id).pipe(
       catchError(this.handleError<any>(`findLine`)));
+  }
+
+  getLines(): Observable<any[]>{
+    return this.httpClient.get<any[]>(this.base_url+"/api/Lines").pipe(
+      catchError(this.handleError<any[]>(`getLines`)));
+  }
+
+  deleteLine(id: any): Observable<any>{
+    return this.httpClient.delete<any>(this.base_url+`/api/Lines/Delete?id=${id}`).pipe(
+      catchError(this.handleError<any>(`deleteLine`)));
+  }
+  
+  addLine(stations: any, lineName: any, lineType: any): Observable<any>{
+    console.log("Stanice: " + stations);
+    return this.httpClient.post<any>(this.base_url+`/api/Lines?stations=${stations}&lineName=${lineName}&lineType=${lineType}`, [stations, lineName, lineType]).pipe(
+      catchError(this.handleError<any>(`addLine`)));
+  } 
+
+  editLine(line: any, id: any): Observable<any>{
+    return this.httpClient.post<any>(this.base_url+`/api/Lines/Edit?line=${line}&id=${id}`, line, id).pipe(
+      catchError(this.handleError<any>(`editLine`)));
   }
 
   private handleError<T> (operation = 'operation', result?: T) {

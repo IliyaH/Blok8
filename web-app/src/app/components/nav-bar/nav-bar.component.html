@@ -30,9 +30,9 @@
             </div>
 
           <div *ngIf="loggedIn == 'Admin'">
-            <div *ngIf="router == '/menage-lines'; then thenBlock6 else elseBlock6"></div>
-                <ng-template #thenBlock6><a routerLink="/menage-lines" class="nav-item nav-link active">Menage Lines</a></ng-template>
-                <ng-template #elseBlock6><a routerLink="/menage-lines" class="nav-item nav-link">Menage Lines</a></ng-template>
+            <div *ngIf="router == '/lines'; then thenBlock6 else elseBlock6"></div>
+                <ng-template #thenBlock6><a routerLink="/lines" class="nav-item nav-link active">Menage Lines</a></ng-template>
+                <ng-template #elseBlock6><a routerLink="/lines" class="nav-item nav-link">Menage Lines</a></ng-template>
           </div>
           <div *ngIf="loggedIn == 'Admin'">
             <div *ngIf="router == '/menage-stations'; then thenBlock7 else elseBlock7"></div>

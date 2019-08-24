@@ -52,7 +52,12 @@ export class MenageStationsComponent implements OnInit {
       this.stationForm.controls.xCoordinate.setValue(data.XCoordinate);
       this.stationForm.controls.yCoordinate.setValue(data.YCoordinate);
     });
-    this.findLines();
+    console.log(this.selectedStationId);
+    this.lines = [];
+    if(this.selectedStationId)
+    {
+      this.findLines();
+    }
   }
 
   findLines(){

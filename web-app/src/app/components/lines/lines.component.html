@@ -1,0 +1,87 @@
+<br><br><div class="container">
+  <div class="container">
+      <div class="row">
+        <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+          <div class="shadow-lg">
+            <div id="gape1" class="card card-signin my-5">
+              <div class="card-body">
+                  <div>
+                    <label>Lines: </label>
+                  </div>
+                  <div class="form-label-group">
+                      <select name="selectedLine" class="form-control" (change)="onSelectLine($event)">
+                          <option>Add Line</option>
+                          <option  *ngFor="let l of lines" [value]="l.Id">{{l.LineName}}</option>
+                      </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+  <div class="row">
+    <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+      <div class="shadow-lg">
+        <div class="card card-signin my-5">
+          <div class="card-body">
+            <form class="form-signin" [formGroup]="lineForm">
+              <div class="form-label-group">
+                  <div *ngIf="lineForm.controls.lineName.errors" >
+                      <div *ngIf="lineForm.controls.lineName.errors.required && (lineForm.controls.lineName.dirty || lineForm.controls.lineName.touched)" class="badge badge-danger">Line name is mandatory field</div>
+                  </div>
+                  <input name="lineName" type="text" class="form-control" placeholder="Line Name" formControlName="lineName">
+              </div>
+              <br>
+              <div class="form-label-group">
+                <label>Line Type:</label>
+                <select formControlName="lineType" class="form-control" (change)="onSelectLineType($event)">
+                  <option value='0'>City</option>
+                  <option value='1'>Suburban</option>
+                </select>
+              </div>
+              <div class="form-label-group">
+                <div *ngFor="let s of allStations">
+                  <input type="checkbox" isChecked value="s.Id" (change)="checkValue($event, s.Id)">{{s.Name}}
+                </div>    
+              </div>
+              <br>
+                <br>
+                <div *ngIf="selectedLineId=='Add Line'">
+                  <div *ngIf="lineForm.valid">
+                    <button class="btn btn-lg btn-primary btn-block text-uppercase active" (click)="addLine()">Add Line</button>
+                  </div>
+                  <div *ngIf="!lineForm.valid">
+                    <button class="btn btn-lg btn-primary btn-block text-uppercase disabled" [disabled]="!lineForm.valid">Add Line</button>
+                  </div><br>
+                </div>
+                  <div *ngIf="selectedLineId!='Add Line'">
+                      <div class="d-flex justify-content-between">
+                          <div *ngIf="lineForm.valid">
+                            <button class="btn btn-lg btn-primary text-uppercase active" (click)="onClickEdit()">Edit</button>
+                          </div>
+                          <div *ngIf="!lineForm.valid">
+                            <button class="btn btn-lg btn-primary text-uppercase disabled" [disabled]="!lineForm.valid">Edit</button>
+                          </div>
+                          <div *ngIf="lineForm.valid">
+                            <button class="btn btn-lg btn-primary text-uppercase active" (click)="onClickDelete()">Delete</button>
+                          </div>
+                          <div *ngIf="!lineForm.valid">
+                              <button class="btn btn-lg btn-primary text-uppercase disabled" [disabled]="!lineForm.valid">Delete</button>
+                          </div>
+                     </div>
+                  </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+ 
+
+

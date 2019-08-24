@@ -144,12 +144,7 @@ namespace WebApp.Controllers
             {
                 return NotFound();
             }
-            
-            /*Station stationTemp = UnitOfWork.StationRepository.Get(station.Id);
-            stationTemp.Name = station.Name;
-            stationTemp.Address = station.Address;
-            stationTemp.XCoordinate = station.XCoordinate;
-            stationTemp.YCoordinate = station.YCoordinate;*/
+
             UnitOfWork.StationRepository.EditStation(station, id);
             UnitOfWork.StationRepository.SaveChanges();
             Station tempStation = UnitOfWork.StationRepository.Get(id);
