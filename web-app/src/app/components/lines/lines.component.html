@@ -36,14 +36,14 @@
               <br>
               <div class="form-label-group">
                 <label>Line Type:</label>
-                <select formControlName="lineType" class="form-control" (change)="onSelectLineType($event)">
+                <select formControlName="lineType" class="form-control">
                   <option value='0'>City</option>
                   <option value='1'>Suburban</option>
                 </select>
-              </div>
+              </div><br>
               <div class="form-label-group">
                 <div *ngFor="let s of allStations">
-                  <input type="checkbox" isChecked value="s.Id" (change)="checkValue($event, s.Id)">{{s.Name}}
+                  <input type="checkbox" isChecked [checked]="s.Exist" value="s.Id" (change)="checkValue($event, s.Id)">{{s.Name}}
                 </div>    
               </div>
               <br>

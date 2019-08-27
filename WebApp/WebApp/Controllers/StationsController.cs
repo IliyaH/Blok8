@@ -131,6 +131,7 @@ namespace WebApp.Controllers
 
             UnitOfWork.StationRepository.Remove(station);
             UnitOfWork.StationRepository.SaveChanges();
+            UnitOfWork.StationRepository.DeleteStationLines(id);
 
             return Ok(station);
         }

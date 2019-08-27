@@ -13,5 +13,9 @@ namespace WebApp.Persistence.Repository
         int getPricelistsItem(TicketType ticketType);
 
         string getIdByEmail(string email);
+
+        Tuple<Pricelist, List<double>> getPrices();
+
+        void editPricelist(int id,double timeTicket, double dayTicket, double monthTicket, double yearTicket);
     }
 }

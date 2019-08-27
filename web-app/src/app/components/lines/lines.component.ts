@@ -20,8 +20,10 @@ export class LinesComponent implements OnInit {
   selectedLineId : any;
   selectedLineType: any;
   i: number;
+  j: number;
   allStations : Station[] = [];
   stationsIds: any[] = [];
+  lineStationsIds: any[] = [];
 
   constructor(private fb: FormBuilder, private menageService: MenageService) { }
 
@@ -29,10 +31,12 @@ export class LinesComponent implements OnInit {
     this.selectedLineId = "Add Line";
     this.getLines();
     this.getAllStations();
+
   }
 
   onSelectLine(event: any){
     this.selectedLineId = event.target.value;
+    
     console.log(this.selectedLineId);
     for(this.i = 0; this.i < this.lines.length; this.i++){
       if(this.lines[this.i].Id == this.selectedLineId){
@@ -40,7 +44,32 @@ export class LinesComponent implements OnInit {
         this.lineForm.controls.lineType.setValue(this.lines[this.i].LineType);
       }
     }
+    if(this.selectedLineId != "Add Line"){
+    
+      this.menageService.getLineStations(this.selectedLineId).subscribe(
+        data =>{
+          this.lineStationsIds = data;
+  
+          for(this.i = 0; this.i < this.allStations.length; this.i++){
+            this.allStations[this.i].Exist = false;
+            for(this.j = 0; this.j < data.length; this.j++){
+              if(this.allStations[this.i].Id == data[this.j]){
+                this.allStations[this.i].Exist = true;
+                console.log("Ista stanica: " + this.allStations[this.i].Name);
+                break;
+              }
+            }
+          }
+          }
+        
+      );
+    }
+    
+    
     if(this.selectedLineId == "Add Line"){
+      for(this.i = 0; this.i < this.allStations.length; this.i++){
+        this.allStations[this.i].Exist = false;
+      }
       this.lineForm.reset();
     }
     
@@ -48,28 +77,26 @@ export class LinesComponent implements OnInit {
     
   }
 
-  onSelectLineType(event: any){
-
-  }
-
+  
   addLine(){
-    this.menageService.addLine(this.stationsIds, this.lineForm.controls.lineName.value, this.lineForm.controls.lineType.value).subscribe(
+    this.menageService.addLine(this.lineStationsIds, this.lineForm.controls.lineName.value, this.lineForm.controls.lineType.value).subscribe(
       data=>{
-        console.log("UDJOH U ADD LINE!");
-        //window.alert('Line with ID: ' + data.Id + ' added!');
         this.getLines();
         this.lineForm.reset();
+        for(this.i = 0; this.i < this.allStations.length; this.i++){
+          this.allStations[this.i].Exist = false;
+        }
       }
     );
   }
 
   onClickEdit(){
-    console.log("UDJOH U EDIT!");
-    this.menageService.editLine(this.lineForm.value, this.selectedLineId).subscribe(
+    this.menageService.editLine(this.lineForm.controls.lineName.value, this.lineForm.controls.lineType.value, this.selectedLineId, this.lineStationsIds).subscribe(
       data=>{
         this.getLines();
         window.alert("Successfully edited line with ID: " + this.selectedLineId);
         this.lineForm.reset();
+        
       }
     );
   }
@@ -82,6 +109,9 @@ export class LinesComponent implements OnInit {
         window.alert("Successfully deleted line with ID: " + this.selectedLineId);
         this.selectedLineId = "Add Line";
         this.lineForm.reset();
+        for(this.i = 0; this.i < this.allStations.length; this.i++){
+          this.allStations[this.i].Exist = false;
+        }
       }
     );
   }
@@ -107,16 +137,16 @@ export class LinesComponent implements OnInit {
     console.log(id);
     console.log(event.currentTarget.checked);
     if(event.currentTarget.checked){
-      this.stationsIds.push(id);
+      this.lineStationsIds.push(id);
     }
     else{
-      for(this. i = 0; this.i < this.stationsIds.length; this.i++){
-        if(this.stationsIds[this.i] == id){
-          this.stationsIds = this.stationsIds.filter(s => s != id);
+      for(this. i = 0; this.i < this.lineStationsIds.length; this.i++){
+        if(this.lineStationsIds[this.i] == id){
+          this.lineStationsIds = this.lineStationsIds.filter(s => s != id);
         }
       }
     }
-    console.log(this.stationsIds);
+    console.log(this.lineStationsIds);
   }
 
 }

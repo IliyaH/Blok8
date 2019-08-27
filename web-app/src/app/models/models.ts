@@ -4,6 +4,7 @@ export class Station{
     Address: string;
     XCoordinate: number;
     YCoordinate: number;
+    Exist: boolean = false;
 }
 
 export class Line{

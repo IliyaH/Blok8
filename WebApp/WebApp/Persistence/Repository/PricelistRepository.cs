@@ -26,5 +26,36 @@ namespace WebApp.Persistence.Repository
         {
             return ((ApplicationDbContext)this.context).Users.Where(u => u.Email == email).Select(u => u.Id).First();
         }
+
+        public Tuple<Pricelist, List<double>> getPrices()
+        {
+            Pricelist pricelist = (Pricelist)((ApplicationDbContext)this.context).Pricelists.Where(p => p.Active == true).FirstOrDefault();
+            List<double> prices = new List<double>(((ApplicationDbContext)this.context).PricelistItems.Where(pi => pi.IdPricelist == pricelist.Id).Select(p => p.Price).ToList());
+            Tuple<Pricelist, List<double>> tuple = new Tuple<Pricelist, List<double>>(pricelist, prices);
+            return tuple;
+        }
+
+        public void editPricelist(int id, double timeTicket, double dayTicket, double monthTicket, double yearTicket)
+        {
+            foreach(var v in ((ApplicationDbContext)this.context).Items)
+            {
+                if(v.TicketType == TicketType.TimeTicket)
+                {
+                    ((ApplicationDbContext)this.context).PricelistItems.Where(pi => pi.IdPricelist == id && pi.IdItem == v.Id).FirstOrDefault().Price = timeTicket;
+                }
+                else if (v.TicketType == TicketType.DayTicket)
+                {
+                    ((ApplicationDbContext)this.context).PricelistItems.Where(pi => pi.IdPricelist == id && pi.IdItem == v.Id).FirstOrDefault().Price = dayTicket;
+                }
+                else if (v.TicketType == TicketType.MounthTicket)
+                {
+                    ((ApplicationDbContext)this.context).PricelistItems.Where(pi => pi.IdPricelist == id && pi.IdItem == v.Id).FirstOrDefault().Price = monthTicket;
+                }
+                else if (v.TicketType == TicketType.YearTicket)
+                {
+                    ((ApplicationDbContext)this.context).PricelistItems.Where(pi => pi.IdPricelist == id && pi.IdItem == v.Id).FirstOrDefault().Price = yearTicket;
+                }
+            }
+        }
     }
 }

@@ -11,5 +11,6 @@ namespace WebApp.Persistence.Repository
     {
         void EditStation(Station station, int id);
         List<string> FindLines(int idStation);
+        void DeleteStationLines(int id);
     }
 }

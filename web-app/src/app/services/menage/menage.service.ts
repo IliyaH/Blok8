@@ -59,10 +59,17 @@ export class MenageService {
       catchError(this.handleError<any>(`addLine`)));
   } 
 
-  editLine(line: any, id: any): Observable<any>{
-    return this.httpClient.post<any>(this.base_url+`/api/Lines/Edit?line=${line}&id=${id}`, line, id).pipe(
+  editLine(lineName: any, lineType: any, id: any, stationsIds: any): Observable<any>{
+    return this.httpClient.post<any>(this.base_url+`/api/Lines/Edit?lineName=${lineName}&lineType=${lineType}&id=${id}&stationsIds=${stationsIds}`, [lineName, lineType, id, stationsIds]).pipe(
       catchError(this.handleError<any>(`editLine`)));
   }
+
+  getLineStations(id: any): Observable<any[]>{
+    return this.httpClient.get<any[]>(this.base_url+`/api/Lines/GetLineStations?id=${id}`).pipe(
+      catchError(this.handleError<any[]>(`getStations`)));
+  }
+
+  
 
   private handleError<T> (operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {

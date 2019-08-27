@@ -48,6 +48,12 @@ namespace WebApp.Controllers
             return UnitOfWork.LineRepository.GetAll().AsQueryable();
         }
 
+        [Route("GetLineStations")]
+        public IQueryable<int> GetLineStations(int id)
+        {
+            return UnitOfWork.LineRepository.FindAllStations(id);
+        }
+
         // GET: api/Lines/5
         [ResponseType(typeof(Line))]
         public IHttpActionResult GetLine(int id)
@@ -99,14 +105,17 @@ namespace WebApp.Controllers
         // DELETE: api/Lines/5
         [Route("Edit")]
         [ResponseType(typeof(Line))]
-        public IHttpActionResult EditLine(Line line, int id)
+        public IHttpActionResult EditLine(string lineName, string lineType, int id, string stationsIds)
         {
-            if (line == null)
+
+            List<int> intStations = new List<int>();
+            string[] data = stationsIds.Split(',');
+            foreach (string s in data)
             {
-                return NotFound();
+                intStations.Add(Int32.Parse(s));
             }
 
-            UnitOfWork.LineRepository.EditLine(line, id);
+            UnitOfWork.LineRepository.EditLine(lineName, (LineType)Enum.Parse(typeof(LineType), lineType), id, intStations);
             UnitOfWork.LineRepository.SaveChanges();
             Line tempLine = UnitOfWork.LineRepository.Get(id);
             return Ok(tempLine);
@@ -155,7 +164,7 @@ namespace WebApp.Controllers
 
             UnitOfWork.LineRepository.Remove(line);
             UnitOfWork.LineRepository.SaveChanges();
-
+            UnitOfWork.LineRepository.DeleteLineStations(id);
 
             return Ok(line);
         }

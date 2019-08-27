@@ -10,6 +10,7 @@ import { ProfileComponent } from './components/profile/profile/profile.component
 import { MenageStationsComponent } from './components/menage-stations/menage-stations.component';
 import { ScheduleComponent } from './components/schedule/schedule.component';
 import {LinesComponent} from './components/lines/lines.component';
+import {ManagePricelistComponent} from './components/manage-pricelist/manage-pricelist.component';
 
 const routes: Routes = [{
   path: '', 
@@ -47,6 +48,10 @@ const routes: Routes = [{
 { 
   path: 'lines', 
   component: LinesComponent  
+},
+{ 
+  path: 'manage-pricelist', 
+  component: ManagePricelistComponent  
 },
 ];
 

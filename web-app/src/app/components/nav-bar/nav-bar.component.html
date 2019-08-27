@@ -45,6 +45,13 @@
                 <ng-template #elseBlock8><a routerLink="/menage-schedule" class="nav-item nav-link">Menage Schedule</a></ng-template>
 
           </div>
+
+          <div *ngIf="loggedIn == 'Admin'">
+            <div *ngIf="router == '/manage-pricelist'; then thenBlock9 else elseBlock9"></div>
+                <ng-template #thenBlock9><a routerLink="/manage-pricelist" class="nav-item nav-link active">Manage Pricelist</a></ng-template>
+                <ng-template #elseBlock9><a routerLink="/manage-pricelist" class="nav-item nav-link">Manage Pricelist</a></ng-template>
+
+          </div>
             
             <div *ngIf="loggedIn">
               <div *ngIf="router == '/profile'; then thenBlock5 else elseBlock5"></div>

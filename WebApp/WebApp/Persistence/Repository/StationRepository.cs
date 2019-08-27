@@ -13,6 +13,15 @@ namespace WebApp.Persistence.Repository
         {
             
         }
+
+        public void DeleteStationLines(int id)
+        {
+            foreach(var v in ((ApplicationDbContext)this.context).StationLines.Where(sl => sl.IdStation == id))
+            {
+                ((ApplicationDbContext)this.context).StationLines.Remove(v);
+            }
+        }
+
         public void EditStation(Station station, int id)
         {
             ((ApplicationDbContext)this.context).Stations.Where(s => s.Id == id).First().Name = station.Name;
