@@ -21,28 +21,28 @@
                     <div *ngIf="pricelistForm.controls.timeTicket.errors.required && (pricelistForm.controls.timeTicket.dirty || pricelistForm.controls.timeTicket.touched)" class="badge badge-danger">Time ticket price is mandatory field</div>
                   </div>
                     <label>Time ticket: </label>
-                    <input  name="timeTicket" class="form-control" required formControlName="timeTicket">
+                    <input type="number" name="timeTicket" class="form-control" required formControlName="timeTicket">
                 </div>
                 <div class="form-label-group">
                   <div *ngIf="pricelistForm.controls.dayTicket.errors" >
                     <div *ngIf="pricelistForm.controls.dayTicket.errors.required && (pricelistForm.controls.dayTicket.dirty || pricelistForm.controls.dayTicket.touched)" class="badge badge-danger">Day ticket price is mandatory field</div>
                   </div>
                     <label>Day ticket: </label>
-                    <input  name="dayTicket" class="form-control" required formControlName="dayTicket">
+                    <input type="number" name="dayTicket" class="form-control" required formControlName="dayTicket">
                 </div>
                 <div class="form-label-group">
                   <div *ngIf="pricelistForm.controls.monthTicket.errors" >
                     <div *ngIf="pricelistForm.controls.monthTicket.errors.required && (pricelistForm.controls.monthTicket.dirty || pricelistForm.controls.monthTicket.touched)" class="badge badge-danger">Month ticket price is mandatory field</div>
                   </div>
                     <label>Month ticket: </label>
-                    <input  name="monthTicket" class="form-control" required formControlName="monthTicket">
+                    <input type="number"  name="monthTicket" class="form-control" required formControlName="monthTicket">
                 </div>
                 <div class="form-label-group">
                   <div *ngIf="pricelistForm.controls.yearTicket.errors" >
                     <div *ngIf="pricelistForm.controls.yearTicket.errors.required && (pricelistForm.controls.yearTicket.dirty || pricelistForm.controls.yearTicket.touched)" class="badge badge-danger">Year ticket price is mandatory field</div>
                   </div>
                     <label>Year ticket: </label>
-                    <input  name="yearTicket" class="form-control" required formControlName="yearTicket">
+                    <input type="number"  name="yearTicket" class="form-control" required formControlName="yearTicket">
                 </div>
                 <br> 
 
@@ -61,58 +61,60 @@
       </div>
   </div>  
 </form>
-<form class="form-signin" [formGroup]="pricelistForm"><br><br>
+<form class="form-signin" [formGroup]="pricelistAddForm"><br><br>
   <div class="container">
       <div class="row">
         <div class="col-sm-10 col-md-8 col-lg-12 mx-auto">
           <div class="shadow-lg">
             <div class="card card-signin my-5">
               <div class="card-body">
-                  <div class="d-flex justify-content-between">
                 <div class="form-label-group">
                     <input type="hidden" name="from" class="form-control" required formControlName="from">
-                    <button type="button" class="form-control" disabled>{{pricelistForm.controls.from.value}}</button>
+                    <label>From: </label>
+                    <input type="text" class="form-control" disabled [value]="pricelistAddForm.controls.from.value">
                 </div>
                 <div class="form-label-group">
-                    <input type="hidden" name="to" class="form-control" required formControlName="to">
-                    <button type="button" class="form-control" disabled>{{pricelistForm.controls.to.value}}</button>
+                    <div *ngIf="pricelistAddForm.controls.to.errors" >
+                        <div *ngIf="pricelistAddForm.controls.to.errors.required && (pricelistAddForm.controls.to.dirty || pricelistAddForm.controls.to.touched)" class="badge badge-danger">To is mandatory field</div>
+                      </div>
+                    <label>To: </label>
+                    <input type="datetime-local" class="form-control" name="to" required formControlName="to">
                 </div>
-                  </div>
                 <div class="form-label-group">
-                  <div *ngIf="pricelistForm.controls.timeTicket.errors" >
-                    <div *ngIf="pricelistForm.controls.timeTicket.errors.required && (pricelistForm.controls.timeTicket.dirty || pricelistForm.controls.timeTicket.touched)" class="badge badge-danger">Time ticket price is mandatory field</div>
+                  <div *ngIf="pricelistAddForm.controls.timeTicket.errors" >
+                    <div *ngIf="pricelistAddForm.controls.timeTicket.errors.required && (pricelistAddForm.controls.timeTicket.dirty || pricelistAddForm.controls.timeTicket.touched)" class="badge badge-danger">Time ticket price is mandatory field</div>
                   </div>
                     <label>Time ticket: </label>
-                    <input  name="timeTicket" class="form-control" required formControlName="timeTicket">
+                    <input type="number" name="timeTicket" class="form-control" required formControlName="timeTicket">
                 </div>
                 <div class="form-label-group">
-                  <div *ngIf="pricelistForm.controls.dayTicket.errors" >
-                    <div *ngIf="pricelistForm.controls.dayTicket.errors.required && (pricelistForm.controls.dayTicket.dirty || pricelistForm.controls.dayTicket.touched)" class="badge badge-danger">Day ticket price is mandatory field</div>
+                  <div *ngIf="pricelistAddForm.controls.dayTicket.errors" >
+                    <div *ngIf="pricelistAddForm.controls.dayTicket.errors.required && (pricelistAddForm.controls.dayTicket.dirty || pricelistAddForm.controls.dayTicket.touched)" class="badge badge-danger">Day ticket price is mandatory field</div>
                   </div>
                     <label>Day ticket: </label>
-                    <input  name="dayTicket" class="form-control" required formControlName="dayTicket">
+                    <input type="number" name="dayTicket" class="form-control" required formControlName="dayTicket">
                 </div>
                 <div class="form-label-group">
-                  <div *ngIf="pricelistForm.controls.monthTicket.errors" >
-                    <div *ngIf="pricelistForm.controls.monthTicket.errors.required && (pricelistForm.controls.monthTicket.dirty || pricelistForm.controls.monthTicket.touched)" class="badge badge-danger">Month ticket price is mandatory field</div>
+                  <div *ngIf="pricelistAddForm.controls.monthTicket.errors" >
+                    <div *ngIf="pricelistAddForm.controls.monthTicket.errors.required && (pricelistAddForm.controls.monthTicket.dirty || pricelistAddForm.controls.monthTicket.touched)" class="badge badge-danger">Month ticket price is mandatory field</div>
                   </div>
                     <label>Month ticket: </label>
-                    <input  name="monthTicket" class="form-control" required formControlName="monthTicket">
+                    <input type="number" name="monthTicket" class="form-control" required formControlName="monthTicket">
                 </div>
                 <div class="form-label-group">
-                  <div *ngIf="pricelistForm.controls.yearTicket.errors" >
-                    <div *ngIf="pricelistForm.controls.yearTicket.errors.required && (pricelistForm.controls.yearTicket.dirty || pricelistForm.controls.yearTicket.touched)" class="badge badge-danger">Year ticket price is mandatory field</div>
+                  <div *ngIf="pricelistAddForm.controls.yearTicket.errors" >
+                    <div *ngIf="pricelistAddForm.controls.yearTicket.errors.required && (pricelistAddForm.controls.yearTicket.dirty || pricelistAddForm.controls.yearTicket.touched)" class="badge badge-danger">Year ticket price is mandatory field</div>
                   </div>
                     <label>Year ticket: </label>
-                    <input  name="yearTicket" class="form-control" required formControlName="yearTicket">
+                    <input type="number"  name="yearTicket" class="form-control" required formControlName="yearTicket">
                 </div>
                 <br> 
 
-                <div *ngIf="pricelistForm.valid">
-                  <button class="btn btn-lg btn-primary btn-block text-uppercase active" (click)="editPricelist()">Edit Pricelist</button>
+                <div *ngIf="pricelistAddForm.valid">
+                  <button class="btn btn-lg btn-primary btn-block text-uppercase active" (click)="addPricelist()">Add Pricelist</button>
                 </div>
-                <div *ngIf="!pricelistForm.valid">
-                  <button class="btn btn-lg btn-primary btn-block text-uppercase disabled" [disabled]="!pricelistForm.valid">Edit Pricelist</button>
+                <div *ngIf="!pricelistAddForm.valid">
+                  <button class="btn btn-lg btn-primary btn-block text-uppercase disabled" [disabled]="!pricelistAddForm.valid">Add Pricelist</button>
                 </div>
                 <br>
 

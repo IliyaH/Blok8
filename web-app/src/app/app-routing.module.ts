@@ -11,6 +11,7 @@ import { MenageStationsComponent } from './components/menage-stations/menage-sta
 import { ScheduleComponent } from './components/schedule/schedule.component';
 import {LinesComponent} from './components/lines/lines.component';
 import {ManagePricelistComponent} from './components/manage-pricelist/manage-pricelist.component';
+import { ManageScheduleComponent } from './components/manage-schedule/manage-schedule.component';
 
 const routes: Routes = [{
   path: '', 
@@ -52,6 +53,10 @@ const routes: Routes = [{
 { 
   path: 'manage-pricelist', 
   component: ManagePricelistComponent  
+},
+{ 
+  path: 'manage-schedule', 
+  component: ManageScheduleComponent  
 },
 ];
 

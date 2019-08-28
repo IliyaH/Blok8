@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Validators, FormBuilder } from '@angular/forms';
 import { PricelistService } from 'src/app/services/pricelist/pricelist.service';
+import { getLocaleDateTimeFormat, DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-manage-pricelist',
@@ -18,8 +19,18 @@ export class ManagePricelistComponent implements OnInit {
     to: [''],
   });
 
+  pricelistAddForm = this.fb.group({
+    timeTicket: ['', Validators.required],
+    dayTicket: ['', Validators.required],
+    monthTicket: ['', Validators.required],
+    yearTicket: ['', Validators.required],
+    from: [''],
+    to: ['', Validators.required],
+  });
+
   pricelist: any;
   prices: any[] = [];
+  date: Date = new Date;
 
   constructor(private fb: FormBuilder, private pricelistService: PricelistService) { }
 
@@ -36,12 +47,25 @@ export class ManagePricelistComponent implements OnInit {
         this.pricelistForm.controls.yearTicket.setValue(this.prices[3]);
         this.pricelistForm.controls.from.setValue(this.pricelist.Start);
         this.pricelistForm.controls.to.setValue(this.pricelist.End);
-      }
+      } 
     );
+    console.log(this.date.toLocaleTimeString());
+    this.pricelistAddForm.controls.from.setValue(this.date.toLocaleDateString() + " " + this.date.toLocaleTimeString());
   }
 
   editPricelist(){
     this.pricelistService.editPricelist(this.pricelist.Id, this.pricelistForm.controls.timeTicket.value, this.pricelistForm.controls.dayTicket.value, this.pricelistForm.controls.monthTicket.value, this.pricelistForm.controls.yearTicket.value).subscribe();
+  }
+
+  addPricelist(){
+    console.log("Udjoh u ADD");
+    this.pricelistService.addPricelist(this.pricelistAddForm.controls.to.value, this.pricelistAddForm.controls.timeTicket.value, this.pricelistAddForm.controls.dayTicket.value, this.pricelistAddForm.controls.monthTicket.value, this.pricelistAddForm.controls.yearTicket.value).subscribe(
+      data =>{
+        this.pricelistAddForm.reset();
+        this.pricelistAddForm.controls.from.setValue(this.date.toLocaleDateString() + " " + this.date.toLocaleTimeString());
+
+      }
+    );
   }
 
 }

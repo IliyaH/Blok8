@@ -57,5 +57,41 @@ namespace WebApp.Persistence.Repository
                 }
             }
         }
+
+        public void addPricelist(DateTime to, double timeTicket, double dayTicket, double monthTicket, double yearTicket)
+        {
+            ((ApplicationDbContext)this.context).Pricelists.Where(p => p.Active == true).FirstOrDefault().Active = false;
+            ((ApplicationDbContext)this.context).Pricelists.Add(new Pricelist() { Active = true, Start = DateTime.Now, End = to });
+        }
+
+        public void addPricelistItem(double timeTicket, double dayTicket, double monthTicket, double yearTicket)
+        {
+            int pricelistId = ((ApplicationDbContext)this.context).Pricelists.Where(p => p.Active == true).Select(i => i.Id).First();
+
+            ((ApplicationDbContext)this.context).PricelistItems.Add(new PricelistItem()
+            {
+                IdPricelist = pricelistId,
+                IdItem = ((ApplicationDbContext)this.context).Items.Where(i => i.TicketType == TicketType.TimeTicket).Select(s => s.Id).First(),
+                Price = timeTicket,
+            });
+            ((ApplicationDbContext)this.context).PricelistItems.Add(new PricelistItem()
+            {
+                IdPricelist = pricelistId,
+                IdItem = ((ApplicationDbContext)this.context).Items.Where(i => i.TicketType == TicketType.DayTicket).Select(s => s.Id).First(),
+                Price = dayTicket,
+            });
+            ((ApplicationDbContext)this.context).PricelistItems.Add(new PricelistItem()
+            {
+                IdPricelist = pricelistId,
+                IdItem = ((ApplicationDbContext)this.context).Items.Where(i => i.TicketType == TicketType.MounthTicket).Select(s => s.Id).First(),
+                Price = monthTicket,
+            });
+            ((ApplicationDbContext)this.context).PricelistItems.Add(new PricelistItem()
+            {
+                IdPricelist = pricelistId,
+                IdItem = ((ApplicationDbContext)this.context).Items.Where(i => i.TicketType == TicketType.YearTicket).Select(s => s.Id).First(),
+                Price = yearTicket,
+            });
+        }
     }
 }

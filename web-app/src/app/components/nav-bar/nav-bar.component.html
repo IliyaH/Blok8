@@ -1,71 +1,74 @@
 <div class="rounded-lg">
   <div class="border">
-    <nav class="navbar navbar-expand-lg navbar navbar-light" style="background-color: #5aaaff;">
+    <nav class="navbar navbar-expand-lg navbar navbar-light" style="background-color: #007bff;">
       <div class="collapse navbar-collapse" id="navbarCollapse9">
           <div class="navbar-nav">
             <div *ngIf="loggedIn != 'Admin'">
-            <div *ngIf="router == '/schedule'; then thenBlock else elseBlock"></div>
-              <ng-template #thenBlock><a routerLink='/schedule' class="nav-item nav-link active">Schedule</a></ng-template>
-              <ng-template #elseBlock><a routerLink='/schedule' class="nav-item nav-link">Schedule</a></ng-template>
+            <div *ngIf="router.url == '/schedule'; then thenBlock else elseBlock"></div>
+              <ng-template #thenBlock><button routerLink='/schedule' class="btn btn-primary active">Schedule</button></ng-template>
+              <ng-template #elseBlock><button routerLink='/schedule' class="btn btn-primary">Schedule</button></ng-template>
             </div>
               <div *ngIf="loggedIn != 'Admin'">
-            <div *ngIf="router == '/bus-lines'; then thenBlock1 else elseBlock1"></div>
-              <ng-template #thenBlock1><a href="#" class="nav-item nav-link active">Bus Lines</a></ng-template>
-              <ng-template #elseBlock1><a href="#" class="nav-item nav-link">Bus Lines</a></ng-template>
+            <div *ngIf="router.url == '/bus-lines'; then thenBlock1 else elseBlock1"></div>
+              <ng-template #thenBlock1><button href="#" class="btn btn-primary active">Bus Lines</button></ng-template>
+              <ng-template #elseBlock1><button href="#" class="btn btn-primary">Bus Lines</button></ng-template>
             </div>
               <div *ngIf="loggedIn != 'Admin'">
-            <div *ngIf="router == '/bus-location'; then thenBlock2 else elseBlock2"></div>
-              <ng-template #thenBlock2><a href="#" class="nav-item nav-link active">Bus Locations</a></ng-template>
-              <ng-template #elseBlock2><a href="#" class="nav-item nav-link">Bus Locations</a></ng-template>
+            <div *ngIf="router.url == '/bus-location'; then thenBlock2 else elseBlock2"></div>
+              <ng-template #thenBlock2><button href="#" class="btn btn-primary active">Bus Locations</button></ng-template>
+              <ng-template #elseBlock2><button href="#" class="btn btn-primary">Bus Locations</button></ng-template>
           </div>
             <div *ngIf="loggedIn != 'Admin'">
-            <div *ngIf="router == '/pricelist'; then thenBlock3 else elseBlock3"></div>
-              <ng-template #thenBlock3><a routerLink="/pricelist" class="nav-item nav-link active">Pricelist</a></ng-template>
-              <ng-template #elseBlock3><a routerLink="/pricelist" class="nav-item nav-link">Pricelist</a></ng-template>
+            <div *ngIf="router.url == '/pricelist'; then thenBlock3 else elseBlock3"></div>
+              <ng-template #thenBlock3><button routerLink="/pricelist" class="btn btn-primary active">Pricelist</button></ng-template>
+              <ng-template #elseBlock3><button routerLink="/pricelist" class="btn btn-primary">Pricelist</button></ng-template>
             </div>
             <div *ngIf="loggedIn != 'Admin'">
-              <div *ngIf="router == '/buy-ticket'; then thenBlock4 else elseBlock4"></div>
-                <ng-template #thenBlock4><a routerLink="/buy-ticket" class="nav-item nav-link active">Buy Ticket</a></ng-template>
-                <ng-template #elseBlock4><a routerLink="/buy-ticket" class="nav-item nav-link">Buy Ticket</a></ng-template>
+              <div *ngIf="router.url == '/buy-ticket'; then thenBlock4 else elseBlock4"></div>
+                <ng-template #thenBlock4><button routerLink="/buy-ticket" class="btn btn-primary active">Buy Ticket</button></ng-template>
+                <ng-template #elseBlock4><button routerLink="/buy-ticket" class="btn btn-primary">Buy Ticket</button></ng-template>
             </div>
 
           <div *ngIf="loggedIn == 'Admin'">
-            <div *ngIf="router == '/lines'; then thenBlock6 else elseBlock6"></div>
-                <ng-template #thenBlock6><a routerLink="/lines" class="nav-item nav-link active">Menage Lines</a></ng-template>
-                <ng-template #elseBlock6><a routerLink="/lines" class="nav-item nav-link">Menage Lines</a></ng-template>
+            <div *ngIf="router.url == '/lines'; then thenBlock6 else elseBlock6"></div>
+                <ng-template #thenBlock6><button routerLink="/lines" class="btn btn-primary active">Menage Lines</button></ng-template>
+                <ng-template #elseBlock6><button routerLink="/lines" class="btn btn-primary">Menage Lines</button></ng-template>
           </div>
           <div *ngIf="loggedIn == 'Admin'">
-            <div *ngIf="router == '/menage-stations'; then thenBlock7 else elseBlock7"></div>
-                <ng-template #thenBlock7><a routerLink="/menage-stations" class="nav-item nav-link active">Menage Stations</a></ng-template>
-                <ng-template #elseBlock7><a routerLink="/menage-stations" class="nav-item nav-link">Menage Stations</a></ng-template>
+            <div *ngIf="router.url == '/menage-stations'; then thenBlock7 else elseBlock7"></div>
+                <ng-template #thenBlock7><button routerLink="/menage-stations" class="btn btn-primary active">Menage Stations</button></ng-template>
+                <ng-template #elseBlock7><button routerLink="/menage-stations" class="btn btn-primary">Menage Stations</button></ng-template>
           </div>
           <div *ngIf="loggedIn == 'Admin'">
-            <div *ngIf="router == '/menage-schedule'; then thenBlock8 else elseBlock8"></div>
-                <ng-template #thenBlock8><a routerLink="/menage-schedule" class="nav-item nav-link active">Menage Schedule</a></ng-template>
-                <ng-template #elseBlock8><a routerLink="/menage-schedule" class="nav-item nav-link">Menage Schedule</a></ng-template>
+            <div *ngIf="router.url == '/manage-schedule'; then thenBlock8 else elseBlock8"></div>
+                <ng-template #thenBlock8><button routerLink="/manage-schedule" class="btn btn-primary active">Menage Schedule</button></ng-template>
+                <ng-template #elseBlock8><button routerLink="/manage-schedule" class="btn btn-primary">Menage Schedule</button></ng-template>
 
           </div>
 
           <div *ngIf="loggedIn == 'Admin'">
-            <div *ngIf="router == '/manage-pricelist'; then thenBlock9 else elseBlock9"></div>
-                <ng-template #thenBlock9><a routerLink="/manage-pricelist" class="nav-item nav-link active">Manage Pricelist</a></ng-template>
-                <ng-template #elseBlock9><a routerLink="/manage-pricelist" class="nav-item nav-link">Manage Pricelist</a></ng-template>
+            <div *ngIf="router.url == '/manage-pricelist'; then thenBlock9 else elseBlock9"></div>
+                <ng-template #thenBlock9><button routerLink="/manage-pricelist" class="btn btn-primary active">Manage Pricelist</button></ng-template>
+                <ng-template #elseBlock9><button routerLink="/manage-pricelist" class="btn btn-primary">Manage Pricelist</button></ng-template>
 
           </div>
             
-            <div *ngIf="loggedIn">
-              <div *ngIf="router == '/profile'; then thenBlock5 else elseBlock5"></div>
-                <ng-template #thenBlock5><a routerLink="/profile" class="nav-item nav-link active">Profile</a></ng-template>
-                <ng-template #elseBlock5><a routerLink="/profile" class="nav-item nav-link">Profile</a></ng-template>
-            </div>
+            
           </div>
-          <form *ngIf="!loggedIn" class="form-inline ml-auto">
+          <div class="form-inline ml-auto">
+              <div *ngIf="loggedIn">
+                  <div *ngIf="router.url == '/profile'; then thenBlock5 else elseBlock5"></div>
+                    <ng-template #thenBlock5><button routerLink="/profile" class="btn btn-primary active">Profile</button></ng-template>
+                    <ng-template #elseBlock5><button routerLink="/profile" class="btn btn-primary">Profile</button></ng-template>
+                </div>
+          <form *ngIf="!loggedIn">
                 <a routerLink="/login" class="form-control mr-sm-2">Login</a>
                 <a routerLink="/register" class="form-control mr-sm-2">Register</a>
             </form>
             <form *ngIf="loggedIn" class="form-inline ml-auto">
                 <a routerLink="/login" class="form-control mr-sm-2" (click)="logOut($event)" >Log Out</a>
             </form>
+          </div>
       </div>
     </nav>
   </div>

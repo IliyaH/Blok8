@@ -69,7 +69,20 @@ export class MenageService {
       catchError(this.handleError<any[]>(`getStations`)));
   }
 
-  
+  addDepartures(idLine: any, dayType: any, departures: any): Observable<any>{
+    return this.httpClient.post<any>(this.base_url+`/api/Timetables/AddDeparture?idLine=${idLine}&dayType=${dayType}&departures=${departures}`,[idLine, dayType, departures]).pipe(
+      catchError(this.handleError<any>(`addDepartures`)));
+  }
+
+  deleteDeparture(departureId: any): Observable<any>{
+    return this.httpClient.delete<any>(this.base_url+`/api/Timetables/Delete?departureId=${departureId}`).pipe(
+      catchError(this.handleError<any>(`deleteDeparture`)));
+  }
+
+  editDeparture(departureId: any, selectedDeparture: any): Observable<any>{
+    return this.httpClient.post<any>(this.base_url+`/api/Timetables/EditDeparture?departureId=${departureId}&selectedDeparture=${selectedDeparture}`, [departureId, selectedDeparture]).pipe(
+      catchError(this.handleError<any>(`editDeparture`)));
+  }
 
   private handleError<T> (operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {

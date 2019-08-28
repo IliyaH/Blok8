@@ -18,6 +18,7 @@ import { MenageStationsComponent } from './components/menage-stations/menage-sta
 import { ScheduleComponent } from './components/schedule/schedule.component';
 import { LinesComponent } from './components/lines/lines.component';
 import { ManagePricelistComponent } from './components/manage-pricelist/manage-pricelist.component';
+import { ManageScheduleComponent } from './components/manage-schedule/manage-schedule.component';
 
 
 @NgModule({
@@ -33,6 +34,7 @@ import { ManagePricelistComponent } from './components/manage-pricelist/manage-p
     ScheduleComponent,
     LinesComponent,
     ManagePricelistComponent,
+    ManageScheduleComponent,
     
   ],
   imports: [

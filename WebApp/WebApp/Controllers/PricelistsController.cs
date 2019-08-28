@@ -135,6 +135,24 @@ namespace WebApp.Controllers
             return Ok(id);
         }
 
+        // POST: api/Pricelists
+        [Route("AddPricelist")]
+        [ResponseType(typeof(Pricelist))]
+        public IHttpActionResult AddPricelist(DateTime to, double timeTicket, double dayTicket, double monthTicket, double yearTicket)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            UnitOfWork.PricelistRepository.addPricelist(to, timeTicket, dayTicket, monthTicket, yearTicket);
+            UnitOfWork.PricelistRepository.SaveChanges();
+            UnitOfWork.PricelistRepository.addPricelistItem(timeTicket, dayTicket, monthTicket, yearTicket);
+            UnitOfWork.PricelistRepository.SaveChanges();
+
+            return Ok(0);
+        }
+
         // DELETE: api/Pricelists/5
         [ResponseType(typeof(Pricelist))]
         public IHttpActionResult DeletePricelist(int id)
