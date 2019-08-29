@@ -7,7 +7,7 @@
               <div id="gape1" class="card card-signin my-5">
                 <div class="card-body">
                     <div>
-                      <label>Station: </label>
+                      <label class="badge badge-primary">Station: </label>
                     </div>
                     <div class="form-label-group">
                         <select name="selectedStation" class="form-control" (change)="onSelect($event)">
@@ -57,9 +57,11 @@
                     <input name="yCoordinate" type="number" class="form-control" placeholder="yCoordinate" formControlName="yCoordinate">
                 </div><br>
                 <div class="text-center">
-                  <label ><u>Lines</u></label>
+                    <h6>Lines <label class="badge badge-primary">{{lines.length}}</label></h6>
+                    
                 </div>
-                <div class="d-flex justify-content-between">
+                <!--<div class="d-flex justify-content-between">-->
+                <div class="d-flex align-items-start flex-column flex-wrap" style="height: 150px;">
                     <li *ngFor="let s of lines">
                         {{s}}
                     </li>

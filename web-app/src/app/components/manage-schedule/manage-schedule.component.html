@@ -6,7 +6,7 @@
               <div class="card card-signin my-5">
                 <div class="card-body">
                     <div>
-                      <label>Lines: </label>
+                      <label class="badge badge-primary">Lines: </label>
                     </div>
                     <div class="form-label-group">
                         <select name="selectedLine" class="form-control" (change)="onSelectLine($event)">
@@ -14,16 +14,18 @@
                         </select>
                     </div>
                     <div class="form-label-group">
-                        <label>Day Type:</label>
+                        <label class="badge badge-primary">Day Type:</label>
                         <select class="form-control" (change)="onSelectDayType($event)">
                           <option value='0'>Weekday</option>
                           <option value='1'>Weekend</option>
                         </select>
                       </div><br>
 
+                      <div class="d-flex align-items-start flex-column flex-wrap" style="height: 120px;">
                       <li *ngFor="let item of Departures">
                           {{item.Departures}}
                       </li>
+                      </div>
 
                   </div>
                 </div>
@@ -38,7 +40,7 @@
             <div class="card-body">
               <form class="form-signin" [formGroup]="scheduleForm">
                 <div class="form-label-group">
-                    <label>Departures: </label>
+                    <label class="badge badge-primary">Departures: </label>
                       <select name="selectedDeparture" formControlName="selectedDeparture" class="form-control" (change)="onSelectDeparture($event)">
                         <option  *ngFor="let d of Departures" [value]="d.Id">{{d.Departures}}</option>
                       </select>
@@ -67,7 +69,7 @@
                                 </div>
                            </div>
                            <br>
-                        <label>Departures: </label>
+                        <label class="badge badge-primary">Departures: </label>
                         <input formControlName="addDeparture"  type="text" class="form-control">
                         <br>
                         <div *ngIf="scheduleForm.controls.addDeparture.valid">

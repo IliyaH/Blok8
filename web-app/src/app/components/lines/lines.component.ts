@@ -83,6 +83,8 @@ export class LinesComponent implements OnInit {
       data=>{
         this.getLines();
         this.lineForm.reset();
+        this.getAllStations();
+
         for(this.i = 0; this.i < this.allStations.length; this.i++){
           this.allStations[this.i].Exist = false;
         }
@@ -94,9 +96,12 @@ export class LinesComponent implements OnInit {
     this.menageService.editLine(this.lineForm.controls.lineName.value, this.lineForm.controls.lineType.value, this.selectedLineId, this.lineStationsIds).subscribe(
       data=>{
         this.getLines();
-        window.alert("Successfully edited line with ID: " + this.selectedLineId);
         this.lineForm.reset();
-        
+        this.getAllStations();
+        for(this.i = 0; this.i < this.allStations.length; this.i++){
+          this.allStations[this.i].Exist = false;
+        }
+        window.alert("Successfully edited line with ID: " + this.selectedLineId);
       }
     );
   }
@@ -106,12 +111,14 @@ export class LinesComponent implements OnInit {
       data=>{
         console.log(data);
         this.getLines();
-        window.alert("Successfully deleted line with ID: " + this.selectedLineId);
+        this.getAllStations();
+
         this.selectedLineId = "Add Line";
         this.lineForm.reset();
         for(this.i = 0; this.i < this.allStations.length; this.i++){
           this.allStations[this.i].Exist = false;
         }
+        window.alert("Successfully deleted line with ID: " + this.selectedLineId);
       }
     );
   }

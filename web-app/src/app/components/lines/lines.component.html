@@ -6,7 +6,7 @@
             <div id="gape1" class="card card-signin my-5">
               <div class="card-body">
                   <div>
-                    <label>Lines: </label>
+                    <label class="badge badge-primary">Lines: </label>
                   </div>
                   <div class="form-label-group">
                       <select name="selectedLine" class="form-control" (change)="onSelectLine($event)">
@@ -35,18 +35,19 @@
               </div>
               <br>
               <div class="form-label-group">
-                <label>Line Type:</label>
+                <label class="badge badge-primary">Line Type:</label>
                 <select formControlName="lineType" class="form-control">
                   <option value='0'>City</option>
                   <option value='1'>Suburban</option>
                 </select>
               </div><br>
               <div class="form-label-group">
+                  <div class="d-flex align-items-start flex-column flex-wrap" style="height: 100px;">
                 <div *ngFor="let s of allStations">
                   <input type="checkbox" isChecked [checked]="s.Exist" value="s.Id" (change)="checkValue($event, s.Id)">{{s.Name}}
-                </div>    
+                </div>
+                  </div>    
               </div>
-              <br>
                 <br>
                 <div *ngIf="selectedLineId=='Add Line'">
                   <div *ngIf="lineForm.valid">
