@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Security.Claims;
 using System.Security.Cryptography;
@@ -15,6 +16,7 @@ using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
 using WebApp.Models;
+using WebApp.Persistence.UnitOfWork;
 using WebApp.Providers;
 using WebApp.Results;
 
@@ -26,9 +28,17 @@ namespace WebApp.Controllers
     {
         private const string LocalLoginProvider = "Local";
         private ApplicationUserManager _userManager;
+        private readonly IUnitOfWork UnitOfWork;
 
         public AccountController()
         {
+
+        }
+
+        public AccountController(ApplicationUserManager userManager, IUnitOfWork uw)
+        {
+            UserManager = userManager;
+            UnitOfWork = uw;
         }
 
         public AccountController(ApplicationUserManager userManager,
@@ -72,6 +82,42 @@ namespace WebApp.Controllers
         {
             ApplicationUser user = UserManager.FindByEmail(email);
             return user;
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        [Route("GetNotActiveUsers")]
+        [ResponseType(typeof(IQueryable<ApplicationUser>))]
+        public IQueryable<ApplicationUser> GetNotActiveUsers()
+        {
+            List<ApplicationUser> ret = new List<ApplicationUser>();
+            foreach(var user in UserManager.Users.Where(p => p.Activated == Enums.RequestType.InProcess))
+            {
+                if(UserManager.IsInRole(user.Id, "AppUser"))
+                {
+                    ret.Add(user);
+                }
+            }
+            return ret.AsQueryable();
+        }
+
+        [Route("ValidateUser")]
+        [ResponseType(typeof(Task<IHttpActionResult>))]
+        public async Task<IHttpActionResult> ValidateUser(string email, bool validate)
+        {
+            ApplicationUser applicationUser = UserManager.FindByEmail(email);
+            if (validate)
+                applicationUser.Activated = Enums.RequestType.Activated;
+            else
+                applicationUser.Activated = Enums.RequestType.Declined;
+
+            IdentityResult result = await UserManager.UpdateAsync(applicationUser);
+            if (!result.Succeeded)
+            {
+                return GetErrorResult(result);
+            }
+
+            return Ok(200);
         }
 
         // POST api/Account/Logout
@@ -349,9 +395,10 @@ namespace WebApp.Controllers
             };
 
             if (user.UserType == Enums.UserType.RegularUser)
-                user.Activated = true;
+                user.Activated = Enums.RequestType.Activated;
             else
-                user.Activated = false;
+                user.Activated = Enums.RequestType.InProcess;
+            
 
             IdentityResult result = await UserManager.CreateAsync(user, model.Password);
 

@@ -3,27 +3,27 @@
     <nav class="navbar navbar-expand-lg navbar navbar-light" style="background-color: #007bff;">
       <div class="collapse navbar-collapse" id="navbarCollapse9">
           <div class="navbar-nav">
-            <div *ngIf="loggedIn != 'Admin'">
+            <div *ngIf="loggedIn != 'Admin' && loggedIn != 'Controller'">
             <div *ngIf="router.url == '/schedule'; then thenBlock else elseBlock"></div>
               <ng-template #thenBlock><button routerLink='/schedule' class="btn btn-primary active">Schedule</button></ng-template>
               <ng-template #elseBlock><button routerLink='/schedule' class="btn btn-primary">Schedule</button></ng-template>
             </div>
-              <div *ngIf="loggedIn != 'Admin'">
+              <div *ngIf="loggedIn != 'Admin' && loggedIn != 'Controller'">
             <div *ngIf="router.url == '/bus-lines'; then thenBlock1 else elseBlock1"></div>
               <ng-template #thenBlock1><button href="#" class="btn btn-primary active">Bus Lines</button></ng-template>
               <ng-template #elseBlock1><button href="#" class="btn btn-primary">Bus Lines</button></ng-template>
             </div>
-              <div *ngIf="loggedIn != 'Admin'">
+              <div *ngIf="loggedIn != 'Admin' && loggedIn != 'Controller'">
             <div *ngIf="router.url == '/bus-location'; then thenBlock2 else elseBlock2"></div>
               <ng-template #thenBlock2><button href="#" class="btn btn-primary active">Bus Locations</button></ng-template>
               <ng-template #elseBlock2><button href="#" class="btn btn-primary">Bus Locations</button></ng-template>
           </div>
-            <div *ngIf="loggedIn != 'Admin'">
+            <div *ngIf="loggedIn != 'Admin' && loggedIn != 'Controller'">
             <div *ngIf="router.url == '/pricelist'; then thenBlock3 else elseBlock3"></div>
               <ng-template #thenBlock3><button routerLink="/pricelist" class="btn btn-primary active">Pricelist</button></ng-template>
               <ng-template #elseBlock3><button routerLink="/pricelist" class="btn btn-primary">Pricelist</button></ng-template>
             </div>
-            <div *ngIf="loggedIn != 'Admin'">
+            <div *ngIf="loggedIn != 'Admin' && loggedIn != 'Controller'">
               <div *ngIf="router.url == '/buy-ticket'; then thenBlock4 else elseBlock4"></div>
                 <ng-template #thenBlock4><button routerLink="/buy-ticket" class="btn btn-primary active">Buy Ticket</button></ng-template>
                 <ng-template #elseBlock4><button routerLink="/buy-ticket" class="btn btn-primary">Buy Ticket</button></ng-template>
@@ -52,6 +52,20 @@
                 <ng-template #elseBlock9><button routerLink="/manage-pricelist" class="btn btn-primary">Manage Pricelist</button></ng-template>
 
           </div>
+
+          <div *ngIf="loggedIn == 'Controller'">
+              <div *ngIf="router.url == '/validate-users'; then thenBlock10 else elseBlock10"></div>
+                  <ng-template #thenBlock10><button routerLink="/validate-users" class="btn btn-primary active">Validate Users</button></ng-template>
+                  <ng-template #elseBlock10><button routerLink="/validate-users" class="btn btn-primary">Validate Users</button></ng-template>
+  
+            </div>
+
+            <div *ngIf="loggedIn == 'Controller'">
+                <div *ngIf="router.url == '/validate-tickets'; then thenBlock11 else elseBlock11"></div>
+                    <ng-template #thenBlock11><button routerLink="/validate-tickets" class="btn btn-primary active">Validate Tickets</button></ng-template>
+                    <ng-template #elseBlock11><button routerLink="/validate-tickets" class="btn btn-primary">Validate Tickets</button></ng-template>
+    
+              </div>
             
             
           </div>

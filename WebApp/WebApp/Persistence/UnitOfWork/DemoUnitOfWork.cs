@@ -31,6 +31,9 @@ namespace WebApp.Persistence.UnitOfWork
         [Dependency]
         public ILineRepository LineRepository { get; set; }
 
+        [Dependency]
+        public IUserRepository UserRepository { get; set; }
+
         public int Complete()
         {
             return _context.SaveChanges();

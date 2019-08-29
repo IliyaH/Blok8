@@ -17,6 +17,8 @@ export class ProfileComponent implements OnInit {
     address: ['', Validators.required],
     birthday: ['', Validators.required],
     email: ['', [Validators.required, Validators.email]],
+    activated: ['', Validators.required],
+    image: ['', Validators.required],
     //password: ['', [Validators.required, Validators.minLength(8)]],
     //confirmPassword: ['', [Validators.required, Validators.minLength(8)]],
     //userType: ['', Validators.required],
@@ -36,6 +38,7 @@ export class ProfileComponent implements OnInit {
     this.getUser();
     this.userRole = localStorage['role'];
     console.log(this.userRole);
+    console.log(this.profileForm.value);
   }
 
   checkPassword(group: FormGroup)
@@ -69,6 +72,9 @@ export class ProfileComponent implements OnInit {
         this.userData = data;
 
         this.userProfileActivated = this.userData.Activated;
+        console.log(this.userProfileActivated);
+        this.selectValue = this.userData.UserType;
+        console.log(this.selectValue);
         if(this.userData.Name)
         {
           this.profileForm.controls.name.setValue(this.userData.Name);
@@ -83,15 +89,7 @@ export class ProfileComponent implements OnInit {
         }
         if(this.userData.Birthday)
         {
-          /*let year = this.userData.Birthday.split('-')[0];
-          let month = this.userData.Birthday.split('-')[1];
-          let tempday = this.userData.Birthday.split('-')[2];
-          let day = tempday.split('T')[0];
-          console.log(year + month + day);
-          //let date = new Date(year+'-'+month+'-'+day);
-          let date = new Date();
-          console.log();
-          this.profileForm.controls.birthday.setValue(date);*/
+          
           let birthday =  this.userData.Birthday.split('T',2);
           this.profileForm.controls.birthday.setValue(`${birthday[0]}`);
         }
@@ -99,36 +97,9 @@ export class ProfileComponent implements OnInit {
         {
           this.profileForm.controls.email.setValue(this.userData.Email);
         }
-        /*if(this.userData.Password)
-        {  
-          this.profileForm.controls.password.setValue(this.userData.Password);
-        }
-        if(this.userData.ConfirmPass)
-        {
-          this.profileForm.controls.confirmPass.setValue(this.userData.ConfirmPass);
-        }
-        if(this.userData.UserType)
-        {
-          if(this.userData.UserType == 0)
-          {
-            this.selectValue = 'RegularUser';
-            this.profileForm.controls.userType.setValue(this.selectValue);
-          }
-          else if(this.userData.UserType == 1)
-          {
-            this.selectValue = 'Student';
-            this.profileForm.controls.userType.setValue(this.selectValue);
-          }
-          else if(this.userData.UserType == 2)
-          {
-            this.selectValue = 'Pensioner';
-            this.profileForm.controls.userType.setValue(this.selectValue);
-          }
-        }
-        if(this.userData.Image)
-        {
-          this.profileForm.controls.image.setValue(this.userData.Image);
-        }*/
+        
+        this.profileForm.controls.activated.setValue(this.userData.Activated);
+        
       
     });
     }

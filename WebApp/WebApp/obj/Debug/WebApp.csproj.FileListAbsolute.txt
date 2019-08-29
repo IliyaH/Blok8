@@ -318,3 +318,4 @@ C:\Users\zilic\Desktop\Blok8\WebApp\WebApp\obj\Debug\WebApp.dll
 C:\Users\zilic\Desktop\Blok8\WebApp\WebApp\obj\Debug\WebApp.pdb
 C:\Users\Korisnik\Desktop\Blok8\WebApp\WebApp\obj\Debug\WebApp.Migrations.DataMigration.resources
 C:\Users\zilic\Desktop\Blok8\WebApp\WebApp\obj\Debug\WebApp.Migrations.DataMigration.resources
+C:\Users\zilic\Desktop\Blok8\WebApp\WebApp\obj\Debug\WebApp.Migrations.ApplicationUserEdit.resources

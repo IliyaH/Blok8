@@ -20,3 +20,12 @@ export class Departure{
     IdDay : number;
     IdTimetableActive : number;
 }
+
+export class User{
+    Name: string;
+    Surname: string;
+    Address: string;
+    Birthday: any;
+    Email: string;
+    UserType: string;
+}

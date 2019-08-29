@@ -12,6 +12,8 @@ import { ScheduleComponent } from './components/schedule/schedule.component';
 import {LinesComponent} from './components/lines/lines.component';
 import {ManagePricelistComponent} from './components/manage-pricelist/manage-pricelist.component';
 import { ManageScheduleComponent } from './components/manage-schedule/manage-schedule.component';
+import { ValidateUsersComponent } from './components/validate-users/validate-users.component';
+import { ValidateTicketsComponent } from './components/validate-tickets/validate-tickets.component';
 
 const routes: Routes = [{
   path: '', 
@@ -57,6 +59,14 @@ const routes: Routes = [{
 { 
   path: 'manage-schedule', 
   component: ManageScheduleComponent  
+},
+{ 
+  path: 'validate-users', 
+  component: ValidateUsersComponent  
+},
+{ 
+  path: 'validate-tickets', 
+  component: ValidateTicketsComponent  
 },
 ];
 

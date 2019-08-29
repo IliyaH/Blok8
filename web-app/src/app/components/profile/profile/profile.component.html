@@ -9,7 +9,15 @@
                       <div *ngIf="profileForm.controls.email.errors" >
                           <div *ngIf="profileForm.controls.email.errors.required && (profileForm.controls.email.dirty || profileForm.controls.email.touched)" class="badge badge-danger">Email is mandatory field</div>
                         </div>
-                      
+                    <div *ngIf="profileForm.controls.activated.value == 0 && userRole == 'AppUser'">
+                      <button type="button" class="btn btn-info btn-lg btn-block" disabled>Validation in process</button><br>
+                    </div>
+                    <div *ngIf="profileForm.controls.activated.value == 1 && userRole == 'AppUser'">
+                        <button type="button" class="btn btn-success btn-lg btn-block" disabled>Profile Activated</button><br>
+                      </div>
+                      <div *ngIf="profileForm.controls.activated.value == 2 && userRole == 'AppUser'">
+                          <button type="button" class="btn btn-danger btn-lg btn-block" disabled>Profile Declined</button><br>
+                        </div>
                     <input type="hidden" name="email" class="form-control" placeholder="Email" required formControlName="email">
                     <button type="button" class="form-control" disabled>{{profileForm.controls.email.value}}</button>
                   </div><br>
@@ -42,21 +50,38 @@
                         <input name="birthday" type="date" class="form-control" placeholder="Birthday" required formControlName="birthday">
                       </div><br>
                       
+                      
+                      <div *ngIf="selectValue == 0" class="form-label-group">
+                          <span class="badge badge-primary">User Type: </span>
+                          <select name="selectedUser" class="form-control" (change)="onSelect($event)">
+                              <option value="0">Regular User</option>
+                              <option value="1">Student</option>
+                              <option value="2">Pensioner</option>
+                          </select>
+                      </div>
+                      <div *ngIf="selectValue != 0" class="form-label-group">
+                          <span class="badge badge-primary">User Type: </span>
+                          <select disabled name="selectedUser" class="form-control" (change)="onSelect($event)">
+                              <option *ngIf="selectValue == 1" value="1">Student</option>
+                              <option *ngIf="selectValue == 2" value="2">Pensioner</option>
+                          </select>
+                      </div>
+
                   
                    <br>
-                  <div *ngIf="selectValue == 'Student' && userProfileActivated == 'false'" class="form-label-group">
+                  <div *ngIf="selectValue == '1' && userProfileActivated == 2" class="form-label-group">
                       <div class="input-group">
                           <div class="custom-file">
-                            <input name="image" type="file" accept="image/*" class="custom-file-input">
+                            <input formControlName="image" type="file" accept="image/*" class="custom-file-input">
                             <label class="custom-file-label">Choose file</label>
                           </div>
                       </div>
                   </div>       
-                  <div *ngIf="selectValue == 'Pensioner' && userProfileActivated == 'false'" class="form-label-group">
+                  <div *ngIf="selectValue == '2' && userProfileActivated == 2" class="form-label-group">
                       <div class="input-group">
                           <div class="custom-file">
                               <span class="badge badge-primary">Image/Document: </span>
-                            <input name="image" type="file" accept="document/*" class="custom-file-input">
+                            <input formControlName="image" type="file" accept="image/*" class="custom-file-input">
                             <label class="custom-file-label">Choose file</label>
                           </div>
                       </div>
@@ -70,7 +95,12 @@
                     <button class="btn btn-lg btn-primary btn-block text-uppercase disabled" [disabled]="!profileForm.valid" type="submit">Edit</button>
                   </div><br>
                   <div *ngIf="userRole == 'AppUser'">
-                    <a class="btn btn-lg btn-primary btn-block text-uppercase active" (click)="brisac()">Delete</a>
+                      <div *ngIf="profileForm.valid">
+                        <a class="btn btn-lg btn-primary btn-block text-uppercase active" (click)="brisac()">Delete</a>
+                      </div>
+                      <div *ngIf="!profileForm.valid">
+                          <button class="btn btn-lg btn-primary btn-block text-uppercase disabled" [disabled]="!profileForm.valid" type="submit">Delete</button>
+                      </div>
                   </div>
                 </div>
               </div>

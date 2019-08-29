@@ -75,6 +75,7 @@ namespace WebApp.App_Start
             container.RegisterType<ITimetableRepository, TimetableRepository>();
             container.RegisterType<IStationRepository, StationRepository>();
             container.RegisterType<ILineRepository, LineRepository>();
+            container.RegisterType<IUserRepository, UserRepository>();
 
             //svaki korisnik treba da ima svoj dbkontekst, po requestu
             container.RegisterType<IUnitOfWork, DemoUnitOfWork>();

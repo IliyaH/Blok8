@@ -21,7 +21,7 @@ namespace WebApp.Models
         public string Address { get; set; }
         public DateTime? Birthday { get; set; }
         public string Image { get; set; }
-        public bool Activated { get; set; }
+        public RequestType Activated { get; set; }
         public UserType UserType { get; set; }
 
 
