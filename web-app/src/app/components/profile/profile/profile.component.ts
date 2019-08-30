@@ -18,7 +18,8 @@ export class ProfileComponent implements OnInit {
     birthday: ['', Validators.required],
     email: ['', [Validators.required, Validators.email]],
     activated: ['', Validators.required],
-    image: ['', Validators.required],
+    image: [''],
+    userType: ['', Validators.required],
     //password: ['', [Validators.required, Validators.minLength(8)]],
     //confirmPassword: ['', [Validators.required, Validators.minLength(8)]],
     //userType: ['', Validators.required],
@@ -31,14 +32,25 @@ export class ProfileComponent implements OnInit {
   tempDate = new Date();
   selectValue: any;
   userRole: any;
+  showFile: boolean;
+  image: any = null;
+  imageFile: File = null;
 
   constructor(public router: Router, private fb: FormBuilder, private userService: UserService, private authService: AuthenticationService) { }
 
   ngOnInit() {
     this.getUser();
     this.userRole = localStorage['role'];
-    console.log(this.userRole);
-    console.log(this.profileForm.value);
+
+    this.userService.downloadImage(localStorage['name']).subscribe(
+      response => {
+        if(response.toString() != "204"){
+        this.image = 'data:image/jpeg;base64,' + response;
+      }
+      console.log(this.image);
+        
+      }
+    );
   }
 
   checkPassword(group: FormGroup)
@@ -51,11 +63,32 @@ export class ProfileComponent implements OnInit {
 
   onSelect(event : any)
   {
-    this.selectValue = event.target.value;
+    console.log(event.target.value);
+    this.profileForm.controls.userType.setValue(event.target.value);
+    console.log(this.profileForm.controls.userType.value)
+    if(event.target.value != '0'){
+      this.showFile = true;
+    }
+    else{
+      this.showFile = false;
+    }
   }
 
   edit(){
-    this.authService.edit(this.profileForm.value).subscribe();
+    let formData = new FormData();
+
+    if(this.imageFile != null){
+      formData.append('image', this.imageFile, this.imageFile.name);
+      formData.append('email', this.profileForm.controls.email.value);
+    }
+
+    this.authService.edit(this.profileForm.value).subscribe(
+      data=>{
+        if(this.imageFile != null){
+          this.userService.uploadImage(formData).subscribe();
+        }
+      }
+    );
     window.alert('Data successfully edited!');
   }
 
@@ -99,10 +132,25 @@ export class ProfileComponent implements OnInit {
         }
         
         this.profileForm.controls.activated.setValue(this.userData.Activated);
-        
+        //this.profileForm.controls.userType.setValue();
+        //this.profileForm.controls.image.setValue(this.userData.Image);
+        this.profileForm.controls.userType.setValue(this.userData.UserType);
+
+        if(this.selectValue != '0'){ 
+          if(this.userProfileActivated == '2'){
+            this.showFile = true;
+          }
+        }
+        else{
+          this.showFile = false;
+        }
       
     });
     }
+}
+
+onImageChange(event){
+  this.imageFile = <File>event.target.files[0];
 }
 
 }

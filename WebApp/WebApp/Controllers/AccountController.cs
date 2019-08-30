@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Security.Claims;
@@ -118,6 +119,84 @@ namespace WebApp.Controllers
             }
 
             return Ok(200);
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        [Route("UploadImage")]
+        public async Task<IHttpActionResult> UploadImage()
+        {
+            var httpRequest = HttpContext.Current.Request;
+
+            var userEmail = httpRequest.Form["email"];
+            var user = _userManager.Users.Where(userDB => userDB.Email == userEmail).First();
+
+            try
+            {
+                if (httpRequest.Files.Count > 0)
+                {
+                    foreach (string file in httpRequest.Files)
+                    {
+                        if (user != null)
+                        {
+                            var image = httpRequest.Files[file];
+                            string fileName = $"{user.Email}_{image.FileName}";
+                            var filePath = HttpContext.Current.Server.MapPath($"~/UploadFile/{fileName}");
+
+                            user.Image = fileName;
+                            IdentityResult result = await _userManager.UpdateAsync(user);
+                            if (!result.Succeeded)
+                            {
+                                return GetErrorResult(result);
+                            }
+
+                            image.SaveAs(filePath);
+                        }
+                    }
+                }
+            }
+            catch
+            {
+                return BadRequest();
+            }
+
+            return Ok(201);
+        }
+
+        [HttpGet]
+        [Route("DownloadImage")]
+        public IHttpActionResult DownloadImage(string email)
+        {
+            var user = _userManager.Users.Where(userDB => userDB.Email == email).First();
+
+            if (user == null)
+            {
+                return BadRequest();
+            }
+
+            if (user.Image == null)
+            {
+                return Ok(204);
+            }
+
+            var filePath = HttpContext.Current.Server.MapPath($"~/UploadFile/{user.Image}");
+
+            FileInfo fileInfo = new FileInfo(filePath);
+            string type = fileInfo.Extension.Split('.')[1];
+            byte[] data = new byte[fileInfo.Length];
+
+            HttpResponseMessage response = new HttpResponseMessage();
+            using (FileStream fileStream = fileInfo.OpenRead())
+            {
+                fileStream.Read(data, 0, data.Length);
+                response.StatusCode = System.Net.HttpStatusCode.OK;
+                response.Content = new ByteArrayContent(data);
+                response.Content.Headers.ContentLength = data.Length;
+            }
+
+            response.Content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/png");
+
+            return Ok(data);
         }
 
         // POST api/Account/Logout

@@ -24,7 +24,12 @@ export class UserService {
       catchError(this.handleError<any[]>(`getNotActiveUsers`)));
   }
 
-
+  uploadImage(image: any): Observable<any>{
+    return this.httpClient.post(`http://localhost:52295/api/Account/UploadImage/`, image);
+  }
+  downloadImage(email: string): Observable<any[]>{
+    return this.httpClient.get<any[]>(`http://localhost:52295/api/Account/DownloadImage?email=`+email);
+  }
 
   private handleError<T> (operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {

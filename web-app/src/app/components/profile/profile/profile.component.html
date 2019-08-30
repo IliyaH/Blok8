@@ -53,7 +53,7 @@
                       
                       <div *ngIf="selectValue == 0" class="form-label-group">
                           <span class="badge badge-primary">User Type: </span>
-                          <select name="selectedUser" class="form-control" (change)="onSelect($event)">
+                          <select class="form-control" (change)="onSelect($event)">
                               <option value="0">Regular User</option>
                               <option value="1">Student</option>
                               <option value="2">Pensioner</option>
@@ -61,32 +61,23 @@
                       </div>
                       <div *ngIf="selectValue != 0" class="form-label-group">
                           <span class="badge badge-primary">User Type: </span>
-                          <select disabled name="selectedUser" class="form-control" (change)="onSelect($event)">
-                              <option *ngIf="selectValue == 1" value="1">Student</option>
-                              <option *ngIf="selectValue == 2" value="2">Pensioner</option>
+                          <select disabled class="form-control" (change)="onSelect($event)">
+                              <option *ngIf="profileForm.controls.userType.value == 1" value="1">Student</option>
+                              <option *ngIf="profileForm.controls.userType.value == 2" value="2">Pensioner</option>
                           </select>
                       </div>
 
                   
                    <br>
-                  <div *ngIf="selectValue == '1' && userProfileActivated == 2" class="form-label-group">
+                  <div *ngIf="showFile" class="form-label-group">
+                      <span class="badge badge-primary">Image: </span>
                       <div class="input-group">
                           <div class="custom-file">
-                            <input formControlName="image" type="file" accept="image/*" class="custom-file-input">
+                            <input formControlName="image" type="file" accept="image/*" class="custom-file-input" (change)="onImageChange($event)">
                             <label class="custom-file-label">Choose file</label>
                           </div>
                       </div>
-                  </div>       
-                  <div *ngIf="selectValue == '2' && userProfileActivated == 2" class="form-label-group">
-                      <div class="input-group">
-                          <div class="custom-file">
-                              <span class="badge badge-primary">Image/Document: </span>
-                            <input formControlName="image" type="file" accept="image/*" class="custom-file-input">
-                            <label class="custom-file-label">Choose file</label>
-                          </div>
-                      </div>
-                  </div>
-  
+                  </div>  
                   <br>
                   <div *ngIf="profileForm.valid">
                     <button class="btn btn-lg btn-primary btn-block text-uppercase active" type="submit">Edit</button>
@@ -101,6 +92,8 @@
                       <div *ngIf="!profileForm.valid">
                           <button class="btn btn-lg btn-primary btn-block text-uppercase disabled" [disabled]="!profileForm.valid" type="submit">Delete</button>
                       </div>
+                      
+                      <img *ngIf="image" [src]="image" #imageControl style="height: 200;">
                   </div>
                 </div>
               </div>
