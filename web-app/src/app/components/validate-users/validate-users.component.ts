@@ -23,12 +23,15 @@ export class ValidateUsersComponent implements OnInit {
   users: User[] = [];
   selectedUserEmail: any;
   i: number;
+  image: any = null;
 
   constructor(private fb: FormBuilder, private userService: UserService, private controllerService: ControllerService) { }
 
   ngOnInit() {
     this.getNotActiveUsers();
   }
+
+  
 
   getNotActiveUsers(){
     this.userService.getNotActiveUsers().subscribe(
@@ -38,6 +41,15 @@ export class ValidateUsersComponent implements OnInit {
         if(this.users.length > 0){
           this.selectedUserEmail = this.users[0].Email;
           this.populateForm();
+          this.userService.downloadImage(this.selectedUserEmail).subscribe(
+            response => {
+              if(response.toString() != "204"){
+              this.image = 'data:image/jpeg;base64,' + response;
+            }
+            console.log(this.image);
+              
+            }
+          );
         }
         
       }
@@ -47,6 +59,15 @@ export class ValidateUsersComponent implements OnInit {
   onSelectUser(event: any){
     this.selectedUserEmail = event.target.value;
     this.populateForm();
+    this.userService.downloadImage(this.selectedUserEmail).subscribe(
+      response => {
+        if(response.toString() != "204"){
+        this.image = 'data:image/jpeg;base64,' + response;
+      }
+      console.log(this.image);
+        
+      }
+    );
 
   }
 
@@ -71,6 +92,7 @@ export class ValidateUsersComponent implements OnInit {
       data =>{
         this.profileForm.reset();
         this.getNotActiveUsers();
+        this.image = null;
       }
     );
   }
@@ -81,6 +103,7 @@ export class ValidateUsersComponent implements OnInit {
       data =>{
         this.profileForm.reset();
         this.getNotActiveUsers();
+        this.image = null;
       }
     );
   }

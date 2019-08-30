@@ -4,6 +4,7 @@ import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { AuthenticationService } from 'src/app/services/auth/authentication.service';
 import { error } from '@angular/compiler/src/util';
 import { ifError } from 'assert';
+import { UserService } from 'src/app/services/user/user.service';
 
 @Component({
   selector: 'app-register',
@@ -28,8 +29,9 @@ export class RegisterComponent implements OnInit {
   }, {validator: this.checkPassword});
 
   temp: any;
+  imageFile: File = null;
 
-  constructor(public router: Router, private fb: FormBuilder, private authService: AuthenticationService) { }
+  constructor(private userService: UserService,public router: Router, private fb: FormBuilder, private authService: AuthenticationService) { }
 
   ngOnInit() {
     
@@ -52,14 +54,27 @@ export class RegisterComponent implements OnInit {
 
   register(){
     this.authService.register(this.registerForm.value).subscribe( data=>{
+      console.log(data);
+
       if(!data)
       {
         console.log('Data: ' + data)
         window.alert('User with email: ' + this.registerForm.controls.email.value + ' already registered!')
         this.emailInUse = true;
       }
-      else if (data == 200) 
+      else if (data.toString() == 200) 
       {
+        console.log(this.imageFile);
+        let formData = new FormData();
+
+        if(this.imageFile != null){
+          formData.append('image', this.imageFile, this.imageFile.name);
+          formData.append('email', this.registerForm.controls.email.value);
+        }
+        if(this.imageFile != null){
+          console.log("UDJOH U POZIV UPLOADIMAGE");
+          this.userService.uploadImage(formData).subscribe();
+        }
         window.alert('Successfully registered!');
         console.log('Zdravo!');
         this.emailInUse = false;
@@ -95,6 +110,10 @@ export class RegisterComponent implements OnInit {
         window.location.href = "/profile"
       }
     );
+  }
+
+  onImageChange(event){
+    this.imageFile = <File>event.target.files[0];
   }
 
 }

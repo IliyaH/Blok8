@@ -92,7 +92,7 @@ namespace WebApp.Controllers
         public IQueryable<ApplicationUser> GetNotActiveUsers()
         {
             List<ApplicationUser> ret = new List<ApplicationUser>();
-            foreach(var user in UserManager.Users.Where(p => p.Activated == Enums.RequestType.InProcess))
+            foreach(var user in UserManager.Users.Where(p => p.Activated == Enums.RequestType.InProcess && p.Image != null))
             {
                 if(UserManager.IsInRole(user.Id, "AppUser"))
                 {
@@ -108,9 +108,15 @@ namespace WebApp.Controllers
         {
             ApplicationUser applicationUser = UserManager.FindByEmail(email);
             if (validate)
+            {
+                EmailHelper.SendEmail(email, "Profile Status", "Your profile is accepted");
                 applicationUser.Activated = Enums.RequestType.Activated;
+            }
             else
+            {
+                EmailHelper.SendEmail(email, "Profile Status", "Your profile is declined");
                 applicationUser.Activated = Enums.RequestType.Declined;
+            }
 
             IdentityResult result = await UserManager.UpdateAsync(applicationUser);
             if (!result.Succeeded)
@@ -130,6 +136,8 @@ namespace WebApp.Controllers
 
             var userEmail = httpRequest.Form["email"];
             var user = _userManager.Users.Where(userDB => userDB.Email == userEmail).First();
+            EmailHelper.SendEmail(userEmail, "Profile Status", "Your profile is being validated");
+
 
             try
             {
@@ -470,13 +478,20 @@ namespace WebApp.Controllers
                 Surname = model.Surname,
                 Address = model.Address,
                 Birthday = model.Birthday,
-                UserType = model.UserType
+                UserType = model.UserType,
+                //Image = model.Image
             };
 
             if (user.UserType == Enums.UserType.RegularUser)
+            {
+                EmailHelper.SendEmail(user.Email, "Profile Status", "Your profile is accepted");
                 user.Activated = Enums.RequestType.Activated;
+            }
             else
+            {
+                EmailHelper.SendEmail(user.Email, "Profile Status", "Your profile is being validated");
                 user.Activated = Enums.RequestType.InProcess;
+            }
             
 
             IdentityResult result = await UserManager.CreateAsync(user, model.Password);
@@ -511,6 +526,7 @@ namespace WebApp.Controllers
             user.Address = model.Address;
             user.Name = model.Name;
             user.Surname = model.Surname;
+            user.Activated = model.Activated;
             //user.Image = path;
             //path = "";
 

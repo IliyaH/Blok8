@@ -11,5 +11,6 @@ namespace WebApp.Persistence.Repository
     public interface ITicketRepository : IRepository<Ticket, int>
     {
         double CalculatePrice(TicketType ticketType, UserType userType);
+        bool CheckTicket(int id);
     }
 }

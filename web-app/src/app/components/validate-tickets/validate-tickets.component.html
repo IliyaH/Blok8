@@ -1,3 +1,38 @@
-<p>
-  validate-tickets works!
-</p>
+<form class="form-signin" [formGroup]="validateTicketForm">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+        <div class="shadow-lg">
+          <div class="card card-signin my-5">
+            <div class="card-body">
+              <div class="form-label-group">
+                <div *ngIf="validateTicketForm.controls.id.errors" >
+                  <div *ngIf="validateTicketForm.controls.id.errors.required && (validateTicketForm.controls.id.dirty || validateTicketForm.controls.id.touched)" class="badge badge-danger">Ticket ID is mandatory field</div>
+                </div>
+                <span class="badge badge-primary">Ticket ID: </span>
+                <input type="number" class="form-control" required formControlName="id">
+                <br>
+                <div *ngIf="!validateTicketForm.controls.id.errors" >
+                <div *ngIf="!ticketValid && show">
+                  <button type="button" class="btn btn-danger btn-lg btn-block" disabled>Ticket is invalid</button>
+                </div>
+                <div *ngIf="ticketValid && show">
+                    <button type="button" class="btn btn-success btn-lg btn-block" disabled>Ticket is valid</button>
+                  </div>
+                </div>
+                <br>
+                <div *ngIf="validateTicketForm.valid">
+                  <button class="btn btn-lg btn-primary btn-block text-uppercase active" (click)="check()">Check</button>
+                </div>
+                <div *ngIf="!validateTicketForm.valid">
+                  <button class="btn btn-lg btn-primary btn-block text-uppercase disabled" [disabled]="!validateTicketForm.valid">Check</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+                

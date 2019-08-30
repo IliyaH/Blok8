@@ -74,7 +74,7 @@
                 <div *ngIf="selectValue == 'Student'" class="form-label-group">
                     <div class="input-group">
                         <div class="custom-file">
-                          <input name="image" type="file" accept="image/*" class="custom-file-input" formControlName="image">
+                          <input name="image" type="file" (change)="onImageChange($event)" accept="image/*" class="custom-file-input" formControlName="image">
                           <label class="custom-file-label">Choose file</label>
                         </div>
                     </div>
@@ -82,7 +82,7 @@
                 <div *ngIf="selectValue == 'Pensioner'" class="form-label-group">
                     <div class="input-group">
                         <div class="custom-file">
-                          <input name="image" type="file" accept="document/*" class="custom-file-input" formControlName="image">
+                          <input name="image" type="file" (change)="onImageChange($event)" accept="image/*" class="custom-file-input" formControlName="image">
                           <label class="custom-file-label">Choose file</label>
                         </div>
                     </div>

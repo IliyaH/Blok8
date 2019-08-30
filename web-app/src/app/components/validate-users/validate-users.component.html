@@ -20,7 +20,6 @@
             </div>
           </div>
         </div>
-
         <form class="form-signin" [formGroup]="profileForm"><br><br>
           <div class="container">
               <div class="row">
@@ -79,15 +78,18 @@
                             <div *ngIf="!profileForm.valid">
                               <button class="btn btn-lg btn-primary btn-block text-uppercase disabled" [disabled]="!profileForm.valid">Dismiss</button>
                             </div>
+                <br><img *ngIf="image" [src]="image" #imageControl style="width: 315px; height: 300px;">
+
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>  
+              </div>   
             </form>
+            
 
-        </div>
+        
 
 
 

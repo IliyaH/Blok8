@@ -5,6 +5,10 @@
         <div class="card card-signin my-5">
           <div class="card-body">
                 <div class="form-label-group">
+                  <div *ngIf="userProfileActivated != 1">
+                      <button type="button" class="btn btn-danger btn-lg btn-block" disabled>Your profile hasn't been verified by controller</button><br>
+                  </div>
+                <div *ngIf="userProfileActivated == 1">
                 <select name="ticketType" class="form-control" (change)="onSelectTicketType($event)">
                   <option>TimeTicket</option>
                   <option *ngIf="loggedIn">DayTicket</option>
@@ -16,10 +20,10 @@
                     <input #emailInput name="email" type="email" class="form-control" placeholder="Email" (input)="email = emailInput.value" required>
                 </div>
                 <div>
-                  {{email}}
                 </div>
-              </div><br>      
-              <button class="btn btn-lg btn-primary btn-block text-uppercase active" (click)="buyTicket()">Buy</button>
+                <button class="btn btn-lg btn-primary btn-block text-uppercase active" (click)="buyTicket()">Buy</button>
+              </div>
+            </div>      
             </div>
           </div> 
         </div>

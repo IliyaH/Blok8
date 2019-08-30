@@ -15,7 +15,10 @@ export class PricelistComponent implements OnInit {
   constructor( private ticketService : TicketService) { }
 
   ngOnInit() {
-    this.price = 65;
+    this.selectedTicketType = "0";
+    this.selectedUserType = "0";
+    this.ticketService.getCena(this.selectedTicketType, this.selectedUserType).subscribe(tempPrice => this.price = tempPrice);
+    
   }
 
   onSelectTicketType(event : any){

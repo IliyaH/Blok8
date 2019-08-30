@@ -38,6 +38,22 @@ namespace WebApp.Controllers
             }
         }
 
+        [Route("GetTicket")]
+        [ResponseType(typeof(IHttpActionResult))]
+        public IHttpActionResult GetTicket(int id)
+        {
+            if(UnitOfWork.TicketRepository.CheckTicket(id))
+            {
+                UnitOfWork.TicketRepository.SaveChanges();
+                return Ok(200);
+            }
+            else
+            {
+                UnitOfWork.TicketRepository.SaveChanges();
+                return Ok(204);
+            }
+        }
+
         // GET: api/Tikets/CalculatePrice
         [Route("CalculatePrice")]
         [ResponseType(typeof(double))]

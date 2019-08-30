@@ -40,7 +40,7 @@ export class BuyTicketComponent implements OnInit {
         this.userProfileActivated = this.userData.Activated;
         this.userProfileType = this.userData.UserType;
         
-        if(this.userProfileActivated == 2)
+        if(this.userProfileActivated != 1)
         {
           this.userProfileType = 0;
         }

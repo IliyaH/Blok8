@@ -42,15 +42,7 @@ export class ProfileComponent implements OnInit {
     this.getUser();
     this.userRole = localStorage['role'];
 
-    this.userService.downloadImage(localStorage['name']).subscribe(
-      response => {
-        if(response.toString() != "204"){
-        this.image = 'data:image/jpeg;base64,' + response;
-      }
-      console.log(this.image);
-        
-      }
-    );
+    
   }
 
   checkPassword(group: FormGroup)
@@ -80,6 +72,8 @@ export class ProfileComponent implements OnInit {
     if(this.imageFile != null){
       formData.append('image', this.imageFile, this.imageFile.name);
       formData.append('email', this.profileForm.controls.email.value);
+      this.profileForm.controls.activated.setValue('0');
+      
     }
 
     this.authService.edit(this.profileForm.value).subscribe(
@@ -137,7 +131,7 @@ export class ProfileComponent implements OnInit {
         this.profileForm.controls.userType.setValue(this.userData.UserType);
 
         if(this.selectValue != '0'){ 
-          if(this.userProfileActivated == '2'){
+          if(this.userProfileActivated == '2' || this.userProfileActivated == '0'){
             this.showFile = true;
           }
         }

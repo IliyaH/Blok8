@@ -51,7 +51,7 @@
                       </div><br>
                       
                       
-                      <div *ngIf="selectValue == 0" class="form-label-group">
+                      <div *ngIf="selectValue == 0 && userRole == 'AppUser'" class="form-label-group">
                           <span class="badge badge-primary">User Type: </span>
                           <select class="form-control" (change)="onSelect($event)">
                               <option value="0">Regular User</option>
@@ -59,7 +59,7 @@
                               <option value="2">Pensioner</option>
                           </select>
                       </div>
-                      <div *ngIf="selectValue != 0" class="form-label-group">
+                      <div *ngIf="selectValue != 0 && userRole == 'AppUser'" class="form-label-group">
                           <span class="badge badge-primary">User Type: </span>
                           <select disabled class="form-control" (change)="onSelect($event)">
                               <option *ngIf="profileForm.controls.userType.value == 1" value="1">Student</option>
