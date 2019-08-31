@@ -17,6 +17,8 @@ export class ValidateTicketsComponent implements OnInit {
   });
   ticketValid: any;
   show: boolean = false;
+  showError: boolean = false;
+  id: any;
 
   ngOnInit() {
   }
@@ -27,12 +29,20 @@ export class ValidateTicketsComponent implements OnInit {
       data=>{
         if(data == 200){
           this.ticketValid = true;
+          this.showError = false;
         }
         else if(data == 204){
           this.ticketValid = false;
+          this.showError = false;
+        }
+        else if(data == 205){
+          this.show = false;
+          this.showError = true;
         }
       }
     );
   }
+
+  
 
 }

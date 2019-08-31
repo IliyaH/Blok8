@@ -43,16 +43,24 @@ namespace WebApp.Controllers
         [ResponseType(typeof(IHttpActionResult))]
         public IHttpActionResult GetTicket(int id)
         {
-            if(UnitOfWork.TicketRepository.CheckTicket(id))
+            try
             {
-                UnitOfWork.TicketRepository.SaveChanges();
-                return Ok(200);
+                if (UnitOfWork.TicketRepository.CheckTicket(id))
+                {
+                    UnitOfWork.TicketRepository.SaveChanges();
+                    return Ok(200);
+                }
+                else
+                {
+                    UnitOfWork.TicketRepository.SaveChanges();
+                    return Ok(204);
+                }
             }
-            else
+            catch
             {
-                UnitOfWork.TicketRepository.SaveChanges();
-                return Ok(204);
+                return Ok(205);
             }
+            
         }
 
         // GET: api/Tikets/CalculatePrice

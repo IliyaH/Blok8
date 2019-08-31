@@ -10,7 +10,7 @@
                   <div *ngIf="validateTicketForm.controls.id.errors.required && (validateTicketForm.controls.id.dirty || validateTicketForm.controls.id.touched)" class="badge badge-danger">Ticket ID is mandatory field</div>
                 </div>
                 <span class="badge badge-primary">Ticket ID: </span>
-                <input type="number" class="form-control" required formControlName="id">
+                <input #idInput type="number" name="id" (input)="id = idInput.value" class="form-control" required formControlName="id">
                 <br>
                 <div *ngIf="!validateTicketForm.controls.id.errors" >
                 <div *ngIf="!ticketValid && show">
@@ -18,6 +18,11 @@
                 </div>
                 <div *ngIf="ticketValid && show">
                     <button type="button" class="btn btn-success btn-lg btn-block" disabled>Ticket is valid</button>
+                  </div>
+                </div>
+                <div *ngIf="!validateTicketForm.controls.id.errors" >
+                <div *ngIf="showError">
+                    <button type="button" class="btn btn-danger btn-lg btn-block" disabled>Ticket with that ID doesn't exists</button>
                   </div>
                 </div>
                 <br>
