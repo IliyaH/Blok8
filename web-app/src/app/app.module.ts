@@ -21,6 +21,7 @@ import { ManagePricelistComponent } from './components/manage-pricelist/manage-p
 import { ManageScheduleComponent } from './components/manage-schedule/manage-schedule.component';
 import { ValidateUsersComponent } from './components/validate-users/validate-users.component';
 import { ValidateTicketsComponent } from './components/validate-tickets/validate-tickets.component';
+import { NgxPayPalModule } from 'ngx-paypal';
 
 
 @NgModule({
@@ -47,7 +48,8 @@ import { ValidateTicketsComponent } from './components/validate-tickets/validate
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
-    HttpModule
+    HttpModule,
+    NgxPayPalModule
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true}],
   bootstrap: [AppComponent]

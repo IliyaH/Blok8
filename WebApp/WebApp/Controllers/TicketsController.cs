@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Web;
 using System.Web.Http;
 using System.Web.Http.Description;
 using WebApp.Models;
@@ -93,6 +94,77 @@ namespace WebApp.Controllers
 
             return Ok(ticket.Id);
 
+        }
+
+        
+        [HttpPost]
+        [Route("BuyTicket")]
+        public IHttpActionResult BuyTicket(bool isLoggedIn, string email, string id, string payer_email, string payer_id, double price, TicketType selectedTicketType, UserType userProfileType/*string email, int id, string payer_email, int payer_id, double price, string selectedTicketType, UserType userProfileType*/)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            string UserId = null;
+            if (isLoggedIn)
+            {
+                UserId = UnitOfWork.PricelistRepository.getIdByEmail(email);
+            }
+
+            int IdPricelistItem = UnitOfWork.PricelistRepository.getPricelistsItem(selectedTicketType);
+
+
+            Ticket ticket = new Ticket()
+            {
+                Valid = true,
+                IssueDate = DateTime.Now,
+                Price = price,
+                IdPricelistItem = IdPricelistItem,
+            };
+            if(UserId != null)
+            {
+                ticket.IdApplicationUser = UserId;
+            }
+            else
+            {
+                ticket.IdApplicationUser = null;
+            }
+            UnitOfWork.TicketRepository.Add(ticket);
+            UnitOfWork.TicketRepository.SaveChanges();
+
+            if (!isLoggedIn)
+            {
+                EmailHelper.SendEmail(email, "Buying Ticket", "You have successfully bought a ticket via PayPal with ID: " + ticket.Id);
+            }
+
+            //var req = HttpContext.Current.Request;
+            /*var price = _unitOfWork.Prices.GetAll().Where(u => u.ticketType == TicketType.TimeTicket).Select(u => u.price).FirstOrDefault();
+            Ticket ticket = new Ticket() { Checked = false, Price = price, RemainingTime = TimeSpan.FromMinutes(60), Type = Enums.TicketType.TimeTicket };
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+
+            _unitOfWork.Tickets.Add(ticket);
+            _unitOfWork.Complete();
+
+            EmailHelper.SendEmail(req.Form["email"], "TIME BUS TICKET", "You just bought your time ticket." + System.Environment.NewLine + "Ticket ID: " + ticket.Id + System.Environment.NewLine + "Type: " + ticket.Type + System.Environment.NewLine + "Price" + ticket.Price + System.Environment.NewLine + "NOTICE: Time ticket is valid 60 minutes after checked in.");
+
+
+            var id = req.Form["id"];
+            var status = req.Form["status"];
+            var payer_email = req.Form["payer_email"];
+            var payer_id = req.Form["payer_id"];
+            var create_time = req.Form["create_time"];
+            var update_time = req.Form["update_time"];
+
+            PayPalInfo payPalInfo = new PayPalInfo { CreateTime = create_time, UpdateTime = update_time, TransactionId = id, PayerEmail = payer_email, PayerId = payer_id, Status = status, TicketId = ticket.Id };
+            _unitOfWork.PayPalInfos.Add(payPalInfo);
+
+            _unitOfWork.Complete();*/
+
+            return Ok(200);
         }
 
 

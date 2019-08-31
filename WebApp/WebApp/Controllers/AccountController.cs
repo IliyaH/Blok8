@@ -20,6 +20,7 @@ using WebApp.Models;
 using WebApp.Persistence.UnitOfWork;
 using WebApp.Providers;
 using WebApp.Results;
+using static WebApp.Models.Enums;
 
 namespace WebApp.Controllers
 {
@@ -458,6 +459,8 @@ namespace WebApp.Controllers
 
             return logins;
         }
+
+        
 
         // POST api/Account/Register
         [AllowAnonymous]
