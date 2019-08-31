@@ -22,6 +22,9 @@ import { ManageScheduleComponent } from './components/manage-schedule/manage-sch
 import { ValidateUsersComponent } from './components/validate-users/validate-users.component';
 import { ValidateTicketsComponent } from './components/validate-tickets/validate-tickets.component';
 import { NgxPayPalModule } from 'ngx-paypal';
+import { BusLinesComponent } from './components/bus-lines/bus-lines.component';
+
+import { AgmCoreModule } from '@agm/core';
 
 
 @NgModule({
@@ -40,6 +43,7 @@ import { NgxPayPalModule } from 'ngx-paypal';
     ManageScheduleComponent,
     ValidateUsersComponent,
     ValidateTicketsComponent,
+    BusLinesComponent,
     
   ],
   imports: [
@@ -49,7 +53,10 @@ import { NgxPayPalModule } from 'ngx-paypal';
     ReactiveFormsModule,
     HttpClientModule,
     HttpModule,
-    NgxPayPalModule
+    NgxPayPalModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyDnihJyw_34z5S1KZXp90pfTGAqhFszNJk'
+    })
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true}],
   bootstrap: [AppComponent]

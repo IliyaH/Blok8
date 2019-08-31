@@ -32,13 +32,6 @@ export class TicketService {
       catchError(this.handleError<any>(`buyTicket`)));
   }
 
-  /*buyTicket(email: any, id: any, payer_email: any, payer_id: any, price: any, selectedTicketType: any, userProfileType: any) : Observable<any>
-  {
-    console.log("CMARRRRR");
-   return this.http.post<any>(`http://localhost:52295/api/Tickets/BuyTicket?email=${email}&id=${id}&payer_email=${payer_email}&payer_id=${payer_id}&price=${price}&selectedTicketType=${selectedTicketType}&userProfileType=${userProfileType}`,[email, id, payer_id, payer_id, price, selectedTicketType, userProfileType], { 'headers': { 'Content-type': 'application/x-www-form-urlencoded' } }).pipe(
-    catchError(this.handleError<any>(`buyTicket`)));
-  }*/
-
   private handleError<T> (operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       return of(result as T);

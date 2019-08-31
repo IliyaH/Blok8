@@ -39,7 +39,6 @@ export class ManageScheduleComponent implements OnInit {
     this.menageService.getLines().subscribe(
       data=>{
         this.lines = data;
-        console.log(this.lines);
         if(this.lines.length > 0){
           this.selectedLineId = this.lines[0].Id;
           this.selectedLineName = this.lines[0].LineName;
@@ -68,21 +67,15 @@ export class ManageScheduleComponent implements OnInit {
         this.selectedLineName = this.lines[this.i].LineName;
       }
     }
-    console.log("SelectedLineName: " + this.selectedLineName);
-    console.log("SelectedLineType: " + this.selectedLineType);
 
     if(this.selectedDayType !== "" && this.selectedLineName !== "" && this.selectedLineType !==""){
-      console.log("La funcion");
       this.getDepartures();
     }
   }
 
   onSelectDayType(event: any){
     this.selectedDayType = event.target.value;
-    console.log("SelectedDayType: " + this.selectedDayType);
-    console.log(event.target.value);
     if(this.selectedDayType !== "" && this.selectedLineName !== "" && this.selectedLineType !==""){
-      console.log("La funcion");
       this.getDepartures();
     }
   }

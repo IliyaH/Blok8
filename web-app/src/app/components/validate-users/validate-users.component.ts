@@ -36,7 +36,6 @@ export class ValidateUsersComponent implements OnInit {
   getNotActiveUsers(){
     this.userService.getNotActiveUsers().subscribe(
       data =>{
-        console.log(data);
         this.users = data;
         if(this.users.length > 0){
           this.selectedUserEmail = this.users[0].Email;
@@ -46,12 +45,9 @@ export class ValidateUsersComponent implements OnInit {
               if(response.toString() != "204"){
               this.image = 'data:image/jpeg;base64,' + response;
             }
-            console.log(this.image);
-              
             }
           );
         }
-        
       }
     );
   }
@@ -64,11 +60,8 @@ export class ValidateUsersComponent implements OnInit {
         if(response.toString() != "204"){
         this.image = 'data:image/jpeg;base64,' + response;
       }
-      console.log(this.image);
-        
       }
     );
-
   }
 
   populateForm(){
@@ -87,7 +80,6 @@ export class ValidateUsersComponent implements OnInit {
   }
 
   validate(){
-    console.log("Validate");
     this.controllerService.validateUser(this.profileForm.controls.email.value, true).subscribe(
       data =>{
         this.profileForm.reset();
@@ -98,7 +90,6 @@ export class ValidateUsersComponent implements OnInit {
   }
 
   dismiss(){
-    console.log("Dismiss");
     this.controllerService.validateUser(this.profileForm.controls.email.value, false).subscribe(
       data =>{
         this.profileForm.reset();

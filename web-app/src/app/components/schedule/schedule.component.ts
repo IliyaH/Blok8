@@ -35,21 +35,15 @@ export class ScheduleComponent implements OnInit {
 
   getLines(event : any)
   {    
-    //console.log("Lines: " + this.Lines[0].LineName);
     this.selectedDayType = this.timetableForm.controls.dayType.value;
     this.selectedLineType = this.timetableForm.controls.lineType.value;
     this.selectedLineName = this.timetableForm.controls.lineName.value;
     this.timetableForm.controls.lineName.setValue('');
     this.timetableService.getLines(this.selectedLineType).subscribe(c=>this.Lines = c);
-    //this.selectedLineName = this.Lines[0].LineName;
-    //console.log("Lines: " + this.Lines[0].LineName);
-    //console.log("LineName: " + this.selectedLineName);
-    console.log("DayType: " + this.selectedDayType + "\nLineType: " + this.selectedLineType + "\nLineName: " + this.selectedLineName + "\nLines: " + this.Lines.length);
   }
 
   getTimetable()
   {
-    console.log("DayType: " + this.selectedDayType + "\nLineType: " + this.selectedLineType + "\nLineName: " + this.timetableForm.controls.lineName.value + "\nLines: " + this.Lines.length);
     this.selectedDayType = this.timetableForm.controls.dayType.value;
     this.selectedLineType = this.timetableForm.controls.lineType.value;
     this.selectedLineName = this.timetableForm.controls.lineName.value;

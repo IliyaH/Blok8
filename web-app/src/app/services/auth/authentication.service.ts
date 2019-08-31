@@ -14,7 +14,6 @@ export class AuthenticationService {
   constructor(private http: Http, private httpClient:HttpClient) { }
 
   register(user): Observable<any>{
-    //console.log(user);
     return this.httpClient.post<any>(this.base_url+"/api/Account/Register",user).pipe(
       catchError(this.handleError<any>(`register`)));
   }
@@ -40,17 +39,8 @@ export class AuthenticationService {
         catchError(this.handleError<any>(`login`))) as Observable<any>
     }
     else{
-     // window.location.href = "/home";
+     window.location.href = "/login";
     }
-  
-    // let httpOptions = {
-    //   headers: {
-    //     "Content-type":"application/x-www-fore-urlencoded"
-    //   }
-    // }
-    // this.http.post(this.base_url+"/oauth/token",data,httpOptions).subscribe(data => {
-    //   localStorage.jwt = data.access_token;
-    // });
   }
 
   logout(): void {
@@ -61,14 +51,10 @@ export class AuthenticationService {
     localStorage.removeItem('randid');
   }
 
-  // getVehicleTypes() : Observable<any> {
-  //   return this.getVehicleTypes1();
-  // }
   getTypes() {
     return this.httpClient.get(this.base_url+"/api/Types/GetTypes");
   }
 
-  //ERROR HENDLER
   private handleError<T> (operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       return of(result as T);

@@ -10,8 +10,8 @@
             </div>
               <div *ngIf="loggedIn != 'Admin' && loggedIn != 'Controller'">
             <div *ngIf="router.url == '/bus-lines'; then thenBlock1 else elseBlock1"></div>
-              <ng-template #thenBlock1><button href="#" class="btn btn-primary active">Bus Lines</button></ng-template>
-              <ng-template #elseBlock1><button href="#" class="btn btn-primary">Bus Lines</button></ng-template>
+              <ng-template #thenBlock1><button routerLink="bus-lines" class="btn btn-primary active">Bus Lines</button></ng-template>
+              <ng-template #elseBlock1><button routerLink="bus-lines" class="btn btn-primary">Bus Lines</button></ng-template>
             </div>
               <div *ngIf="loggedIn != 'Admin' && loggedIn != 'Controller'">
             <div *ngIf="router.url == '/bus-location'; then thenBlock2 else elseBlock2"></div>

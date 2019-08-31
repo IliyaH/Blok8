@@ -132,148 +132,19 @@ namespace WebApp.Controllers
             UnitOfWork.TicketRepository.Add(ticket);
             UnitOfWork.TicketRepository.SaveChanges();
 
+            UnitOfWork.TicketRepository.AddPayPal(id, payer_id, payer_email, ticket.Id);
+            UnitOfWork.TicketRepository.SaveChanges();
+
             if (!isLoggedIn)
             {
                 EmailHelper.SendEmail(email, "Buying Ticket", "You have successfully bought a ticket via PayPal with ID: " + ticket.Id);
             }
 
-            //var req = HttpContext.Current.Request;
-            /*var price = _unitOfWork.Prices.GetAll().Where(u => u.ticketType == TicketType.TimeTicket).Select(u => u.price).FirstOrDefault();
-            Ticket ticket = new Ticket() { Checked = false, Price = price, RemainingTime = TimeSpan.FromMinutes(60), Type = Enums.TicketType.TimeTicket };
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-
-            _unitOfWork.Tickets.Add(ticket);
-            _unitOfWork.Complete();
-
-            EmailHelper.SendEmail(req.Form["email"], "TIME BUS TICKET", "You just bought your time ticket." + System.Environment.NewLine + "Ticket ID: " + ticket.Id + System.Environment.NewLine + "Type: " + ticket.Type + System.Environment.NewLine + "Price" + ticket.Price + System.Environment.NewLine + "NOTICE: Time ticket is valid 60 minutes after checked in.");
-
-
-            var id = req.Form["id"];
-            var status = req.Form["status"];
-            var payer_email = req.Form["payer_email"];
-            var payer_id = req.Form["payer_id"];
-            var create_time = req.Form["create_time"];
-            var update_time = req.Form["update_time"];
-
-            PayPalInfo payPalInfo = new PayPalInfo { CreateTime = create_time, UpdateTime = update_time, TransactionId = id, PayerEmail = payer_email, PayerId = payer_id, Status = status, TicketId = ticket.Id };
-            _unitOfWork.PayPalInfos.Add(payPalInfo);
-
-            _unitOfWork.Complete();*/
+            
 
             return Ok(200);
         }
 
-
-        /*[Route("GetTicketTypes")]
-        //GET: api/Tickets
-        public IEnumerable<TicketType> GetTicketTypes()
-        {
-            return unitOfWork.TicketTypes.GetAll().ToList();
-        }*/
-
-        // GET: api/Tickets
-        //public IQueryable<Ticket> GetTickets()
-        //{
-        //    return db.Tickets;
-        //}
-
-        //// GET: api/Tickets/5
-        //[ResponseType(typeof(Ticket))]
-        //public IHttpActionResult GetTicket(int id)
-        //{
-        //    Ticket ticket = db.Tickets.Find(id);
-        //    if (ticket == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    return Ok(ticket);
-        //}
-
-        //// PUT: api/Tickets/5
-        //[ResponseType(typeof(void))]
-        //public IHttpActionResult PutTicket(int id, Ticket ticket)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return BadRequest(ModelState);
-        //    }
-
-        //    if (id != ticket.Id)
-        //    {
-        //        return BadRequest();
-        //    }
-
-        //    db.Entry(ticket).State = EntityState.Modified;
-
-        //    try
-        //    {
-        //        db.SaveChanges();
-        //    }
-        //    catch (DbUpdateConcurrencyException)
-        //    {
-        //        if (!TicketExists(id))
-        //        {
-        //            return NotFound();
-        //        }
-        //        else
-        //        {
-        //            throw;
-        //        }
-        //    }
-
-        //    return StatusCode(HttpStatusCode.NoContent);
-        //}
-
-        // POST: api/Tickets
-        /*[ResponseType(typeof(Ticket))]
-        public IHttpActionResult PostTicket(Ticket ticket)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            try
-            {
-                Ticket t = new Ticket();
-                t.PurchaseTime = ticket.PurchaseTime;
-                t.TicketPricesId = unitOfWork.TicketPrices.Get(ticket.TicketPricesId).Id;
-                t.TicketTypeId = unitOfWork.TicketTypes.Get((int)ticket.TicketTypeId).Id;
-                t.Name = "Karta";
-                t.ApplicationUserId = UserManager.FindById(ticket.ApplicationUserId).Id;
-
-                unitOfWork.Tickets.Add(ticket);
-                unitOfWork.Complete();
-                return Ok(t.Id);
-            }
-            catch (Exception ex)
-            {
-                return NotFound();
-            }
-
-
-        }*/
-
-        //// DELETE: api/Tickets/5
-        //[ResponseType(typeof(Ticket))]
-        //public IHttpActionResult DeleteTicket(int id)
-        //{
-        //    Ticket ticket = db.Tickets.Find(id);
-        //    if (ticket == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    db.Tickets.Remove(ticket);
-        //    db.SaveChanges();
-
-        //    return Ok(ticket);
-        //}
 
         protected override void Dispose(bool disposing)
         {

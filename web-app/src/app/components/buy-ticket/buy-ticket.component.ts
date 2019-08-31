@@ -15,11 +15,13 @@ export class BuyTicketComponent implements OnInit {
   userProfileActivated: any;
   userProfileType: any;
   selectedTicketType: any;
-  price: any;
+  price: number;
   addTicket: any;
   email: any;
   temp: any;
   isLoggedIn: boolean;
+  priceEUR: number;
+  tempPrice: number;
 
   public payPalConfig?: IPayPalConfig;
   showSuccess: boolean;
@@ -32,7 +34,6 @@ export class BuyTicketComponent implements OnInit {
     this.getUser();
     this.initConfig();
     this.temp = localStorage['name'];
-    console.log("Temp: " + this.temp);
     if(this.temp){
       this.isLoggedIn = true;
     }
@@ -55,19 +56,28 @@ export class BuyTicketComponent implements OnInit {
         this.userProfileActivated = this.userData.Activated;
         this.userProfileType = this.userData.UserType;
         this.email = this.userData.Email;
-        console.log(this.email);
         
         if(this.userProfileActivated != 1)
         {
           this.userProfileType = 0;
         }
-        this.ticketService.getCena(this.selectedTicketType, this.userProfileType).subscribe( data => this.price = data);
+        this.ticketService.getCena(this.selectedTicketType, this.userProfileType).subscribe( data =>
+          {
+            this.price = data;
+            this.priceEUR = data*0.0085;
+          } 
+          );
       });
       }
       else
       {
         this.email = null;
-        this.ticketService.getCena(this.selectedTicketType, 0).subscribe( data => this.price = data);
+        this.ticketService.getCena(this.selectedTicketType, 0).subscribe( data =>
+          {
+            this.price = data;
+            this.priceEUR = data*0.0085;
+          } 
+          );
       }
   }
 
@@ -77,26 +87,11 @@ export class BuyTicketComponent implements OnInit {
   }
 
 
-
-
-
-
-
-
-
   //PayPal
   private initConfig(): void {
-    
-   
-    /*var diffDays =this.priceWDiscount;
-.
-    console.log("cena u dinarima: ", diffDays);
-    diffDays = diffDays/118;
-    var str = diffDays.toFixed(2);
-    console.log("cena u evrima: ", str);*/
 
     this.payPalConfig = {
-      currency: 'EUR',//ATniFSIBK8rHNVLG_PetS-skYOy0lfhJw1m7IlrlHhqLzAC7_HaD1fNQPX_y8nDiTvtfyn7uyQEyofp6
+      currency: 'EUR',
       clientId: 'ATniFSIBK8rHNVLG_PetS-skYOy0lfhJw1m7IlrlHhqLzAC7_HaD1fNQPX_y8nDiTvtfyn7uyQEyofp6',
       
 
@@ -105,11 +100,11 @@ export class BuyTicketComponent implements OnInit {
           purchase_units: [{
               amount: {
                   currency_code: 'EUR',
-                  value: '1',
+                  value: this.priceEUR.toPrecision(2),
                   breakdown: {
                       item_total: {
                           currency_code: 'EUR',
-                          value: '1'
+                          value: this.priceEUR.toPrecision(2)
                       }
                   }
               },
@@ -119,7 +114,7 @@ export class BuyTicketComponent implements OnInit {
                   category: 'DIGITAL_GOODS',
                   unit_amount: {
                       currency_code: 'EUR',
-                      value: '1',
+                      value: this.priceEUR.toPrecision(2),
                   },
               }]
           }]
@@ -130,19 +125,16 @@ export class BuyTicketComponent implements OnInit {
       },
       style: {
         label: 'paypal',
-        layout: 'vertical'
+        layout: 'horizontal'
+        
       },
 
       onApprove: (data, actions) => {
           console.log('onApprove - transaction was approved, but not authorized', data, actions);
-          //actions.order.get().then(details => {
-            //  console.log('onApprove - you can get full order details inside onApprove: ', details);
-         // });
-
-      },//data.id, data.payer.email_address, data.payer.payer_id, this.price, this.selectedTicketType, this.userProfileType
+         
+      },
       onClientAuthorization: (data) => {
           console.log('onClientAuthorization - you should probably inform your server about completed transaction at this point', data);
-          //this.buyTimeTicket(data);
           console.log("USO SAM" + this.email + data);
           if(!this.loggedIn){
             this.userProfileType = 0;
@@ -153,17 +145,14 @@ export class BuyTicketComponent implements OnInit {
       },
       onCancel: (data, actions) => {
           console.log('OnCancel', data, actions);
-         // this.showCancel = true;
 
       },
       onError: err => {
         window.alert("Something went wrong!");
           console.log('OnError', err);
-          //this.showError = true;
       },
       onClick: (data, actions) => {
           console.log('onClick', data, actions);
-          //this.resetStatus();
       },
   };
 }

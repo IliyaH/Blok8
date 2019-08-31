@@ -39,8 +39,6 @@ export class ManagePricelistComponent implements OnInit {
       data => {
         this.pricelist = data[0];
         this.prices = data[1];
-        console.log(this.pricelist);
-        console.log(this.prices);
         this.pricelistForm.controls.timeTicket.setValue(this.prices[0]);
         this.pricelistForm.controls.dayTicket.setValue(this.prices[1]);
         this.pricelistForm.controls.monthTicket.setValue(this.prices[2]);
@@ -49,7 +47,6 @@ export class ManagePricelistComponent implements OnInit {
         this.pricelistForm.controls.to.setValue(this.pricelist.End);
       } 
     );
-    console.log(this.date.toLocaleTimeString());
     this.pricelistAddForm.controls.from.setValue(this.date.toLocaleDateString() + " " + this.date.toLocaleTimeString());
   }
 
@@ -58,7 +55,6 @@ export class ManagePricelistComponent implements OnInit {
   }
 
   addPricelist(){
-    console.log("Udjoh u ADD");
     this.pricelistService.addPricelist(this.pricelistAddForm.controls.to.value, this.pricelistAddForm.controls.timeTicket.value, this.pricelistAddForm.controls.dayTicket.value, this.pricelistAddForm.controls.monthTicket.value, this.pricelistAddForm.controls.yearTicket.value).subscribe(
       data =>{
         this.pricelistAddForm.reset();

@@ -22,7 +22,6 @@ export class ValidateTicketsComponent implements OnInit {
   }
 
   check(){
-    console.log("Uso u check");
     this.show = true;
     this.ticketService.getTicket(this.validateTicketForm.controls.id.value).subscribe(
       data=>{

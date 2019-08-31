@@ -14,6 +14,12 @@ import {ManagePricelistComponent} from './components/manage-pricelist/manage-pri
 import { ManageScheduleComponent } from './components/manage-schedule/manage-schedule.component';
 import { ValidateUsersComponent } from './components/validate-users/validate-users.component';
 import { ValidateTicketsComponent } from './components/validate-tickets/validate-tickets.component';
+import { BusLinesComponent } from './components/bus-lines/bus-lines.component';
+import { AdminGuardGuard } from './components/guards/admin-guard.guard';
+import { ControllerGuard } from './components/guards/controller.guard';
+import { UserGuard } from './components/guards/user.guard';
+import { NorRegisteredUserGuard } from './components/guards/nor-registered-user.guard';
+import { ProfileGuard } from './components/guards/profile.guard';
 
 const routes: Routes = [{
   path: '', 
@@ -22,51 +28,68 @@ const routes: Routes = [{
 },
 { 
   path: 'login', 
-  component: LoginComponent 
+  component: LoginComponent, 
+  canActivate: [NorRegisteredUserGuard]
 },
 { 
   path: 'register', 
-  component: RegisterComponent 
+  component: RegisterComponent,
+  canActivate: [NorRegisteredUserGuard] 
 },
 { 
   path: 'pricelist', 
-  component: PricelistComponent 
+  component: PricelistComponent,
+  canActivate: [UserGuard] 
 },
 { 
   path: 'buy-ticket', 
-  component: BuyTicketComponent 
+  component: BuyTicketComponent,
+  canActivate: [UserGuard] 
 },
 { 
   path: 'profile', 
-  component: ProfileComponent  
+  component: ProfileComponent,
+  canActivate: [ProfileGuard]  
 },
 { 
   path: 'menage-stations', 
-  component: MenageStationsComponent  
+  component: MenageStationsComponent,  
+  canActivate: [AdminGuardGuard]
 },
 { 
   path: 'schedule', 
-  component: ScheduleComponent  
+  component: ScheduleComponent,
+  canActivate: [UserGuard]  
 },
 { 
   path: 'lines', 
-  component: LinesComponent  
+  component: LinesComponent,
+  canActivate: [AdminGuardGuard]  
 },
 { 
   path: 'manage-pricelist', 
-  component: ManagePricelistComponent  
+  component: ManagePricelistComponent,
+  canActivate: [AdminGuardGuard]  
 },
 { 
   path: 'manage-schedule', 
-  component: ManageScheduleComponent  
+  component: ManageScheduleComponent,
+  canActivate: [AdminGuardGuard]  
 },
 { 
   path: 'validate-users', 
-  component: ValidateUsersComponent  
+  component: ValidateUsersComponent,
+  canActivate: [ControllerGuard]  
 },
 { 
   path: 'validate-tickets', 
-  component: ValidateTicketsComponent  
+  component: ValidateTicketsComponent,
+  canActivate: [ControllerGuard]  
+},
+{ 
+  path: 'bus-lines', 
+  component: BusLinesComponent,
+  canActivate: [UserGuard]  
 },
 ];
 

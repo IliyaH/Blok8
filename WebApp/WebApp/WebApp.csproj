@@ -313,6 +313,10 @@
     <Compile Include="Migrations\201908291548041_ApplicationUserEdit.Designer.cs">
       <DependentUpon>201908291548041_ApplicationUserEdit.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201908311724456_PayPalMigration.cs" />
+    <Compile Include="Migrations\201908311724456_PayPalMigration.Designer.cs">
+      <DependentUpon>201908311724456_PayPalMigration.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -322,6 +326,7 @@
     <Compile Include="Models\Enums.cs" />
     <Compile Include="Models\Item.cs" />
     <Compile Include="Models\Line.cs" />
+    <Compile Include="Models\PayPal.cs" />
     <Compile Include="Models\Pricelist.cs" />
     <Compile Include="Models\PricelistItem.cs" />
     <Compile Include="Models\Station.cs" />
@@ -482,6 +487,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201908291548041_ApplicationUserEdit.resx">
       <DependentUpon>201908291548041_ApplicationUserEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908311724456_PayPalMigration.resx">
+      <DependentUpon>201908311724456_PayPalMigration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

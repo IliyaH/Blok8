@@ -37,7 +37,6 @@ export class LinesComponent implements OnInit {
   onSelectLine(event: any){
     this.selectedLineId = event.target.value;
     
-    console.log(this.selectedLineId);
     for(this.i = 0; this.i < this.lines.length; this.i++){
       if(this.lines[this.i].Id == this.selectedLineId){
         this.lineForm.controls.lineName.setValue(this.lines[this.i].LineName);
@@ -55,7 +54,6 @@ export class LinesComponent implements OnInit {
             for(this.j = 0; this.j < data.length; this.j++){
               if(this.allStations[this.i].Id == data[this.j]){
                 this.allStations[this.i].Exist = true;
-                console.log("Ista stanica: " + this.allStations[this.i].Name);
                 break;
               }
             }
@@ -109,7 +107,6 @@ export class LinesComponent implements OnInit {
   onClickDelete(){
     this.menageService.deleteLine(this.selectedLineId).subscribe(
       data=>{
-        console.log(data);
         this.getLines();
         this.getAllStations();
 
@@ -127,7 +124,6 @@ export class LinesComponent implements OnInit {
     this.menageService.getLines().subscribe(
       data=>{
         this.lines = data;
-        console.log(this.lines);
       }
     );
   }
@@ -141,8 +137,6 @@ export class LinesComponent implements OnInit {
   }
 
   checkValue(event: any, id: any){
-    console.log(id);
-    console.log(event.currentTarget.checked);
     if(event.currentTarget.checked){
       this.lineStationsIds.push(id);
     }
@@ -153,7 +147,6 @@ export class LinesComponent implements OnInit {
         }
       }
     }
-    console.log(this.lineStationsIds);
   }
 
 }

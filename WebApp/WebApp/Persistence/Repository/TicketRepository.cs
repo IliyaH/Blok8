@@ -14,6 +14,11 @@ namespace WebApp.Persistence.Repository
         {
         }
 
+        public void AddPayPal(string transactionID, string payerId, string payerEmail, int ticketId)
+        {
+            ((ApplicationDbContext)this.context).PayPals.Add(new PayPal() { TransactionId = transactionID, PayerId = payerId, PayerEmail = payerEmail, IdTicket = ticketId });
+        }
+
         public double CalculatePrice(Enums.TicketType ticketType, Enums.UserType userType)
         {
             int cenovnikId = ((ApplicationDbContext)this.context).Pricelists.Where(c => c.Active == true).Select(c => c.Id).First();
@@ -81,5 +86,7 @@ namespace WebApp.Persistence.Repository
 
             return false;
         }
+
+
     }
 }

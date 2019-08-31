@@ -24,11 +24,22 @@
         </div>
 
     <div class="row">
-      <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+      <div class="col-sm-9 col-md-7 col-lg-6 mx-auto">
         <div class="shadow-lg">
           <div class="card card-signin my-5">
             <div class="card-body">
+                
               <form class="form-signin" [formGroup]="stationForm">
+                  <div class="form-label-group">
+                  <agm-map (mapClick)="MapClicked($event)" [latitude]="markerInfo.location.latitude" [longitude]="markerInfo.location.longitude" [zoom]="14" style="height: 300px;">
+                      <div *ngIf="clicked">
+                          <agm-marker [latitude]="stationForm.controls.xCoordinate.value" [longitude]="stationForm.controls.yCoordinate.value">
+                            
+                          </agm-marker>
+                        </div>
+                  </agm-map>
+                  </div>
+                  <br>
                 <div class="form-label-group">
                     <div *ngIf="stationForm.controls.name.errors" >
                         <div *ngIf="stationForm.controls.name.errors.required && (stationForm.controls.name.dirty || stationForm.controls.name.touched)" class="badge badge-danger">Name is mandatory field</div>
@@ -93,6 +104,7 @@
                     </div>
                     
               </form>
+
             </div>
           </div>
         </div>

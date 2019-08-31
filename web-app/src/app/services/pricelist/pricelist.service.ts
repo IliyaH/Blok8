@@ -23,7 +23,6 @@ export class PricelistService {
   }
 
   addPricelist(to: any, timeTicket: any, dayTicket: any, monthTicket: any, yearTicket: any): Observable<any[]>{
-    console.log("addPricelist");
     return this.httpClient.post<any[]>(this.base_url+`/api/Pricelist/AddPricelist?to=${to}&timeTicket=${timeTicket}&dayTicket=${dayTicket}&monthTicket=${monthTicket}&yearTicket=${yearTicket}`, [to, timeTicket, dayTicket, monthTicket, yearTicket]).pipe(
       catchError(this.handleError<any[]>(`addPricelist`)));
   }

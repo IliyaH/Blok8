@@ -29,6 +29,8 @@ namespace WebApp.Persistence
 
         public DbSet<Timetable> Timetables { get; set; }
 
+        public DbSet<PayPal> PayPals { get; set; }
+
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {

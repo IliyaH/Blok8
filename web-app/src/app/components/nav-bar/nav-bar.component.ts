@@ -16,8 +16,6 @@ export class NavBarComponent implements OnInit {
 
   ngOnInit() {
     this.loggedIn = localStorage['role'];
-    console.log(this.loggedIn);
-    console.log(this.router.url);
   }
 
   logOut(){

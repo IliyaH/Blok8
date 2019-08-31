@@ -20,11 +20,7 @@ export class ProfileComponent implements OnInit {
     activated: ['', Validators.required],
     image: [''],
     userType: ['', Validators.required],
-    //password: ['', [Validators.required, Validators.minLength(8)]],
-    //confirmPassword: ['', [Validators.required, Validators.minLength(8)]],
-    //userType: ['', Validators.required],
-    //image: [''],
-  }/*, {validator: this.checkPassword}*/);
+  });
 
   userData: any;
   userProfileType: any;
@@ -55,9 +51,7 @@ export class ProfileComponent implements OnInit {
 
   onSelect(event : any)
   {
-    console.log(event.target.value);
     this.profileForm.controls.userType.setValue(event.target.value);
-    console.log(this.profileForm.controls.userType.value)
     if(event.target.value != '0'){
       this.showFile = true;
     }
@@ -99,9 +93,7 @@ export class ProfileComponent implements OnInit {
         this.userData = data;
 
         this.userProfileActivated = this.userData.Activated;
-        console.log(this.userProfileActivated);
         this.selectValue = this.userData.UserType;
-        console.log(this.selectValue);
         if(this.userData.Name)
         {
           this.profileForm.controls.name.setValue(this.userData.Name);
@@ -126,8 +118,6 @@ export class ProfileComponent implements OnInit {
         }
         
         this.profileForm.controls.activated.setValue(this.userData.Activated);
-        //this.profileForm.controls.userType.setValue();
-        //this.profileForm.controls.image.setValue(this.userData.Image);
         this.profileForm.controls.userType.setValue(this.userData.UserType);
 
         if(this.selectValue != '0'){ 

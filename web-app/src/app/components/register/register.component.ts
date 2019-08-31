@@ -40,8 +40,6 @@ export class RegisterComponent implements OnInit {
   onSelect(event : any)
   {
     this.selectValue = event.target.value;
-    console.log(this.checkPassword(this.registerForm));
-    console.log(this.registerForm.valid);
   }
 
   checkPassword(group: FormGroup)
@@ -54,17 +52,14 @@ export class RegisterComponent implements OnInit {
 
   register(){
     this.authService.register(this.registerForm.value).subscribe( data=>{
-      console.log(data);
 
       if(!data)
       {
-        console.log('Data: ' + data)
         window.alert('User with email: ' + this.registerForm.controls.email.value + ' already registered!')
         this.emailInUse = true;
       }
       else if (data.toString() == 200) 
       {
-        console.log(this.imageFile);
         let formData = new FormData();
 
         if(this.imageFile != null){
@@ -72,11 +67,9 @@ export class RegisterComponent implements OnInit {
           formData.append('email', this.registerForm.controls.email.value);
         }
         if(this.imageFile != null){
-          console.log("UDJOH U POZIV UPLOADIMAGE");
           this.userService.uploadImage(formData).subscribe();
         }
         window.alert('Successfully registered!');
-        console.log('Zdravo!');
         this.emailInUse = false;
         this.login();
       }
@@ -86,7 +79,6 @@ export class RegisterComponent implements OnInit {
   login(){
     this.authService.login(this.registerForm.controls.email.value, this.registerForm.controls.password.value).subscribe(
       res => {
-        console.log(res.access_token);
 
         let jwt = res.access_token;
         let jwtData = jwt.split('.')[1]
@@ -94,19 +86,11 @@ export class RegisterComponent implements OnInit {
         let decodetJwtData = JSON.parse(decodedJwtJasonData)
 
         let role = decodetJwtData.role
-        //let temp = decodetJwtData.email
         
-        console.log('jwtData: ' + jwtData)
-        console.log('decodedJwtJsonData: ' + decodedJwtJasonData)
-        console.log(decodetJwtData)
-        console.log('Role: ' + role)
-        //console.log('Password' + temp)
-
         let a = decodetJwtData.unique_name
         localStorage.setItem('jwt', jwt)
         localStorage.setItem('role', role)
         localStorage.setItem('name',a);
-        //localStorage.setItem('password', temp);
         window.location.href = "/profile"
       }
     );
