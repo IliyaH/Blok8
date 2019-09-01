@@ -20,11 +20,24 @@
                 </select><br>
                 <label class="form-control text-center">Price: {{price}} RSD</label><br>
                 <div *ngIf="!loggedIn">
-                    <input #emailInput name="email" type="email" class="form-control" placeholder="Email" (input)="email = emailInput.value" required><br>
+                  <form class="form-signin" [formGroup]="emailForm">
+                      <div *ngIf="emailForm.controls.email.errors" >
+                          <div *ngIf="emailForm.controls.email.errors.required && (emailForm.controls.email.dirty || emailForm.controls.email.touched)" class="badge badge-danger">Email is mandatory field</div>
+                      </div>
+                    <input formControlName="email" type="email" class="form-control" placeholder="Email"><br>
+                  </form>
                 </div>
                 <div>
                 </div>
-                <button class="btn btn-lg btn-primary btn-block text-uppercase active" (click)="buyTicket()">Buy</button>
+                <div *ngIf="emailForm.valid && !loggedIn" >
+                  <button class="btn btn-lg btn-primary btn-block text-uppercase active" (click)="buyTicket()">Buy</button>
+                </div>
+                <div *ngIf="!emailForm.valid && !loggedIn" >
+                    <button class="btn btn-lg btn-primary btn-block text-uppercase disabled" [disabled]="!emailForm.valid" >Buy</button>
+                  </div>
+                  <div *ngIf="loggedIn" >
+                      <button class="btn btn-lg btn-primary btn-block text-uppercase active" (click)="buyTicket()">Buy</button>
+                    </div>
                 <br><ngx-paypal [config]="payPalConfig"></ngx-paypal>
               </div>
             </div>      

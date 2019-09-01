@@ -13,5 +13,6 @@ namespace WebApp.Persistence.Repository
         double CalculatePrice(TicketType ticketType, UserType userType);
         bool CheckTicket(int id);
         void AddPayPal(string transactionID, string payerId, string payerEmail, int ticketId);
+        void DeleteUserID(string id);
     }
 }

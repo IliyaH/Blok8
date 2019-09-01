@@ -65,10 +65,10 @@ export class RegisterComponent implements OnInit {
         if(this.imageFile != null){
           formData.append('image', this.imageFile, this.imageFile.name);
           formData.append('email', this.registerForm.controls.email.value);
-        }
-        if(this.imageFile != null){
+          console.log(formData);
           this.userService.uploadImage(formData).subscribe();
         }
+        
         window.alert('Successfully registered!');
         this.emailInUse = false;
         this.login();

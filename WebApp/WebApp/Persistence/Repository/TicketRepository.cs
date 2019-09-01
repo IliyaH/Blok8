@@ -87,6 +87,15 @@ namespace WebApp.Persistence.Repository
             return false;
         }
 
-
+        public void DeleteUserID(string id)
+        {
+            foreach(var v in ((ApplicationDbContext)this.context).Tickets.Where(t => t.IdApplicationUser == id))
+            {
+                if(v.IdApplicationUser == id)
+                {
+                    v.IdApplicationUser = null;
+                }
+            }
+        }
     }
 }

@@ -13,22 +13,23 @@ export class UserService {
   constructor(private http: Http, private httpClient: HttpClient) { }
 
   getUserInfo() {
-    return this.httpClient.get('http://localhost:52295/api/Account/UserInfo' ,{ 'headers': { 'Content-type': 'application/x-www-form-urlencoded' } })
+    return this.httpClient.get('http://localhost:52295/api/Account/UserInfo')
   }
   getUserData(email:string): Observable<any>{
-    return this.httpClient.get<any>('http://localhost:52295/api/Account/GetUserData?email='+email, { 'headers': { 'Content-type': 'application/x-www-form-urlencoded' } })
+    return this.httpClient.get<any>('http://localhost:52295/api/Account/GetUserData?email='+email)
   }
 
   getNotActiveUsers(): Observable<User[]>{
-    return this.httpClient.get<User[]>(`http://localhost:52295/api/Account/GetNotActiveUsers`, { 'headers': { 'Content-type': 'application/x-www-form-urlencoded' } }).pipe(
+    return this.httpClient.get<User[]>(`http://localhost:52295/api/Account/GetNotActiveUsers`).pipe(
       catchError(this.handleError<any[]>(`getNotActiveUsers`)));
   }
 
   uploadImage(image: any): Observable<any>{
-    return this.httpClient.post(`http://localhost:52295/api/Account/UploadImage/`, image, { 'headers': { 'Content-type': 'application/x-www-form-urlencoded' } });
+    console.log(image);
+    return this.httpClient.post(`http://localhost:52295/api/Account/UploadImage/`, image);
   }
   downloadImage(email: string): Observable<any[]>{
-    return this.httpClient.get<any[]>(`http://localhost:52295/api/Account/DownloadImage?email=`+email, { 'headers': { 'Content-type': 'application/x-www-form-urlencoded' } });
+    return this.httpClient.get<any[]>(`http://localhost:52295/api/Account/DownloadImage?email=`+email);
   }
 
   private handleError<T> (operation = 'operation', result?: T) {

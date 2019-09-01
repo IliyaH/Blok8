@@ -560,9 +560,21 @@ namespace WebApp.Controllers
                     return GetErrorResult(result);
                 }
             }
-            catch(Exception e)
+            catch
             {
-                
+                UnitOfWork.TicketRepository.DeleteUserID(user.Id);
+                try
+                {
+                    IdentityResult result = await UserManager.DeleteAsync(user);
+                    if (!result.Succeeded)
+                    {
+                        return GetErrorResult(result);
+                    }
+                }
+                catch
+                {
+                    return Ok(204);
+                }
             }
 
             return Ok();

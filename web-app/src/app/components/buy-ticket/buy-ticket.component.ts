@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/services/user/user.service';
 import { TicketService } from 'src/app/services/ticket/ticket.service';
 import { IPayPalConfig, ICreateOrderRequest } from 'ngx-paypal';
+import { FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-buy-ticket',
@@ -10,6 +11,11 @@ import { IPayPalConfig, ICreateOrderRequest } from 'ngx-paypal';
 })
 export class BuyTicketComponent implements OnInit {
 
+  emailForm = this.fb.group({
+    email: ['', [Validators.required, Validators.email]],
+    
+  });
+
   loggedIn = undefined;
   userData : any;
   userProfileActivated: any;
@@ -17,7 +23,7 @@ export class BuyTicketComponent implements OnInit {
   selectedTicketType: any;
   price: number;
   addTicket: any;
-  email: any;
+  //email: any;
   temp: any;
   isLoggedIn: boolean;
   priceEUR: number;
@@ -26,7 +32,7 @@ export class BuyTicketComponent implements OnInit {
   public payPalConfig?: IPayPalConfig;
   showSuccess: boolean;
 
-  constructor(private userService: UserService, private ticketService: TicketService) { }
+  constructor(private userService: UserService, private ticketService: TicketService, private fb: FormBuilder) { }
 
   ngOnInit() {
     this.loggedIn = localStorage['role'];
@@ -55,7 +61,8 @@ export class BuyTicketComponent implements OnInit {
         this.userData = data;
         this.userProfileActivated = this.userData.Activated;
         this.userProfileType = this.userData.UserType;
-        this.email = this.userData.Email;
+        //this.email = this.userData.Email;
+        this.emailForm.controls.email.setValue(this.userData.Email);
         
         if(this.userProfileActivated != 1)
         {
@@ -71,7 +78,8 @@ export class BuyTicketComponent implements OnInit {
       }
       else
       {
-        this.email = null;
+        //this.email = null;
+        this.emailForm.controls.email.setValue(null);
         this.ticketService.getCena(this.selectedTicketType, 0).subscribe( data =>
           {
             this.price = data;
@@ -82,7 +90,8 @@ export class BuyTicketComponent implements OnInit {
   }
 
   buyTicket(){
-    this.ticketService.addTicket(this.price, this.selectedTicketType, localStorage.getItem('name'), this.email).subscribe( data => this.addTicket = data);
+
+    this.ticketService.addTicket(this.price, this.selectedTicketType, localStorage.getItem('name'), this.emailForm.controls.email.value).subscribe( data => this.addTicket = data);
     window.alert("You've buyed a ticked");
   }
 
@@ -135,12 +144,11 @@ export class BuyTicketComponent implements OnInit {
       },
       onClientAuthorization: (data) => {
           console.log('onClientAuthorization - you should probably inform your server about completed transaction at this point', data);
-          console.log("USO SAM" + this.email + data);
           if(!this.loggedIn){
             this.userProfileType = 0;
             
           }
-          this.ticketService.buyTicket(this.isLoggedIn, this.email, data.id, data.payer.email_address, data.payer.payer_id, this.price, this.selectedTicketType, this.userProfileType).subscribe();
+          this.ticketService.buyTicket(this.isLoggedIn, this.emailForm.controls.email.value, data.id, data.payer.email_address, data.payer.payer_id, this.price, this.selectedTicketType, this.userProfileType).subscribe();
           
       },
       onCancel: (data, actions) => {
