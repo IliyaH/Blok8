@@ -126,14 +126,15 @@ namespace WebApp.Controllers
             Station station = UnitOfWork.StationRepository.Get(id);
             if (station == null)
             {
-                return NotFound();
+                return Ok(204);
             }
 
             UnitOfWork.StationRepository.Remove(station);
             UnitOfWork.StationRepository.SaveChanges();
             UnitOfWork.StationRepository.DeleteStationLines(id);
+            UnitOfWork.StationRepository.SaveChanges();
 
-            return Ok(station);
+            return Ok(200);
         }
 
         // DELETE: api/Stations/5
@@ -141,15 +142,21 @@ namespace WebApp.Controllers
         [ResponseType(typeof(Station))]
         public IHttpActionResult EditStation(Station station, int id)
         {
-            if (station == null)
+            Station s = UnitOfWork.StationRepository.Get(id);
+            if (s == null)
             {
-                return NotFound();
+                return Ok(203);
             }
 
-            UnitOfWork.StationRepository.EditStation(station, id);
-            UnitOfWork.StationRepository.SaveChanges();
-            Station tempStation = UnitOfWork.StationRepository.Get(id);
-            return Ok(tempStation);
+            if(UnitOfWork.StationRepository.EditStation(station, id, station.Version))
+            {
+                UnitOfWork.StationRepository.SaveChanges();
+                return Ok(200);
+            }
+            else
+            {
+                return Ok(204);
+            }
         }
 
         protected override void Dispose(bool disposing)

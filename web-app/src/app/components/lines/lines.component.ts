@@ -24,6 +24,7 @@ export class LinesComponent implements OnInit {
   allStations : Station[] = [];
   stationsIds: any[] = [];
   lineStationsIds: any[] = [];
+  lineVersion: any;
 
   constructor(private fb: FormBuilder, private menageService: MenageService) { }
 
@@ -39,6 +40,8 @@ export class LinesComponent implements OnInit {
     
     for(this.i = 0; this.i < this.lines.length; this.i++){
       if(this.lines[this.i].Id == this.selectedLineId){
+        this.lineVersion = this.lines[this.i].Version;
+        console.log(this.lineVersion);
         this.lineForm.controls.lineName.setValue(this.lines[this.i].LineName);
         this.lineForm.controls.lineType.setValue(this.lines[this.i].LineType);
       }
@@ -53,6 +56,7 @@ export class LinesComponent implements OnInit {
             this.allStations[this.i].Exist = false;
             for(this.j = 0; this.j < data.length; this.j++){
               if(this.allStations[this.i].Id == data[this.j]){
+                
                 this.allStations[this.i].Exist = true;
                 break;
               }
@@ -91,15 +95,26 @@ export class LinesComponent implements OnInit {
   }
 
   onClickEdit(){
-    this.menageService.editLine(this.lineForm.controls.lineName.value, this.lineForm.controls.lineType.value, this.selectedLineId, this.lineStationsIds).subscribe(
+    this.menageService.editLine(this.lineForm.controls.lineName.value, this.lineVersion, this.lineForm.controls.lineType.value, this.selectedLineId, this.lineStationsIds).subscribe(
       data=>{
-        this.getLines();
-        this.lineForm.reset();
-        this.getAllStations();
-        for(this.i = 0; this.i < this.allStations.length; this.i++){
-          this.allStations[this.i].Exist = false;
+        if(data == 200){
+          this.getLines();
+          this.lineForm.reset();
+          this.getAllStations();
+          for(this.i = 0; this.i < this.allStations.length; this.i++){
+            this.allStations[this.i].Exist = false;
+          }
         }
-        window.alert("Successfully edited line with ID: " + this.selectedLineId);
+        else if(data == 204){
+          window.alert("Another admin already edited this line, please refresh the page.");
+        }
+        else if(data == 202){
+          window.alert("Another admin already deleted this line, please refresh the page.");
+        }
+        else if(data == 203){
+          window.alert("Another admin deleted one of this line stations, please refresh the page.");
+        }
+        //window.alert("Successfully edited line with ID: " + this.selectedLineId);
       }
     );
   }
@@ -107,15 +122,20 @@ export class LinesComponent implements OnInit {
   onClickDelete(){
     this.menageService.deleteLine(this.selectedLineId).subscribe(
       data=>{
-        this.getLines();
-        this.getAllStations();
-
-        this.selectedLineId = "Add Line";
-        this.lineForm.reset();
-        for(this.i = 0; this.i < this.allStations.length; this.i++){
-          this.allStations[this.i].Exist = false;
+        if(data == 200){
+          this.getLines();
+          this.getAllStations();
+  
+          this.selectedLineId = "Add Line";
+          this.lineForm.reset();
+          for(this.i = 0; this.i < this.allStations.length; this.i++){
+            this.allStations[this.i].Exist = false;
+          }
+          //window.alert("Successfully deleted line with ID: " + this.selectedLineId);
         }
-        window.alert("Successfully deleted line with ID: " + this.selectedLineId);
+        else{
+          window.alert("Another admin already deleted this line, please refresh the page.");
+        }
       }
     );
   }
@@ -124,6 +144,7 @@ export class LinesComponent implements OnInit {
     this.menageService.getLines().subscribe(
       data=>{
         this.lines = data;
+        
       }
     );
   }

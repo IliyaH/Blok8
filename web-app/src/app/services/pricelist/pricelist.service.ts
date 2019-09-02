@@ -17,8 +17,8 @@ export class PricelistService {
       catchError(this.handleError<any[]>(`getPrices`)));
   }
 
-  editPricelist(id: any, timeTicket: any, dayTicket: any, monthTicket: any, yearTicket: any): Observable<any[]>{
-    return this.httpClient.post<any[]>(this.base_url+`/api/Pricelist/EditPricelist?id=${id}&timeTicket=${timeTicket}&dayTicket=${dayTicket}&monthTicket=${monthTicket}&yearTicket=${yearTicket}`, [id, timeTicket, dayTicket, monthTicket, yearTicket]).pipe(
+  editPricelist(id: any, pricelistVersion: any, timeTicket: any, dayTicket: any, monthTicket: any, yearTicket: any): Observable<any>{
+    return this.httpClient.post<any>(this.base_url+`/api/Pricelist/EditPricelist?id=${id}&pricelistVersion=${pricelistVersion}&timeTicket=${timeTicket}&dayTicket=${dayTicket}&monthTicket=${monthTicket}&yearTicket=${yearTicket}`, [id, pricelistVersion, timeTicket, dayTicket, monthTicket, yearTicket]).pipe(
       catchError(this.handleError<any[]>(`editPricelist`)));
   }
 

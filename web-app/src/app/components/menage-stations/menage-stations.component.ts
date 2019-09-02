@@ -15,6 +15,7 @@ export class MenageStationsComponent implements OnInit {
     address: ['', Validators.required],
     xCoordinate: ['', Validators.required],
     yCoordinate: ['', Validators.required],
+    version: [''],
   });
 
   stations : Station[] = [];
@@ -24,6 +25,7 @@ export class MenageStationsComponent implements OnInit {
   markerInfo: MarkerInfo;
   selLine: Polyline;
   clicked: boolean = false;
+  stationVersion: number;
 
   constructor(private fb: FormBuilder, private menageService: MenageService) { }
 
@@ -59,6 +61,9 @@ export class MenageStationsComponent implements OnInit {
       this.stationForm.controls.address.setValue(data.Address);
       this.stationForm.controls.xCoordinate.setValue(data.XCoordinate);
       this.stationForm.controls.yCoordinate.setValue(data.YCoordinate);
+      this.stationForm.controls.version.setValue(data.Version);
+      this.stationVersion = data.Version;
+      console.log(this.stationForm.controls.Version);
     });
     this.lines = [];
     if(this.selectedStationId)
@@ -77,13 +82,19 @@ export class MenageStationsComponent implements OnInit {
 
 
   onClickDelete(){
-    this.menageService.deleteStation(this.selectedStationId).subscribe(
-      d=>{
-        this.getStations();
-        window.alert("Successfully deleted station with ID: " + this.selectedStationId);
-        this.selectedStationId = "";
-        this.stationForm.reset();
-        this.clicked = false;
+    this.menageService.deleteStation(this.selectedStationId, this.stationVersion).subscribe(
+      data=>{
+        if(data == 200){
+          this.getStations();
+          window.alert("Successfully deleted station with ID: " + this.selectedStationId);
+          this.selectedStationId = "";
+          this.stationForm.reset();
+          this.clicked = false;
+        }
+        else{
+          window.alert("Another admin already deleted this station, please refresh the page.");
+        }
+        
       }
     );
   }
@@ -92,10 +103,18 @@ export class MenageStationsComponent implements OnInit {
   onClickEdit(){
         this.menageService.editStation(this.stationForm.value, this.selectedStationId).subscribe(
           data=>{
-            this.getStations();
-            window.alert("Successfully edited station with ID: " + this.selectedStationId);
-            this.stationForm.reset();
-            this.clicked = false;
+            if(data == 200){
+              this.getStations();
+              window.alert("Successfully edited station with ID: " + this.selectedStationId);
+              this.stationForm.reset();
+              this.clicked = false;
+            }
+            else if (data == 204){
+              window.alert("Another admin already edited this station, please refresh the page.");
+            }
+            else{
+              window.alert("Another admin deleted this station, please refresh the page.");
+            }
           }
         );
   }

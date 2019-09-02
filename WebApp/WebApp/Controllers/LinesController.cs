@@ -105,8 +105,13 @@ namespace WebApp.Controllers
         // DELETE: api/Lines/5
         [Route("Edit")]
         [ResponseType(typeof(Line))]
-        public IHttpActionResult EditLine(string lineName, string lineType, int id, string stationsIds)
+        public IHttpActionResult EditLine(string lineName, long lineVersion, string lineType, int id, string stationsIds)
         {
+            Line line = UnitOfWork.LineRepository.Get(id);
+            if(line == null)
+            {
+                return Ok(202);
+            }
 
             List<int> intStations = new List<int>();
             string[] data = stationsIds.Split(',');
@@ -115,10 +120,19 @@ namespace WebApp.Controllers
                 intStations.Add(Int32.Parse(s));
             }
 
-            UnitOfWork.LineRepository.EditLine(lineName, (LineType)Enum.Parse(typeof(LineType), lineType), id, intStations);
-            UnitOfWork.LineRepository.SaveChanges();
-            Line tempLine = UnitOfWork.LineRepository.Get(id);
-            return Ok(tempLine);
+            if(UnitOfWork.LineRepository.EditLine(lineName, lineVersion, (LineType)Enum.Parse(typeof(LineType), lineType), id, intStations) == 0)
+            {
+                UnitOfWork.LineRepository.SaveChanges();
+                return Ok(200);
+            }
+            else if(UnitOfWork.LineRepository.EditLine(lineName, lineVersion, (LineType)Enum.Parse(typeof(LineType), lineType), id, intStations) == 1)
+            {
+                return Ok(204);
+            }
+            else
+            {
+                return Ok(203);
+            }
         }
 
         // POST: api/Lines
@@ -159,14 +173,16 @@ namespace WebApp.Controllers
             Line line = UnitOfWork.LineRepository.Get(id);
             if (line == null)
             {
-                return NotFound();
+                return Ok(204);
             }
 
             UnitOfWork.LineRepository.Remove(line);
             UnitOfWork.LineRepository.SaveChanges();
             UnitOfWork.LineRepository.DeleteLineStations(id);
+            UnitOfWork.LineRepository.SaveChanges();
 
-            return Ok(line);
+
+            return Ok(200);
         }
 
         protected override void Dispose(bool disposing)

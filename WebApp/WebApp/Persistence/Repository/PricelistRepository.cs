@@ -35,26 +35,35 @@ namespace WebApp.Persistence.Repository
             return tuple;
         }
 
-        public void editPricelist(int id, double timeTicket, double dayTicket, double monthTicket, double yearTicket)
+        public bool editPricelist(int id, long pricelistVersion, double timeTicket, double dayTicket, double monthTicket, double yearTicket)
         {
-            foreach(var v in ((ApplicationDbContext)this.context).Items)
+            if(((ApplicationDbContext)this.context).Pricelists.Where(p => p.Id == id).First().Version == pricelistVersion)
             {
-                if(v.TicketType == TicketType.TimeTicket)
+                foreach(var v in ((ApplicationDbContext)this.context).Items)
                 {
-                    ((ApplicationDbContext)this.context).PricelistItems.Where(pi => pi.IdPricelist == id && pi.IdItem == v.Id).FirstOrDefault().Price = timeTicket;
+                    if(v.TicketType == TicketType.TimeTicket)
+                    {
+                        ((ApplicationDbContext)this.context).PricelistItems.Where(pi => pi.IdPricelist == id && pi.IdItem == v.Id).FirstOrDefault().Price = timeTicket;
+                    }
+                    else if (v.TicketType == TicketType.DayTicket)
+                    {
+                        ((ApplicationDbContext)this.context).PricelistItems.Where(pi => pi.IdPricelist == id && pi.IdItem == v.Id).FirstOrDefault().Price = dayTicket;
+                    }
+                    else if (v.TicketType == TicketType.MounthTicket)
+                    {
+                        ((ApplicationDbContext)this.context).PricelistItems.Where(pi => pi.IdPricelist == id && pi.IdItem == v.Id).FirstOrDefault().Price = monthTicket;
+                    }
+                    else if (v.TicketType == TicketType.YearTicket)
+                    {
+                        ((ApplicationDbContext)this.context).PricelistItems.Where(pi => pi.IdPricelist == id && pi.IdItem == v.Id).FirstOrDefault().Price = yearTicket;
+                    }
                 }
-                else if (v.TicketType == TicketType.DayTicket)
-                {
-                    ((ApplicationDbContext)this.context).PricelistItems.Where(pi => pi.IdPricelist == id && pi.IdItem == v.Id).FirstOrDefault().Price = dayTicket;
-                }
-                else if (v.TicketType == TicketType.MounthTicket)
-                {
-                    ((ApplicationDbContext)this.context).PricelistItems.Where(pi => pi.IdPricelist == id && pi.IdItem == v.Id).FirstOrDefault().Price = monthTicket;
-                }
-                else if (v.TicketType == TicketType.YearTicket)
-                {
-                    ((ApplicationDbContext)this.context).PricelistItems.Where(pi => pi.IdPricelist == id && pi.IdItem == v.Id).FirstOrDefault().Price = yearTicket;
-                }
+                ((ApplicationDbContext)this.context).Pricelists.Where(p => p.Id == id).First().Version = ((ApplicationDbContext)this.context).Pricelists.Where(p => p.Id == id).First().Version + 1;
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
 

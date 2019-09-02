@@ -10,6 +10,9 @@ namespace WebApp.Models
     {
         public int Id { get; set; }
 
+        public long Version { get; set; }
+
+
         [ForeignKey("Station")]
         public int IdStation { get; set; }
         public Station Station { get; set; }

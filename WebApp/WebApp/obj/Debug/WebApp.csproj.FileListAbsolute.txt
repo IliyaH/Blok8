@@ -320,3 +320,6 @@ C:\Users\Korisnik\Desktop\Blok8\WebApp\WebApp\obj\Debug\WebApp.Migrations.DataMi
 C:\Users\zilic\Desktop\Blok8\WebApp\WebApp\obj\Debug\WebApp.Migrations.DataMigration.resources
 C:\Users\zilic\Desktop\Blok8\WebApp\WebApp\obj\Debug\WebApp.Migrations.ApplicationUserEdit.resources
 C:\Users\zilic\Desktop\Blok8\WebApp\WebApp\obj\Debug\WebApp.Migrations.PayPalMigration.resources
+C:\Users\zilic\Desktop\Blok8\WebApp\WebApp\obj\Debug\WebApp.Migrations.pricelistVersion.resources
+C:\Users\zilic\Desktop\Blok8\WebApp\WebApp\obj\Debug\WebApp.Migrations.timetableVersion.resources
+C:\Users\zilic\Desktop\Blok8\WebApp\WebApp\obj\Debug\WebApp.Migrations.stationLineVersion.resources

@@ -14,5 +14,7 @@ namespace WebApp.Models
 
         public LineType LineType { get; set; }
 
+        public long Version { get; set; }
+
     }
 }

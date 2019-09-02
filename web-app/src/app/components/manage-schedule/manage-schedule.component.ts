@@ -27,6 +27,7 @@ export class ManageScheduleComponent implements OnInit {
   selectedLineId: any;
   selectedDepartureId: any;
   editDeleteDeparture: any;
+  sheduleVersion: any;
 
   constructor(private menageService: MenageService, private fb: FormBuilder, private timetableService : TimetableService) { }
 
@@ -54,6 +55,8 @@ export class ManageScheduleComponent implements OnInit {
     this.timetableService.getSchedule(this.selectedDayType, this.selectedLineType, this.selectedLineName).subscribe(
       data =>{
         this.Departures = data;
+        console.log(data);
+        
       }
     );
 
@@ -85,16 +88,25 @@ export class ManageScheduleComponent implements OnInit {
     for(this.i = 0; this.i < this.Departures.length; this.i++){
       if(this.Departures[this.i].Id == event.target.value){
         this.selectedDeparture = this.Departures[this.i].Departures;
+        this.sheduleVersion = this.Departures[this.i].Version;
         this.scheduleForm.controls.editDeleteDeparture.setValue(this.Departures[this.i].Departures);
       }
     }
   }
 
   onClickEdit(){
-    this.menageService.editDeparture(this.selectedDepartureId, this.scheduleForm.controls.editDeleteDeparture.value).subscribe(
+    this.menageService.editDeparture(this.selectedDepartureId, this.sheduleVersion, this.scheduleForm.controls.editDeleteDeparture.value).subscribe(
       data =>{
-        this.getDepartures();
-        this.scheduleForm.reset();
+        if(data == 200){
+          this.getDepartures();
+          this.scheduleForm.reset();
+        }
+        else if(data == 203){
+          window.alert("Another admin already deleted this schedule, please refresh the page.");
+        }
+        else{
+          window.alert("Another admin already edited this schedule, please refresh the page.");
+        }
       }
     );
   }
@@ -102,8 +114,13 @@ export class ManageScheduleComponent implements OnInit {
   onClickDelete(){
     this.menageService.deleteDeparture(this.selectedDepartureId).subscribe(
       data =>{
-        this.getDepartures();
-        this.scheduleForm.reset();
+        if(data == 200){
+          this.getDepartures();
+          this.scheduleForm.reset();
+        }
+        else{
+          window.alert("Another admin already deleted this schedule, please refresh the page.");
+        }
       }
     );
   }

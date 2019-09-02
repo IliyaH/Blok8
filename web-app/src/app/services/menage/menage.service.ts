@@ -28,8 +28,8 @@ export class MenageService {
       catchError(this.handleError<any>(`getStation`)));
   }
 
-  deleteStation(id: any): Observable<any>{
-    return this.httpClient.delete<any>(this.base_url+`/api/Stations/Delete?id=${id}`).pipe(
+  deleteStation(id: any, stationVersion: number): Observable<any>{
+    return this.httpClient.delete<any>(this.base_url+`/api/Stations/Delete?id=${id}&stationVersion=${stationVersion}`).pipe(
       catchError(this.handleError<any>(`deleteStation`)));
   }
 
@@ -59,8 +59,8 @@ export class MenageService {
       catchError(this.handleError<any>(`addLine`)));
   } 
 
-  editLine(lineName: any, lineType: any, id: any, stationsIds: any): Observable<any>{
-    return this.httpClient.post<any>(this.base_url+`/api/Lines/Edit?lineName=${lineName}&lineType=${lineType}&id=${id}&stationsIds=${stationsIds}`, [lineName, lineType, id, stationsIds]).pipe(
+  editLine(lineName: any, lineVersion: number, lineType: any, id: any, stationsIds: any): Observable<any>{
+    return this.httpClient.post<any>(this.base_url+`/api/Lines/Edit?lineName=${lineName}&lineVersion=${lineVersion}&lineType=${lineType}&id=${id}&stationsIds=${stationsIds}`, [lineName, lineVersion, lineType, id, stationsIds]).pipe(
       catchError(this.handleError<any>(`editLine`)));
   }
 
@@ -79,8 +79,8 @@ export class MenageService {
       catchError(this.handleError<any>(`deleteDeparture`)));
   }
 
-  editDeparture(departureId: any, selectedDeparture: any): Observable<any>{
-    return this.httpClient.post<any>(this.base_url+`/api/Timetables/EditDeparture?departureId=${departureId}&selectedDeparture=${selectedDeparture}`, [departureId, selectedDeparture]).pipe(
+  editDeparture(departureId: any, scheduleVersion: number, selectedDeparture: any): Observable<any>{
+    return this.httpClient.post<any>(this.base_url+`/api/Timetables/EditDeparture?departureId=${departureId}&scheduleVersion=${scheduleVersion}&selectedDeparture=${selectedDeparture}`, [departureId, scheduleVersion, selectedDeparture]).pipe(
       catchError(this.handleError<any>(`editDeparture`)));
   }
 

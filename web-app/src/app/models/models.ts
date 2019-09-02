@@ -5,12 +5,14 @@ export class Station{
     XCoordinate: number;
     YCoordinate: number;
     Exist: boolean = false;
+    Version: number;
 }
 
 export class Line{
     Id: number;
     LineName: string;
     LineType : string;
+    Version: number;
 }
 
 export class Departure{
@@ -19,6 +21,7 @@ export class Departure{
     IdLine : number;
     IdDay : number;
     IdTimetableActive : number;
+    Version: number;
 }
 
 export class User{

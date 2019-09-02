@@ -136,17 +136,28 @@ namespace WebApp.Controllers
         }
 
         [Route("EditDeparture")]
-        public IHttpActionResult EditDeparture(int departureId, string selectedDeparture)
+        public IHttpActionResult EditDeparture(int departureId, long scheduleVersion, string selectedDeparture)
         {
+            Timetable timetable = db.Timetables.Find(departureId);
+            if(timetable == null)
+            {
+                return Ok(203);
+            }
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            UnitOfWork.TimetableRepository.editDeparture(departureId, selectedDeparture);
-            UnitOfWork.TimetableRepository.SaveChanges();
+            if(UnitOfWork.TimetableRepository.editDeparture(departureId, scheduleVersion, selectedDeparture))
+            {
+                UnitOfWork.TimetableRepository.SaveChanges();
+                return Ok(200);
+            }
+            else
+            {
+                return Ok(204);
+            }
 
-            return Ok(0);
         }
 
         // DELETE: api/Timetables/5
@@ -157,13 +168,13 @@ namespace WebApp.Controllers
             Timetable timetable = db.Timetables.Find(departureId);
             if (timetable == null)
             {
-                return NotFound();
+                return Ok(204);
             }
 
             db.Timetables.Remove(timetable);
             db.SaveChanges();
 
-            return Ok(timetable);
+            return Ok(200);
         }
 
         protected override void Dispose(bool disposing)

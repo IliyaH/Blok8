@@ -22,12 +22,21 @@ namespace WebApp.Persistence.Repository
             }
         }
 
-        public void EditStation(Station station, int id)
+        public bool EditStation(Station station, int id, long stationVersion)
         {
-            ((ApplicationDbContext)this.context).Stations.Where(s => s.Id == id).First().Name = station.Name;
-            ((ApplicationDbContext)this.context).Stations.Where(s => s.Id == id).First().Address = station.Address;
-            ((ApplicationDbContext)this.context).Stations.Where(s => s.Id == id).First().XCoordinate = station.XCoordinate;
-            ((ApplicationDbContext)this.context).Stations.Where(s => s.Id == id).First().YCoordinate = station.YCoordinate;
+            if (((ApplicationDbContext)this.context).Stations.Where(s => s.Id == id).First().Version == stationVersion)
+            {
+                ((ApplicationDbContext)this.context).Stations.Where(s => s.Id == id).First().Name = station.Name;
+                ((ApplicationDbContext)this.context).Stations.Where(s => s.Id == id).First().Address = station.Address;
+                ((ApplicationDbContext)this.context).Stations.Where(s => s.Id == id).First().XCoordinate = station.XCoordinate;
+                ((ApplicationDbContext)this.context).Stations.Where(s => s.Id == id).First().YCoordinate = station.YCoordinate;
+                ((ApplicationDbContext)this.context).Stations.Where(s => s.Id == id).First().Version = ((ApplicationDbContext)this.context).Stations.Where(s => s.Id == id).First().Version + 1;
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public List<string> FindLines(int idStation)

@@ -16,7 +16,7 @@ namespace WebApp.Persistence.Repository
 
         Tuple<Pricelist, List<double>> getPrices();
 
-        void editPricelist(int id,double timeTicket, double dayTicket, double monthTicket, double yearTicket);
+        bool editPricelist(int id, long pricelistVersion, double timeTicket, double dayTicket, double monthTicket, double yearTicket);
 
         void addPricelist(DateTime to, double timeTicket, double dayTicket, double monthTicket, double yearTicket);
 

@@ -318,6 +318,18 @@
     <Compile Include="Migrations\201908311724456_PayPalMigration.Designer.cs">
       <DependentUpon>201908311724456_PayPalMigration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201909020256517_pricelistVersion.cs" />
+    <Compile Include="Migrations\201909020256517_pricelistVersion.Designer.cs">
+      <DependentUpon>201909020256517_pricelistVersion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201909020334582_timetableVersion.cs" />
+    <Compile Include="Migrations\201909020334582_timetableVersion.Designer.cs">
+      <DependentUpon>201909020334582_timetableVersion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201909020441380_stationLineVersion.cs" />
+    <Compile Include="Migrations\201909020441380_stationLineVersion.Designer.cs">
+      <DependentUpon>201909020441380_stationLineVersion.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -491,6 +503,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201908311724456_PayPalMigration.resx">
       <DependentUpon>201908311724456_PayPalMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201909020256517_pricelistVersion.resx">
+      <DependentUpon>201909020256517_pricelistVersion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201909020334582_timetableVersion.resx">
+      <DependentUpon>201909020334582_timetableVersion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201909020441380_stationLineVersion.resx">
+      <DependentUpon>201909020441380_stationLineVersion.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
