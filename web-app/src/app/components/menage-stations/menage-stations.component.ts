@@ -33,7 +33,7 @@ export class MenageStationsComponent implements OnInit {
     "assets/images/ftn.png",
     "Jugodrvo" , "" , "http://ftn.uns.ac.rs/691618389/fakultet-tehnickih-nauka");
     this.selLine = new Polyline([], 'red', { url:"assets/images/autobus.png", scaledSize: {width: 50, height: 50}});
-  
+
   }
 
   addStation(){

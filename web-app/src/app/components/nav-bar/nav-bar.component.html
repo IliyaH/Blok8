@@ -15,8 +15,8 @@
             </div>
               <div *ngIf="loggedIn != 'Admin' && loggedIn != 'Controller'">
             <div *ngIf="router.url == '/bus-location'; then thenBlock2 else elseBlock2"></div>
-              <ng-template #thenBlock2><button href="#" class="btn btn-primary active">Bus Locations</button></ng-template>
-              <ng-template #elseBlock2><button href="#" class="btn btn-primary">Bus Locations</button></ng-template>
+              <ng-template #thenBlock2><button routerLink="bus-location" class="btn btn-primary active">Bus Locations</button></ng-template>
+              <ng-template #elseBlock2><button routerLink="bus-location" class="btn btn-primary">Bus Locations</button></ng-template>
           </div>
             <div *ngIf="loggedIn != 'Admin' && loggedIn != 'Controller'">
             <div *ngIf="router.url == '/pricelist'; then thenBlock3 else elseBlock3"></div>

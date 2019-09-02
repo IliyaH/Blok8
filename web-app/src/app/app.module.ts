@@ -25,6 +25,7 @@ import { NgxPayPalModule } from 'ngx-paypal';
 import { BusLinesComponent } from './components/bus-lines/bus-lines.component';
 
 import { AgmCoreModule } from '@agm/core';
+import { BusLocationComponent } from './components/bus-location/bus-location.component';
 
 
 @NgModule({
@@ -44,6 +45,7 @@ import { AgmCoreModule } from '@agm/core';
     ValidateUsersComponent,
     ValidateTicketsComponent,
     BusLinesComponent,
+    BusLocationComponent,
     
   ],
   imports: [

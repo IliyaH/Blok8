@@ -71,7 +71,7 @@ export class BusLinesComponent implements OnInit {
     this.selectedLineId = event.target.value;
     this.lineStations = [];
     this.getStations();
-
+    
   }
 
 }

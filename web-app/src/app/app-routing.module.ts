@@ -20,6 +20,7 @@ import { ControllerGuard } from './components/guards/controller.guard';
 import { UserGuard } from './components/guards/user.guard';
 import { NorRegisteredUserGuard } from './components/guards/nor-registered-user.guard';
 import { ProfileGuard } from './components/guards/profile.guard';
+import { BusLocationComponent } from './components/bus-location/bus-location.component';
 
 const routes: Routes = [{
   path: '', 
@@ -89,6 +90,11 @@ const routes: Routes = [{
 { 
   path: 'bus-lines', 
   component: BusLinesComponent,
+  canActivate: [UserGuard]  
+},
+{ 
+  path: 'bus-location', 
+  component: BusLocationComponent,
   canActivate: [UserGuard]  
 },
 ];
