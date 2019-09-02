@@ -50,14 +50,6 @@ export class LocationService {
       });
   }
 
-  public registerForClickEvents(): void {  
-      
-      this.proxy.on('userClicked', (data: string) => {  
-          console.log('received notification: ' + data);  
-          this.notificationReceived.emit(data);  
-      }); 
-  }  
-
   public registerForHello() : Observable<any> {
       
     return Observable.create((observer) => {
@@ -70,19 +62,9 @@ export class LocationService {
     });      
   }
 
-  public StopTimer() {
-      this.proxy.invoke("StopTimeServerUpdates");
-  }
-
-  public StartTimer() {
-      this.proxy.invoke("TimeServerUpdates");
-  }
 
   public hello(stations: any[]){
     this.proxy.invoke("Hello", stations);
   }
 
-  public stop(){
-    this.connection.disconnected();
-  }
 }

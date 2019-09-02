@@ -65,7 +65,6 @@ export class BusLocationComponent implements OnInit {
   private registerForHello(){
     this.locationService.registerForHello().subscribe(
       data=>{
-        console.log("Cmar");
         this.BusX = data[0];
         this.BusY = data[1];
         
@@ -84,13 +83,6 @@ export class BusLocationComponent implements OnInit {
     this.menageService.getLines().subscribe(
       response => {
         this.lines = response;
-        /*if(this.lines.length > 0){
-          if(this.initBool === true){
-            this.selectedLineId = this.lines[0].Id;
-            this.initBool = false;
-          }
-        }*/
-        //this.getStations();
       });
     }
 
@@ -122,9 +114,6 @@ export class BusLocationComponent implements OnInit {
   onSelectLine(event: any){
     this.selectedLineId = event.target.value;
     this.lineStations = [];
-    //this.hello();
-    //this.locationService.stop();
-    //this.checkConnection();
     this.getStations();
     
   }

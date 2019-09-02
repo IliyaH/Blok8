@@ -13,7 +13,7 @@ namespace WebApp
             MailMessage mail = new MailMessage();
             SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
 
-            mail.From = new MailAddress("micasakica.pusgs@gmail.com");
+            mail.From = new MailAddress("webprojekat123@gmail.com");
             mail.To.Add(to);
             mail.Subject = subj;
             mail.Body = body;
@@ -21,7 +21,7 @@ namespace WebApp
             SmtpServer.UseDefaultCredentials = false;
             SmtpServer.EnableSsl = true;
             SmtpServer.Port = 587;
-            SmtpServer.Credentials = new System.Net.NetworkCredential("micasakica.pusgs@gmail.com", "milansandra123");
+            SmtpServer.Credentials = new System.Net.NetworkCredential("webprojekat123@gmail.com", "sifra123");
 
             SmtpServer.Send(mail);
         }
